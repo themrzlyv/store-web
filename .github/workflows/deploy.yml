@@ -16,7 +16,12 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.DEPLOY_KEY }}
 
-      # Step 2: Deploy to VPS
+      # Step 2: Add GitHub to known hosts
+      - name: Add GitHub to known hosts
+        run: |
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      # Step 3: Deploy to VPS
       - name: Deploy to VPS
         env:
           HOST: 157.173.205.31
