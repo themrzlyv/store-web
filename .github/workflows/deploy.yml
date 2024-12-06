@@ -10,18 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Set up SSH for deployment
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.1
         with:
           ssh-private-key: ${{ secrets.DEPLOY_KEY }}
 
-      - name: Configure Git for SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-
+      # Step 2: Deploy to VPS
       - name: Deploy to VPS
         env:
           HOST: 157.173.205.31
@@ -29,17 +24,35 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no $USERNAME@$HOST << EOF
             set -e
+
             echo "Logging into VPS at $HOST"
+
+            # Navigate to project directory
             cd /var/www/store-web
-            echo "Pulling latest code"
-            export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa"
+
+            # Pull the latest code from the main branch
+            echo "Pulling latest code from GitHub"
             git pull origin main
             git fetch origin
             git reset --hard origin/main
+
+            # Stop and remove the existing Docker container
+            if [ \$(docker ps -q -f name=store-web) ]; then
+              echo "Stopping and removing existing container"
+              docker stop store-web
+              docker rm store-web
+            fi
+
+            # Build a new Docker image locally on the VPS
+            echo "Building the Docker image locally"
             docker build -t store-web:latest .
+
+            # Run the updated Docker container
+            echo "Starting the updated container"
             docker run -d --name store-web --network app_network -p 3000:3000 \
               -e NEXT_PUBLIC_NODE_ENV=production \
               -e NEXT_PUBLIC_SERVER_URL=https://api.themirzaliyev.store \
               store-web:latest
+
             echo "Deployment complete!"
           EOF
