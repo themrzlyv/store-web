@@ -32,6 +32,7 @@ jobs:
 
             # Pull the latest code from the main branch
             echo "Pulling latest code from GitHub"
+            git pull origin main
             git fetch origin
             git reset --hard origin/main
 
