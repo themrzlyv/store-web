@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  identifier String   @unique @default("themirzaliyev_store_admin")
+  email      String   @unique
+  password   String
+  firstName  String
+  lastName   String
+  role       Role     @default(ADMIN)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Bio {
+  id         Int     @id @default(autoincrement())
+  identifier String  @unique @default("themirzaliyev_store_bio")
+  firstName  String?
+  lastName   String?
+  profession String?
+  bio        String?
+  image      String?
+  social     Social?
+  socialid   Int?
+  skills     Skill[]
+}
+
+model Skill {
+  id      Int      @id @default(autoincrement())
+  name    String
+  bioId   String
+  Bio     Bio      @relation(fields: [bioId], references: [identifier])
+  courses Course[]
+}
+
+model Social {
+  id        Int     @id @default(autoincrement())
+  github    String?
+  linkedin  String?
+  instagram String?
+  mail      String?
+
+  bioId String @unique
+  bio   Bio    @relation(fields: [bioId], references: [identifier])
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  slug      String   @unique
+  image     String?
+  views     Int      @default(0)
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Project {
+  id        Int      @id @default(autoincrement())
+  title     String
+  image     String?
+  content   String
+  sourceUrl String?
+  stars     Int      @default(0)
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Experience {
+  id         Int       @id @default(autoincrement())
+  company    String
+  position   String
+  companyUrl String
+  image      String
+  startDate  DateTime
+  endDate    DateTime?
+}
+
+model Course {
+  id          Int      @id @default(autoincrement())
+  title       String
+  image       String?
+  description String
+  price       Float
+  duration    Int
+  techStack   Skill[]
+  createdAt   DateTime @default(now())
+}
