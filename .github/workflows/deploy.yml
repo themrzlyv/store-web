@@ -27,6 +27,10 @@ jobs:
           HOST: 157.173.205.31
           USERNAME: root
         run: |
+          # Debugging: check if SSH key is loaded
+          ssh-add -l || echo "No SSH key loaded"
+
+          # SSH into VPS and perform the deployment
           ssh -A -o StrictHostKeyChecking=no $USERNAME@$HOST << EOF
             set -e
             echo "Logged into VPS at $HOST"
@@ -34,6 +38,10 @@ jobs:
             # Navigate to project directory
             cd /var/www/store-web
 
+            # Debugging: Ensure SSH agent is available and git is able to pull
+            echo "Checking SSH agent setup"
+            ssh -T git@github.com || echo "Failed to connect to GitHub via SSH"
+            
             # Pull the latest code from the GitHub repository
             echo "Pulling latest code from GitHub"
             git pull origin main || true
