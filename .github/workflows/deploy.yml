@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Set up SSH for deployment
+      # Step 1: Set up SSH for GitHub authentication
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.1
         with:
@@ -27,17 +27,21 @@ jobs:
           HOST: 157.173.205.31
           USERNAME: root
         run: |
-          ssh -o StrictHostKeyChecking=no $USERNAME@$HOST << EOF
+          ssh -A -o StrictHostKeyChecking=no $USERNAME@$HOST << EOF
             set -e
 
             echo "Logging into VPS at $HOST"
+
+            # Ensure SSH agent is running and add key
+            eval "\$(ssh-agent -s)"
+            ssh-add ~/.ssh/deploy_key
 
             # Navigate to project directory
             cd /var/www/store-web
 
             # Pull the latest code from the main branch
             echo "Pulling latest code from GitHub"
-            git pull origin main
+            git pull origin main || true
             git fetch origin
             git reset --hard origin/main
 
