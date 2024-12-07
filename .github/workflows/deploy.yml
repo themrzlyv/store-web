@@ -28,7 +28,8 @@ jobs:
           USERNAME: root
         run: |
           # Debugging: check if SSH key is loaded
-          ssh-add -l || echo "No SSH key loaded"
+          echo "Loading SSH key"
+          echo "${{ secrets.DEPLOY_KEY }}" | ssh-add -
 
           # SSH into VPS and perform the deployment
           ssh -A -o StrictHostKeyChecking=no $USERNAME@$HOST << EOF
@@ -38,15 +39,12 @@ jobs:
             # Navigate to project directory
             cd /var/www/store-web
 
-            # Debugging: Ensure SSH agent is available and git is able to pull
-            echo "Checking SSH agent setup"
+            # Ensure SSH is properly connected to GitHub
             ssh -T git@github.com || echo "Failed to connect to GitHub via SSH"
             
-            # Pull the latest code from the GitHub repository
+            # Pull the latest code from GitHub
             echo "Pulling latest code from GitHub"
-            git pull origin main || true
-            git fetch origin
-            git reset --hard origin/main
+            git pull origin main
 
             # Stop and remove the existing Docker container
             if [ \$(docker ps -q -f name=store-web) ]; then
