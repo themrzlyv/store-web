@@ -37,9 +37,9 @@ jobs:
 
             # Pull the latest code from the main branch
             echo "Pulling latest code from GitHub"
-            # git pull origin main
-            # git fetch origin
-            # git reset --hard origin/main
+            git pull origin main
+            git fetch origin
+            git reset --hard origin/main
 
             # Stop and remove the existing Docker container
             if [ \$(docker ps -q -f name=store-web) ]; then
