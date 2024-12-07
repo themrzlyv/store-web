@@ -10,17 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Set up SSH agent and add the deploy key
-      - name: Set up SSH Agent and Add Key
-        run: |
-          eval "$(ssh-agent -s)"
-          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          ssh-add ~/.ssh/deploy_key
+      # Step 1: Set up SSH for deployment
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.1
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
 
       # Step 2: Add GitHub to known hosts
-      - name: Add GitHub to Known Hosts
-        run: ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - name: Add GitHub to known hosts
+        run: |
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
 
       # Step 3: Deploy to VPS
       - name: Deploy to VPS
@@ -38,9 +37,9 @@ jobs:
 
             # Pull the latest code from the main branch
             echo "Pulling latest code from GitHub"
-            git pull origin main
-            git fetch origin
-            git reset --hard origin/main
+            # git pull origin main
+            # git fetch origin
+            # git reset --hard origin/main
 
             # Stop and remove the existing Docker container
             if [ \$(docker ps -q -f name=store-web) ]; then
