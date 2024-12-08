@@ -18,10 +18,8 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.DEPLOY_KEY }}
 
-      - name: Debug SSH Agent
-        run: |
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/id_rsa <<< ${{secrets.DEPLOY_KEY}}
+      - name: Debug SSH Connection
+        run: ssh -T git@github.com || exit 1
 
       # Step 3: Deploy to VPS
       - name: Deploy to VPS
