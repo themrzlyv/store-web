@@ -19,11 +19,22 @@ jobs:
           host: 157.173.205.31
           username: root
           key: ${{ secrets.STORE_WEB_KEY }}
-          port: 22  # optional, default is 22
+          port: 22
           script: |
             # SSH into VPS and perform deployment
             echo "Logged into VPS at $HOST"
             cd /var/www/store-web
+            # Stop and remove the old container
+            echo "Stopping and removing old container..."
+            docker-compose down || echo "Failed to stop/remove old container"
+
+            # Pull latest code from GitHub
             git pull origin main || echo "Failed to pull from GitHub"
-            # Additional commands for deployment can go here
+
+            # Build and start new container
+            echo "Building and starting new container..."
+            docker-compose up -d --build
+
             echo "Deployment finished"
+        env:
+          DATABASE_URL: ${{ vars.DATABASE_URL }}
