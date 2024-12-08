@@ -13,10 +13,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.5.1
-        with:
-          ssh-private-key: ${{ secrets.STORE_WEB_KEY }}
+      # - name: Set up SSH
+      #   uses: webfactory/ssh-agent@v0.5.1
+      #   with:
+      #     ssh-private-key: ${{ secrets.STORE_WEB_KEY }}
 
       - name: Set up SSH key for GitHub connection
         uses: appleboy/ssh-action@v0.1.7
