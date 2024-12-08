@@ -16,7 +16,7 @@ jobs:
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.1
         with:
-          ssh-private-key: ${{ secrets.STORE_WEB_DEPLOY_KEY }}
+          ssh-private-key: ${{ secrets.STORE_WEB_KEY }}
 
       # Step 3: Deploy to VPS
       - name: Deploy to VPS
@@ -36,23 +36,5 @@ jobs:
             echo "Pulling latest code from GitHub"
             git pull origin main
 
-            # Stop and remove the existing Docker container
-            if [ \$(docker ps -q -f name=store-web) ]; then
-              echo "Stopping and removing existing container"
-              docker stop store-web
-              docker rm store-web
-            fi
-
-            # Build a new Docker image locally on the VPS
-            echo "Building the Docker image locally"
-            docker build -t store-web:latest .
-
-            # Run the updated Docker container
-            echo "Starting the updated container"
-            docker run -d --name store-web --network app_network -p 3000:3000 \
-              -e NEXT_PUBLIC_NODE_ENV=production \
-              -e NEXT_PUBLIC_SERVER_URL=https://api.themirzaliyev.store \
-              store-web:latest
-
-            echo "Deployment complete!"
+            
           EOF
