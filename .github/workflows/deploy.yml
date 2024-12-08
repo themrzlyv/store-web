@@ -24,8 +24,6 @@ jobs:
           HOST: 157.173.205.31
           USERNAME: root
         run: |
-          # Debugging: check if SSH key is loaded
-
           # SSH into VPS and perform the deployment
           ssh -A -o StrictHostKeyChecking=no $USERNAME@$HOST << EOF
             set -e
