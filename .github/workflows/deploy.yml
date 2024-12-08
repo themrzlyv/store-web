@@ -22,8 +22,10 @@ jobs:
         with:
           host: 157.173.205.31
           username: root
-          password: Mirzaliyev15
-          script: cd /var/www/store-web && git pull origin main
+          key: ${{ secrets.DEPLOY_KEY }}
+          script: |
+            cd /var/www/store-web
+            git pull origin main
 
 
       # Step 3: Deploy to VPS
