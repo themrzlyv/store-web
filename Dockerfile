@@ -10,13 +10,11 @@ COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 RUN npx prisma generate
 RUN npm run build
-RUN ls -la /app
 
 FROM node:20 AS runner
 WORKDIR /app
 COPY package.json package-lock.json ./
 COPY --from=builder /app/next.config.ts ./
-COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/node_modules ./node_modules
