@@ -10,7 +10,7 @@ export function Connect() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h4>Let's connect!</h4>
+      <h4>Let&apos;s connect!</h4>
       {data ? (
         <Typography variant="content-text" element="p">
           Feel free to reach out to me at

@@ -30,16 +30,16 @@ export function Info() {
   return (
     <div className="flex flex-col gap-6  max-w-[105ch]">
       <Typography variant="content-text" element="p">
-        👋 Hey there! I'm {fullName}, a full-stack software engineer from
+        👋 Hey there! I&apos;m {fullName}, a full-stack software engineer from
         Azerbaijan with over four (4) years of professional experience. My
         pronouns are he/they.
       </Typography>
       <Typography variant="content-text" element="p">
-        I focus on details and I'm passionate about crafting software products
+        I focus on details and I&apos;m passionate about crafting software products
         that look great and are both accessible and easy to maintain.
       </Typography>
       <Typography variant="content-text" element="p">
-        I'm a huge advocate for open source and collaborating with the
+        I&apos;m a huge advocate for open source and collaborating with the
         community. You can find my stash of websites, libraries, and apps on
         <Typography
           element="a"
@@ -53,7 +53,7 @@ export function Info() {
       </Typography>
 
       <Typography variant="content-text" element="p">
-        I'm all about diving into challenges improving and expanding my skillset
+        I&apos;m all about diving into challenges improving and expanding my skillset
         and I thrive in globally-remote teams that value people and embrace
         trust, kindness, and inclusion.
       </Typography>

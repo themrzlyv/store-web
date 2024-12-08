@@ -73,7 +73,7 @@ export function Info() {
         <div className="flex w-48 h-48 mb-5 md:mb-0">
           {data?.bio.image ? (
             <Img
-              src={data?.bio.image!}
+              src={data?.bio.image}
               alt={fullName}
               width={200}
               height={120}
