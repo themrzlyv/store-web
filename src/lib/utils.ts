@@ -39,6 +39,7 @@ export async function parseFormData<T>(formData: FormData): Promise<T> {
     path: string[],
     value: unknown
   ) => {
+    if (value === undefined) return;
     const lastKey = path.pop();
     if (!lastKey) return;
     const nested = path.reduce((acc, key) => {
@@ -55,7 +56,7 @@ export async function parseFormData<T>(formData: FormData): Promise<T> {
       } catch {
         // If JSON parsing fails, leave the value as a string
       }
-      if (value === "undefined") value = undefined;
+      if (value === "undefined") return;
     }
     const keyParts = key.split(/\[|\].?/).filter(Boolean); // Split nested keys like "socials[github]"
     if (keyParts.length > 1) {
