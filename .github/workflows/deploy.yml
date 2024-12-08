@@ -18,11 +18,6 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.PRIVATE_KEY }}
 
-      - name: Debug SSH Key
-        run: |
-          ssh-add -l || echo "No key added to agent"
-          ssh -T git@github.com
-
       # Step 3: Deploy to VPS
       - name: Deploy to VPS
         env:
@@ -30,8 +25,6 @@ jobs:
           USERNAME: root
         run: |
           # Debugging: check if SSH key is loaded
-          echo "Loading SSH key"
-          echo "${{ secrets.PRIVATE_KEY }}" | ssh-add -
 
           # SSH into VPS and perform the deployment
           ssh -A -o StrictHostKeyChecking=no $USERNAME@$HOST << EOF
