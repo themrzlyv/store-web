@@ -17,9 +17,14 @@ jobs:
           ssh-private-key: ${{ secrets.DEPLOY_KEY }}
 
       # Step 2: Add GitHub to known hosts
-      - name: Add GitHub to known hosts
-        run: |
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - name: Push to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: 157.173.205.31
+          username: root
+          password: Mirzaliyev15
+          script: cd /var/www/store-web && git pull
+
 
       # Step 3: Deploy to VPS
       - name: Deploy to VPS
@@ -36,18 +41,10 @@ jobs:
             set -e
             echo "Logged into VPS at $HOST"
 
-            eval "$(ssh-agent -s)"
-            ssh-add ~/.ssh/authorized_keys
-
-            # Navigate to project directory
-            cd /var/www/store-web
-
-            # Ensure SSH is properly connected to GitHub
-            ssh -T git@github.com || echo "Failed to connect to GitHub via SSH"
-            
-            # Pull the latest code from GitHub
-            echo "Pulling latest code from GitHub"
-            git pull origin main
+            # cd /var/www/store-web
+            # ssh -T git@github.com || echo "Failed to connect to GitHub via SSH"
+            # echo "Pulling latest code from GitHub"
+            # git pull origin main
 
             # Stop and remove the existing Docker container
             if [ \$(docker ps -q -f name=store-web) ]; then
