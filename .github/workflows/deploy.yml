@@ -31,6 +31,9 @@ jobs:
             set -e
             echo "Logged into VPS at $HOST"
 
+            eval "$(ssh-agent -s)"
+            ssh-add ~/.ssh/github_access
+
             cd /var/www/store-web
             ssh -T git@github.com || echo "Failed to connect to GitHub via SSH"
             echo "Pulling latest code from GitHub"
