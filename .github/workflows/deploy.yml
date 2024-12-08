@@ -31,6 +31,9 @@ jobs:
           echo "Loading SSH key"
           echo "${{ secrets.DEPLOY_KEY }}" | ssh-add -
 
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/authorized_keys
+
           # SSH into VPS and perform the deployment
           ssh -A -o StrictHostKeyChecking=no $USERNAME@$HOST << EOF
             set -e
