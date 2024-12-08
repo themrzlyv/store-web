@@ -13,38 +13,38 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # - name: Set up SSH
-      #   uses: webfactory/ssh-agent@v0.5.1
-      #   with:
-      #     ssh-private-key: ${{ secrets.STORE_WEB_KEY }}
-
-      - name: Set up SSH key for GitHub connection
-        uses: appleboy/ssh-action@v0.1.7
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.1
         with:
-          host: 157.173.205.31
-          username: root
-          key: ${{ secrets.STORE_WEB_KEY }}
-          port: 22  # optional, default is 22
-          script: |
-            # SSH into VPS and perform deployment
-            echo "Logged into VPS at $HOST"
-            cd /var/www/store-web
-            git pull origin main || echo "Failed to pull from GitHub"
-            # Additional commands for deployment can go here
-            echo "Deployment finished"
+          ssh-private-key: ${{ secrets.STORE_WEB_KEY }}
 
-      # - name: Deploy to VPS
-      #   env:
-      #     HOST: 157.173.205.31
-      #     USERNAME: root
-      #   run: |
-      #     # SSH into VPS and perform the deployment
-      #     ssh -A -o StrictHostKeyChecking=no $USERNAME@$HOST << EOF
-      #       set -e
+      # - name: Set up SSH key for GitHub connection
+      #   uses: appleboy/ssh-action@v0.1.7
+      #   with:
+      #     host: 157.173.205.31
+      #     username: root
+      #     key: ${{ secrets.STORE_WEB_KEY }}
+      #     port: 22  # optional, default is 22
+      #     script: |
+      #       # SSH into VPS and perform deployment
       #       echo "Logged into VPS at $HOST"
-
       #       cd /var/www/store-web
-      #       ssh -T git@github.com || echo "Failed to connect to GitHub via SSH"
-      #       echo "Pulling latest code from GitHub"
-      #       git pull origin main
-      #     EOF
+      #       git pull origin main || echo "Failed to pull from GitHub"
+      #       # Additional commands for deployment can go here
+      #       echo "Deployment finished"
+
+      - name: Deploy to VPS
+        env:
+          HOST: 157.173.205.31
+          USERNAME: root
+        run: |
+          # SSH into VPS and perform the deployment
+          ssh -A -o StrictHostKeyChecking=no $USERNAME@$HOST << EOF
+            set -e
+            echo "Logged into VPS at $HOST"
+
+            cd /var/www/store-web
+            ssh -T git@github.com || echo "Failed to connect to GitHub via SSH"
+            echo "Pulling latest code from GitHub"
+            git pull origin main
+          EOF
