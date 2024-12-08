@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -18,6 +17,18 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.1
         with:
           ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+
+      - name: Test DEPLOY_KEY secret
+        run: |
+          # Output a masked version of the secret to verify it exists
+          if [ -z "${{ secrets.DEPLOY_KEY }}" ]; then
+            echo "DEPLOY_KEY is empty or not configured properly!"
+            exit 1
+          else
+            echo "DEPLOY_KEY is present. First few characters are: ${{
+              secrets.DEPLOY_KEY:0:10
+            }}***"
+          fi
 
       - name: Debug SSH Agent
         run: |
