@@ -14,7 +14,7 @@ RUN npm run build
 FROM node:20 AS runner
 WORKDIR /app
 COPY package.json package-lock.json ./
-COPY --from=builder /app/next.config.mjs ./
+COPY --from=builder /app/next.config.ts ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/prisma ./prisma
