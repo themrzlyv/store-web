@@ -20,14 +20,12 @@ jobs:
 
       - name: Test DEPLOY_KEY secret
         run: |
-          # Output a masked version of the secret to verify it exists
+          # Check if the secret exists and is not empty
           if [ -z "${{ secrets.DEPLOY_KEY }}" ]; then
             echo "DEPLOY_KEY is empty or not configured properly!"
             exit 1
           else
-            echo "DEPLOY_KEY is present. First few characters are: ${{
-              secrets.DEPLOY_KEY:0:10
-            }}***"
+            echo "DEPLOY_KEY is present. It has $(echo "${{ secrets.DEPLOY_KEY }}" | wc -c) characters."
           fi
 
       - name: Debug SSH Agent
