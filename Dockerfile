@@ -1,6 +1,7 @@
 FROM node:20 AS deps
 WORKDIR /app
 COPY package.json package-lock.json* ./
+RUN npm install --legacy-peer-deps
 RUN npm ci
 
 FROM node:20 AS builder
