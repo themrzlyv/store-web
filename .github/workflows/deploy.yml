@@ -23,8 +23,10 @@ jobs:
           HOST: 157.173.205.31
           USERNAME: root
         run: |
-          # Add the SSH key to the agent on the VPS
-          echo "$STORE_WEB_KEY" | ssh-add - > /dev/null
+          # Save the SSH key to a temporary file and add it to the agent
+          echo "$STORE_WEB_KEY" > /tmp/deploy_key
+          chmod 600 /tmp/deploy_key
+          ssh-add /tmp/deploy_key
 
           # SSH into VPS and perform the deployment
           ssh -A -o StrictHostKeyChecking=no $USERNAME@$HOST << EOF
