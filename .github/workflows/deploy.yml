@@ -16,10 +16,12 @@ jobs:
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.1
         with:
-          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+          ssh-private-key: ${{ secrets.PRIVATE_KEY }}
 
-      - name: Debug SSH Connection
-        run: ssh -T git@github.com || exit 1
+      - name: Debug SSH Key
+        run: |
+          ssh-add -l || echo "No key added to agent"
+          ssh -T git@github.com
 
       # Step 3: Deploy to VPS
       - name: Deploy to VPS
@@ -29,7 +31,7 @@ jobs:
         run: |
           # Debugging: check if SSH key is loaded
           echo "Loading SSH key"
-          echo "${{ secrets.DEPLOY_KEY }}" | ssh-add -
+          echo "${{ secrets.PRIVATE_KEY }}" | ssh-add -
 
           # SSH into VPS and perform the deployment
           ssh -A -o StrictHostKeyChecking=no $USERNAME@$HOST << EOF
