@@ -21,8 +21,7 @@ jobs:
       - name: Debug SSH Agent
         run: |
           eval "$(ssh-agent -s)"
-          echo "${{ secrets.DEPLOY_KEY }}" | ssh-add -
-          ssh-add -l
+          ssh-add ~/.ssh/id_rsa <<< ${{secrets.DEPLOY_KEY}}
 
       # Step 3: Deploy to VPS
       - name: Deploy to VPS
