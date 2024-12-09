@@ -6,7 +6,7 @@ import { DeleteProjectsInput } from "./types/delete-projects.input";
 export const projectApi = createApi({
   reducerPath: "projectApi",
   baseQuery: customFetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_URL,
+    baseUrl: process.env.API_URL,
     credentials: "include",
   }),
   tagTypes: ["GetProjects"],

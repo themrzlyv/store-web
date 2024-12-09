@@ -7,7 +7,7 @@ import { compareDesc, parseISO } from "date-fns";
 export const experienceApi = createApi({
   reducerPath: "experienceApi",
   baseQuery: customFetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_URL,
+    baseUrl: process.env.API_URL,
     credentials: "include",
   }),
   tagTypes: ["GetExperiences"],

@@ -5,7 +5,7 @@ import { BioEntity } from "../domain/entities/bio.entity";
 export const bioApi = createApi({
   reducerPath: "bioApi",
   baseQuery: customFetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_URL,
+    baseUrl: process.env.API_URL,
     credentials: "include",
   }),
   tagTypes: ["GetBioInformation"],
