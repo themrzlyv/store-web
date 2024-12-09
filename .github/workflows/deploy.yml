@@ -33,6 +33,7 @@ jobs:
 
             # Build and start new container
             echo "Building and starting new container..."
+            echo "NEXT_PUBLIC_API_URL=${{ vars.NEXT_PUBLIC_API_URL }}"
             DATABASE_URL=${{ vars.DATABASE_URL }} NEXT_PUBLIC_API_URL=${{ vars.NEXT_PUBLIC_API_URL }} docker-compose up -d --build
 
             echo "Deployment finished"
