@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -33,9 +27,9 @@ model Bio {
   profession String?
   bio        String?
   image      String?
-  social     Social?
   socialid   Int?
   skills     Skill[]
+  social     Social?
 }
 
 model Skill {
@@ -43,7 +37,9 @@ model Skill {
   name    String
   bioId   String
   Bio     Bio      @relation(fields: [bioId], references: [identifier])
-  courses Course[]
+  courses Course[] @relation("CourseToSkill")
+
+  @@index([bioId], map: "Skill_bioId_fkey")
 }
 
 model Social {
@@ -52,14 +48,8 @@ model Social {
   linkedin  String?
   instagram String?
   mail      String?
-
-  bioId String @unique
-  bio   Bio    @relation(fields: [bioId], references: [identifier])
-}
-
-enum Role {
-  ADMIN
-  USER
+  bioId     String  @unique
+  bio       Bio     @relation(fields: [bioId], references: [identifier])
 }
 
 model Post {
@@ -101,6 +91,11 @@ model Course {
   description String
   price       Float
   duration    Int
-  techStack   Skill[]
   createdAt   DateTime @default(now())
+  techStack   Skill[]  @relation("CourseToSkill")
+}
+
+enum Role {
+  ADMIN
+  USER
 }
