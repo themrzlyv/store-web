@@ -1,5 +1,4 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { API_URL } from "@/shared/data/constants";
 import { customFetchBaseQuery } from "@/lib/custom-fetch-base-query";
 import { ExperienceEntity } from "../domain/entities/experience.entity";
 import { DeleteExperiencesInput } from "./types/delete-experiences.input";
@@ -8,7 +7,7 @@ import { compareDesc, parseISO } from "date-fns";
 export const experienceApi = createApi({
   reducerPath: "experienceApi",
   baseQuery: customFetchBaseQuery({
-    baseUrl: API_URL,
+    baseUrl: process.env.NEXT_PUBLIC_API_URL,
     credentials: "include",
   }),
   tagTypes: ["GetExperiences"],

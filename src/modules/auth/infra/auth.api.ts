@@ -1,12 +1,11 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { API_URL } from "@/shared/data/constants";
 import { SignInFormType } from "./types/sign-in-form";
 import { customFetchBaseQuery } from "@/lib/custom-fetch-base-query";
 
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: customFetchBaseQuery({
-    baseUrl: API_URL,
+    baseUrl: process.env.NEXT_PUBLIC_API_URL,
     credentials: "include",
   }),
   endpoints: builder => ({

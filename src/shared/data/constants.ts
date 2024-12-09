@@ -13,8 +13,6 @@ export const apiPublicRoutes = [
 export const DEFAULT_LOGIN_REDIRECT_URL = "/admin";
 export const DEFAULT_UNAUTHORIZED_REDIRECT_URL = "/login";
 
-export const API_URL = "http://localhost:3000/api";
-
 export const TOKEN_KEY = "themirzaliyev_store_session";
 
 export const DEFAULT_BIO_KEY = "themirzaliyev_store_bio";

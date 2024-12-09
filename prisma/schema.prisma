@@ -8,15 +8,14 @@ datasource db {
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
-  identifier String   @unique @default("themirzaliyev_store_admin")
-  email      String   @unique
-  password   String
-  firstName  String
-  lastName   String
-  role       Role     @default(ADMIN)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  firstName String
+  lastName  String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Bio {
@@ -48,19 +47,19 @@ model Social {
   linkedin  String?
   instagram String?
   mail      String?
-  bioId     String  @unique
-  bio       Bio     @relation(fields: [bioId], references: [identifier])
+  bioId     Int     @unique
+  bio       Bio     @relation(fields: [bioId], references: [id])
 }
 
 model Post {
   id        Int      @id @default(autoincrement())
   title     String
   content   String
-  slug      String   @unique
   image     String?
   views     Int      @default(0)
   published Boolean  @default(false)
   createdAt DateTime @default(now())
+  slug      String   @unique
 }
 
 model Project {
@@ -68,10 +67,10 @@ model Project {
   title     String
   image     String?
   content   String
-  sourceUrl String?
-  stars     Int      @default(0)
   published Boolean  @default(false)
   createdAt DateTime @default(now())
+  sourceUrl String?
+  stars     Int      @default(0)
 }
 
 model Experience {
