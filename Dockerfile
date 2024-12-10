@@ -9,7 +9,7 @@ WORKDIR /app
 ARG DATABASE_URL
 ARG API_URL
 ENV DATABASE_URL=$DATABASE_URL
-ENV NEXT_PUBLIC_API_URL=$API_URL
+ENV API_URL=$API_URL
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 RUN npx prisma generate
