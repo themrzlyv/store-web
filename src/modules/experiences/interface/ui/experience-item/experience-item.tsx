@@ -22,9 +22,9 @@ export function ExperienceItem({ item, line }: Props) {
         title={item.company}
         content={item.position}
         subContent={
-          <Typography variant="content-text">
-            {formatDate(item.startDate, true)} -{" "}
-            {item.endDate ? formatDate(item.endDate, true) : "Present"}
+          <Typography element="p" variant="small-text" className="font-light">
+            {formatDate(item.startDate, false)} -{" "}
+            {item.endDate ? formatDate(item.endDate, false) : "Present"}
           </Typography>
         }
       />

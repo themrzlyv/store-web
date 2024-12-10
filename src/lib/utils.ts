@@ -71,7 +71,7 @@ export async function parseFormData<T>(formData: FormData): Promise<T> {
 }
 
 export function formatDate(date: Date, fullDate: boolean = false): string {
-  const formatDate = fullDate ? "MMMM d, yyyy" : "MMMM d";
+  const formatDate = fullDate ? "MMMM d, yyyy" : "MMMM yyyy";
   return format(date, formatDate);
 }
 

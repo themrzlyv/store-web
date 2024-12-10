@@ -1,6 +1,7 @@
 import { formatDate } from "@/lib/utils";
 import { PostEntity } from "@/modules/blog/domain/entities/post.entity";
 import { Card } from "@/shared/components/card/card";
+import { Typography } from "@/shared/components/typography/typography";
 import { usePathname, useRouter } from "next/navigation";
 
 type Props = {
@@ -17,17 +18,17 @@ export function PostItem({ post }: Props) {
     <Card key={post.id} onClick={() => router.push(`/blog/${post.slug}`)}>
       <Card.Image src={post.image!} width={110} height={64} alt={post.title} />
       <Card.Content
-        title={post.title}
-        content={post.content}
+        title={post.title.slice(0, 50).trim() + "..."}
+        content={post.content.slice(0, 100).trim() + "..."}
         subContent={
           <>
-            <p className="text-base dark:text-dark-light-gray">
+            <Typography element="p" variant="small-text">
               {formatDate(post.createdAt, dateFormat)}
-            </p>
+            </Typography>
             <span>·</span>
-            <p className="text-base dark:text-dark-light-gray">
+            <Typography element="p" variant="small-text">
               {post.views} views
-            </p>
+            </Typography>
           </>
         }
       />

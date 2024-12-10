@@ -27,9 +27,9 @@ export function ProjectItem({ project }: Props) {
             {project.title}
             <span
               style={{ textDecorationLine: "none" }}
-              className="ml-4 text-sm flex items-center gap-1 rounded-lg bg-primary-100 text-black py-1 px-3"
+              className="ml-4 text-xs flex items-center gap-1 rounded-md bg-primary-100 text-black py-0.5 px-2"
             >
-              <Star width={14} height={14} />
+              <Star width={10} height={10} fill="#000" />
               {project.stars}
             </span>
           </>

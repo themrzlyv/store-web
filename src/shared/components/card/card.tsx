@@ -1,6 +1,7 @@
 import React from "react";
 import { Img } from "@/ui";
 import { cn } from "@/lib/utils";
+import { Typography } from "../typography/typography";
 
 type CardContainerProps<T extends React.ElementType> = {
   children: React.ReactNode;
@@ -62,17 +63,23 @@ const CardContent = ({
 }) => (
   <div
     className={cn(
-      subContent ? "justify-between" : "justify-center",
-      "flex flex-col h-full"
+      "flex flex-col h-full overflow-hidden",
+      subContent ? "justify-between" : ""
     )}
   >
     {title && (
-      <h4 className="text-xl flex items-center group-hover:underline font-medium dark:text-light-default">
+      <Typography
+        element="h6"
+        variant="card-title"
+        className="flex items-center group-hover:underline dark:text-light-default"
+      >
         {title}
-      </h4>
+      </Typography>
     )}
     {content && (
-      <p className="text-lg text-pretty dark:text-dark-light-gray">{content}</p>
+      <Typography element="p" variant="small-text" className="text-pretty">
+        {content}
+      </Typography>
     )}
     {subContent && <div className="flex items-center gap-2">{subContent}</div>}
   </div>
