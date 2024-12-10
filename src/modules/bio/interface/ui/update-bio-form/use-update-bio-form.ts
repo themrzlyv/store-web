@@ -12,7 +12,7 @@ import { QueryTypes } from "@/shared/query-types/query-types";
 
 export function useUpdateBioForm() {
   const { data } = useGetBioInformationQuery(QueryTypes.BIO_INFO);
-  const [updateBioInformation, { isLoading: isUpdatePostLoading }] =
+  const [updateBioInformation, { isLoading: isUpdateBioLoading }] =
     useUpdateBioMutation();
 
   const [isEditMode, setIsEditMode] = useState(false);
@@ -41,7 +41,7 @@ export function useUpdateBioForm() {
   return {
     form,
     onSubmit,
-    isLoading: isUpdatePostLoading,
+    isLoading: isUpdateBioLoading,
     isEditMode,
     toggleEditMode,
   };

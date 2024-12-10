@@ -7,34 +7,27 @@ import { Textarea } from "@/ui/textarea";
 import { Section } from "@/shared/components/section/section";
 
 export function UpdateBioForm() {
-  const { form, onSubmit, isEditMode, toggleEditMode } = useUpdateBioForm();
+  const { form, onSubmit, isEditMode, toggleEditMode, isLoading } =
+    useUpdateBioForm();
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
       <Section>
         <Section.Header
           title="Bio Information"
-          action={
-            <div className="flex gap-2">
+          action={{ icon: UserRoundPen, onClick: toggleEditMode }}
+          subActions={[
+            isEditMode && (
               <Button
-                variant="ghost"
-                size="md"
-                type="button"
-                onClick={toggleEditMode}
+                type="submit"
+                variant="primary"
+                size="sm"
+                className="max-w-md w-full"
+                isLoading={isLoading}
               >
-                <UserRoundPen width={22} height={22} />
+                <Save width={18} height={18} />
               </Button>
-              {isEditMode && (
-                <Button
-                  type="submit"
-                  variant="primary"
-                  size="md"
-                  className="max-w-md w-full"
-                >
-                  <Save width={22} height={22} />
-                </Button>
-              )}
-            </div>
-          }
+            ),
+          ]}
         />
         <div className="flex flex-col gap-4">
           <Form {...form}>

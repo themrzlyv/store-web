@@ -22,29 +22,20 @@ export function AdminSocials() {
         <Section>
           <Section.Header
             title="Social Links"
-            action={
-              <div className="flex gap-2">
+            action={{ icon: UserRoundPen, onClick: toggleEditMode }}
+            subActions={[
+              isEditMode && (
                 <Button
-                  variant="ghost"
-                  size="md"
-                  type="button"
-                  onClick={toggleEditMode}
+                  type="submit"
+                  variant="primary"
+                  size="sm"
+                  className="max-w-md w-full"
+                  isLoading={isUpdateFormLoading}
                 >
-                  <UserRoundPen width={22} height={22} />
+                  <Save width={18} height={18} />
                 </Button>
-                {isEditMode && (
-                  <Button
-                    type="submit"
-                    variant="primary"
-                    size="md"
-                    className="max-w-md w-full"
-                    isLoading={isUpdateFormLoading}
-                  >
-                    <Save width={22} height={22} />
-                  </Button>
-                )}
-              </div>
-            }
+              ),
+            ]}
           />
           <div className="flex items-center flex-wrap">
             <Form {...form}>
@@ -58,7 +49,7 @@ export function AdminSocials() {
                       <FormControl>
                         <div className="flex items-center gap-2">
                           <div className="p-3 rounded-lg bg-light-dark dark:bg-dark-lighter">
-                            <social.icon />
+                            {social.icon}
                           </div>
                           <Input
                             {...field}

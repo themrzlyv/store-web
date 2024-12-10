@@ -1,5 +1,6 @@
 import Button from "@/ui/button";
 import { Typography } from "../typography/typography";
+import React from "react";
 
 function SectionContainer({ children }: React.PropsWithChildren) {
   return <section className="flex flex-col gap-6">{children}</section>;
@@ -12,33 +13,44 @@ type SectionHeaderProps = {
       width?: number | string;
       height?: number | string;
     }>;
-    title: string;
-    onClick: () => void;
+    title?: string;
+    onClick?: () => void;
   };
+  subActions?: React.ReactNode[];
 };
 
 function SectionHeader({
   title,
   action,
+  subActions,
 }: React.PropsWithChildren<SectionHeaderProps>) {
   return (
     <div className="flex justify-between items-center">
       <Typography element="h4" variant="section-title">
         {title}
       </Typography>
-      {action && (
-        <Button
-          variant="primary"
-          size="sm"
-          className="font-bold flex items-center gap-1"
-          onClick={() => action.onClick()}
-        >
-          {action.icon && <action.icon width={18} height={18} />}
-          <Typography element="p" variant="menu-text">
-            {action.title}
-          </Typography>
-        </Button>
-      )}
+      <div className="flex items-center gap-2">
+        {action && (
+          <Button
+            variant="primary"
+            size="sm"
+            type="button"
+            className="font-bold flex items-center gap-1"
+            onClick={() => action?.onClick && action.onClick()}
+          >
+            {action?.icon && <action.icon width={18} height={18} />}
+            {action?.title && (
+              <Typography element="p" variant="menu-text">
+                {action.title}
+              </Typography>
+            )}
+          </Button>
+        )}
+        {subActions &&
+          subActions.map((action, index) => {
+            return <React.Fragment key={index}>{action}</React.Fragment>;
+          })}
+      </div>
     </div>
   );
 }
