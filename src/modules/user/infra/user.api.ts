@@ -5,7 +5,7 @@ import { customFetchBaseQuery } from "@/lib/custom-fetch-base-query";
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: customFetchBaseQuery({
-    baseUrl: process.env.API_URL,
+    baseUrl: process.env.NEXT_PUBLIC_API_URL,
     credentials: "include",
   }),
   endpoints: builder => ({
