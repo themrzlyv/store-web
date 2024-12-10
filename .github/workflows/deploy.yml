@@ -33,7 +33,7 @@ jobs:
 
             # Build and start new container
             echo "Building and starting new container..."
-            DATABASE_URL=${{ vars.DATABASE_URL }} docker-compose up -d --build
+            DATABASE_URL=${{ vars.DATABASE_URL }} API_URL=${{ vars.API_URL }} docker-compose up -d --build
 
             echo "Deployment finished"
         env:

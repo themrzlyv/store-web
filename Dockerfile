@@ -6,6 +6,10 @@ RUN npm ci --legacy-peer-deps
 
 FROM node:20 AS builder
 WORKDIR /app
+ARG DATABASE_URL
+ARG API_URL
+ENV DATABASE_URL=$DATABASE_URL
+ENV NEXT_PUBLIC_API_URL=$API_URL
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 RUN npx prisma generate

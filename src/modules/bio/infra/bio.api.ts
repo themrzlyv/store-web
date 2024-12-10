@@ -1,14 +1,13 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { customFetchBaseQuery } from "@/lib/custom-fetch-base-query";
 import { BioEntity } from "../domain/entities/bio.entity";
-import { API_URL } from "@/shared/data/constants";
 
-console.log(API_URL, "process.env.API_URL");
+console.log(process.env.API_URL, "process.env.API_URL");
 
 export const bioApi = createApi({
   reducerPath: "bioApi",
   baseQuery: customFetchBaseQuery({
-    baseUrl: API_URL,
+    baseUrl: process.env.API_URL,
     credentials: "include",
   }),
   tagTypes: ["GetBioInformation"],

@@ -2,12 +2,11 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { PostEntity } from "../domain/entities/post.entity";
 import { DeletePostsInput } from "./types/delete-posts.input";
 import { customFetchBaseQuery } from "@/lib/custom-fetch-base-query";
-import { API_URL } from "@/shared/data/constants";
 
 export const postApi = createApi({
   reducerPath: "postApi",
   baseQuery: customFetchBaseQuery({
-    baseUrl: API_URL,
+    baseUrl: process.env.API_URL,
     credentials: "include",
   }),
   tagTypes: ["GetPosts", "GetPostDetails"],
