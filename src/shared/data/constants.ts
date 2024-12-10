@@ -8,6 +8,7 @@ export const apiPublicRoutes = [
   { path: `${apiPrefix}/experience`, publicMethod: "GET" },
   { path: `${apiPrefix}/project`, publicMethod: "GET" },
   { path: `${apiPrefix}/auth/sign-in`, publicMethod: "POST" },
+  { path: `${apiPrefix}/auth/sign-up`, publicMethod: "POST" },
 ];
 
 export const DEFAULT_LOGIN_REDIRECT_URL = "/admin";
