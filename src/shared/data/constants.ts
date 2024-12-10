@@ -16,3 +16,8 @@ export const DEFAULT_UNAUTHORIZED_REDIRECT_URL = "/login";
 export const TOKEN_KEY = "themirzaliyev_store_session";
 
 export const DEFAULT_BIO_KEY = "themirzaliyev_store_bio";
+
+export const API_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://themirzaliyev.com/api"
+    : "http://localhost:3000/api";
