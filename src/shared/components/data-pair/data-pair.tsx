@@ -11,7 +11,7 @@ export function DataPair({ label, value }: Props) {
       <Typography element="h6" variant="label">
         {label}
       </Typography>
-      <Typography element="h6" variant="small-text">
+      <Typography element="p" variant="small-text">
         {value}
       </Typography>
     </div>

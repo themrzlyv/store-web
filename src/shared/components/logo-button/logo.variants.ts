@@ -1,5 +1,5 @@
 import { tv } from "tailwind-variants";
 
 export const logoVariants = tv({
-  base: "p-4 cursor-pointer transition-all duration-150",
+  base: "py-2 px-3 cursor-pointer transition-all duration-150",
 });

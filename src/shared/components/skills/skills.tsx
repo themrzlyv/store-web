@@ -22,7 +22,7 @@ export function Skills({ handleRemoveSkill }: Props) {
     return (
       <div
         key={skill.id}
-        className="bg-dark-light-gray/20 relative dark:bg-dark-light/50 hover:dark:bg-dark-lighter ring-1 ring-primary-600/10 dark:ring-primary-200/15 cursor-default py-2 px-4 hover:bg-light-dark rounded-md"
+        className="bg-dark-light-gray/20 relative dark:bg-dark-light/50 hover:dark:bg-dark-lighter ring-1 ring-primary-600/10 dark:ring-primary-200/15 cursor-default py-1.5 px-3 hover:bg-light-dark rounded-lg"
       >
         {handleRemoveSkill && (
           <div
@@ -33,7 +33,7 @@ export function Skills({ handleRemoveSkill }: Props) {
           </div>
         )}
 
-        <Typography variant="content-text" element="p">
+        <Typography variant="small-text" element="p" className="font-medium">
           {skill.name}
         </Typography>
       </div>

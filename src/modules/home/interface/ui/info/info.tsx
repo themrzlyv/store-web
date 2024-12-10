@@ -28,7 +28,7 @@ export function Info() {
     <section className="flex flex-col gap-6">
       <div className="flex justify-between flex-col-reverse md:flex-row py-3">
         <div className="flex-1 flex flex-col gap-4">
-          <h1 className="text-4xl flex items-center gap-1 dark:text-dark-light-gray">
+          <h2 className="text-2xl flex items-center gap-1 dark:text-dark-light-gray">
             <span
               role="img"
               aria-label={"waving hand"}
@@ -40,9 +40,9 @@ export function Info() {
                 "👋 Hello, World"
               )}
             </span>
-          </h1>
+          </h2>
 
-          <h1 className="flex items-center gap-2 text-2xl shadow-primary-300 dark:text-dark-light-gray">
+          <h2 className="flex items-center gap-2 text-xl shadow-primary-300 dark:text-dark-light-gray">
             {!data ? (
               <Skeleton className="w-[250px] h-5" />
             ) : (
@@ -53,7 +53,7 @@ export function Info() {
                 <VerifiedIcon />
               </>
             )}
-          </h1>
+          </h2>
 
           {!data ? (
             <>
@@ -64,13 +64,13 @@ export function Info() {
             <Typography
               variant="content-text"
               element="p"
-              className="max-w-[34rem] "
+              className="max-w-[25rem]"
             >
               {data?.bio?.bio}
             </Typography>
           )}
         </div>
-        <div className="flex w-48 h-48 mb-5 md:mb-0">
+        <div className="flex w-40 h-40 mb-5 md:mb-0">
           {data?.bio.image ? (
             <Img
               src={data?.bio.image}
@@ -89,11 +89,11 @@ export function Info() {
         {data ? (
           <Button
             variant="primary"
-            size="lg"
-            className="flex items-center gap-2 font-bold"
+            size="md"
+            className="flex items-center gap-2 font-semibold"
             onClick={() => router.push("/about")}
           >
-            <User />
+            <User width={20} height={20} />
             More about me
           </Button>
         ) : (

@@ -32,9 +32,7 @@ export function Footer() {
   return (
     <footer className={footer()}>
       <div className={details()}>
-        <div>
-          <LogoButton textClass={logoText()} />
-        </div>
+        <LogoButton textClass={logoText()} wrapperClass="p-0" />
         <div>
           {data ? (
             <p className={description()}>{data?.bio.bio}</p>

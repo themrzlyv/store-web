@@ -10,7 +10,9 @@ export function Connect() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h4>Let&apos;s connect!</h4>
+      <Typography element="h4" variant="content-text">
+        Let&apos;s connect!
+      </Typography>
       {data ? (
         <Typography variant="content-text" element="p">
           Feel free to reach out to me at
@@ -22,7 +24,7 @@ export function Connect() {
       ) : (
         <Skeleton className="w-3/4 h-5" />
       )}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2">
         <Socials />
       </div>
     </div>

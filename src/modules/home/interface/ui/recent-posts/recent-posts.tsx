@@ -1,7 +1,6 @@
 "use client";
 import { Posts } from "@/modules/blog/interface/ui/posts/posts";
 import { Section } from "@/shared/components/section/section";
-import Button from "@/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -12,17 +11,11 @@ export function RecentPosts() {
     <Section>
       <Section.Header
         title="Recent Posts"
-        action={
-          <Button
-            variant="primary"
-            size="lg"
-            className="font-bold flex items-center gap-2"
-            onClick={() => router.push("/blog")}
-          >
-            <ArrowRight />
-            View all
-          </Button>
-        }
+        action={{
+          title: "View all",
+          onClick: () => router.push("/blog"),
+          icon: ArrowRight,
+        }}
       />
       <Section.Body>
         <Posts />

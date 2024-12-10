@@ -29,11 +29,7 @@ export function Experience() {
     <div className="flex flex-col gap-4">
       <Section.Header
         title="Experience"
-        action={
-          <Button variant="primary" size="lg">
-            Resume
-          </Button>
-        }
+        action={{ title: "Resume", onClick: () => {} }}
       />
       <div className="flex flex-1 flex-col">{renderList}</div>
     </div>

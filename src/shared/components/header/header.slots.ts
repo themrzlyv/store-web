@@ -5,10 +5,10 @@ export const headerSlots = tv({
     header:
       "md:sticky fixed top-4 z-10 flex justify-center w-full items-center duration-500 ease-in-out transition-transform",
     headerContent:
-      "flex flex-wrap relative w-full items-center justify-between mx-auto bg-light-dark/50 backdrop-blur ring-1 ring-primary-600/10 rounded-2xl p-2 overflow-hidden transition-all duration-500 md:max-w-[850px] dark:bg-dark-light/50 dark:ring-primary-200/15",
+      "flex flex-wrap relative w-full items-center justify-between mx-auto bg-light-dark/50 backdrop-blur ring-1 ring-primary-600/10 rounded-2xl p-1.5 md:p-2 overflow-hidden transition-all duration-500 md:max-w-[670px] dark:bg-dark-light/50 dark:ring-primary-200/15",
     headerLogo: " rounded-lg  hover:bg-light-darker hover:dark:bg-dark-lighter",
     menuButton:
-      "p-4 cursor-pointer rounded-lg flex items-center justify-center  transition-colors hover:bg-light-darker hover:dark:bg-dark-lighter ",
+      "px-2.5 py-2 cursor-pointer rounded-lg flex items-center justify-center  transition-colors hover:bg-light-darker hover:dark:bg-dark-lighter ",
     navContainer: "flex items-center gap-2 md:hidden",
   },
   variants: {
@@ -22,7 +22,7 @@ export const headerSlots = tv({
         headerContent: "max-h-screen",
       },
       false: {
-        headerContent: "max-h-[78px]",
+        headerContent: "max-h-[55px] md:max-h-[60px]",
       },
     },
   },

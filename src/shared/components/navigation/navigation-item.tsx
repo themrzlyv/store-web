@@ -16,7 +16,7 @@ export function NavigationItem({ isActive, route }: Props) {
   return (
     <div className={navigationItem()}>
       <Link href={route.path}>
-        <Typography variant="menu-text" element="h4" className={itemText()}>
+        <Typography variant="menu-text" element="h6" className={itemText()}>
           {route.name}
         </Typography>
       </Link>

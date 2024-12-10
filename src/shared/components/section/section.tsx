@@ -1,19 +1,44 @@
+import Button from "@/ui/button";
 import { Typography } from "../typography/typography";
 
 function SectionContainer({ children }: React.PropsWithChildren) {
   return <section className="flex flex-col gap-6">{children}</section>;
 }
 
+type SectionHeaderProps = {
+  title: string;
+  action?: {
+    icon?: React.FC<{
+      width?: number | string;
+      height?: number | string;
+    }>;
+    title: string;
+    onClick: () => void;
+  };
+};
+
 function SectionHeader({
   title,
   action,
-}: React.PropsWithChildren<{ title: string; action?: React.ReactNode }>) {
+}: React.PropsWithChildren<SectionHeaderProps>) {
   return (
     <div className="flex justify-between items-center">
-      <Typography element="h2" variant="section-title">
+      <Typography element="h4" variant="section-title">
         {title}
       </Typography>
-      {action && action}
+      {action && (
+        <Button
+          variant="primary"
+          size="sm"
+          className="font-bold flex items-center gap-1"
+          onClick={() => action.onClick()}
+        >
+          {action.icon && <action.icon width={18} height={18} />}
+          <Typography element="p" variant="menu-text">
+            {action.title}
+          </Typography>
+        </Button>
+      )}
     </div>
   );
 }

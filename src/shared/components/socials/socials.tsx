@@ -24,16 +24,15 @@ export function Socials() {
     <>
       {socialFields.map(field => {
         const name = field.name.split(".")[1] as keyof typeof social;
-        const Icon = field.icon;
         return data ? (
           social[name] && (
             <Link
               href={social[name]}
               key={social[name]}
               target="_blank"
-              className="p-4 rounded-lg hover:bg-light-dark dark:hover:bg-dark-lighter"
+              className="p-3 rounded-lg hover:bg-light-dark dark:hover:bg-dark-lighter"
             >
-              <Icon />
+              {field.icon}
             </Link>
           )
         ) : (

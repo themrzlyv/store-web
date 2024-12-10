@@ -19,7 +19,7 @@ export function SwitchTheme({ className }: Props) {
         "flex",
         "items-center",
         "justify-center",
-        "p-4",
+        "py-2 px-2.5",
         "cursor-pointer",
         "rounded-lg",
         "transition-colors",
@@ -30,9 +30,9 @@ export function SwitchTheme({ className }: Props) {
       onClick={toggleTheme}
     >
       {theme === "light" ? (
-        <Sun width={24} height={24} className="text-primary-default" />
+        <Sun width={20} height={20} className="text-primary-default" />
       ) : (
-        <Moon width={24} height={24} className="text-primary-300" />
+        <Moon width={20} height={20} className="text-primary-300" />
       )}
     </div>
   );

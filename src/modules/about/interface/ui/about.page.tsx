@@ -8,7 +8,7 @@ export function AboutPage() {
   return (
     <Section>
       <Section.Header title="About" />
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-8">
         <Info />
         <Connect />
         <Skills />
