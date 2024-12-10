@@ -17,3 +17,4 @@ export const DEFAULT_UNAUTHORIZED_REDIRECT_URL = "/login";
 export const TOKEN_KEY = "themirzaliyev_store_session";
 
 export const DEFAULT_BIO_KEY = "themirzaliyev_store_bio";
+export const DEFAULT_USER_KEY = "themirzaliyev_store_user";

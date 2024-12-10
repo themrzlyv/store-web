@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
+import { DEFAULT_USER_KEY } from "@/shared/data/constants";
 
 export async function POST(req: NextRequest) {
   try {
@@ -13,7 +14,11 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const existUser = await prisma.user.findUnique({ where: { email } });
+    const existUser = await prisma.user.findFirst({
+      where: {
+        OR: [email ? { email } : {}, { identifier: DEFAULT_USER_KEY }],
+      },
+    });
 
     if (existUser) {
       return NextResponse.json(
