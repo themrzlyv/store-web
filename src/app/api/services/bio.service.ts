@@ -52,7 +52,7 @@ export class BioService {
           firstName,
           lastName,
           image,
-          about,
+          about: about || undefined,
           skills: {
             ...(skill ? { create: { name: skill } } : {}),
             ...(skillId ? { delete: { id: Number(skillId) } } : {}),
