@@ -6,12 +6,12 @@ export async function GET() {
   return await experienceService.getExperiences();
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const experienceService = new ExperienceService();
   return await experienceService.createExperience(req);
 }
 
-export async function PUT(req: Request) {
+export async function PUT(req: NextRequest) {
   const experienceService = new ExperienceService();
   return await experienceService.updateExperience(req);
 }
