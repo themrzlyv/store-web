@@ -23,7 +23,11 @@ export function Experience() {
       <ExperienceItem
         key={index}
         item={item}
-        line={index % 2 === 0 && data.experiences.length > 1}
+        line={
+          data.experiences.length > index &&
+          data?.experiences?.length > 1 &&
+          index !== data.experiences.length - 1
+        }
       />
     ));
   }, [data, isLoading]);
