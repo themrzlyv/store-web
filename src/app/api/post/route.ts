@@ -6,12 +6,12 @@ export async function GET(req: NextRequest) {
   return await postService.getPosts(req);
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const postService = new PostService();
   return await postService.createPost(req);
 }
 
-export async function PUT(req: Request) {
+export async function PUT(req: NextRequest) {
   const postService = new PostService();
   return await postService.updatePost(req);
 }
