@@ -23,7 +23,7 @@ export function LogoButton({ wrapperClass, textClass }: Props) {
   }, [data]);
 
   if (isLoading || !data) {
-    return <Skeleton className="w-44 h-16" />;
+    return <Skeleton className="w-44 h-10" />;
   }
 
   return (

@@ -36,7 +36,7 @@ export function Socials() {
             </Link>
           )
         ) : (
-          <Skeleton key={field.name} className="w-14 h-14 rounded-lg" />
+          <Skeleton key={field.name} className="w-10 h-10 rounded-lg" />
         );
       })}
     </>

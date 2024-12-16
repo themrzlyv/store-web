@@ -1,5 +1,6 @@
 "use client";
 import { useGetBioInformationQuery } from "@/modules/bio/infra/bio.api";
+import { AboutForm } from "@/modules/bio/interface/ui/about-form/about-form";
 import { Typography } from "@/shared/components/typography/typography";
 import { QueryTypes } from "@/shared/query-types/query-types";
 import { Skeleton } from "@/ui/skeleton";
@@ -17,10 +18,10 @@ export function Info() {
   if (isLoading || !data) {
     return (
       <div className="flex flex-col gap-6  max-w-[105ch]">
-        {Array.from({ length: 3 }).map((_, index) => (
+        {Array.from({ length: 4 }).map((_, index) => (
           <div key={index} className="flex flex-col gap-2">
-            <Skeleton className="w-full h-5" />
-            <Skeleton className="w-full h-5" />
+            <Skeleton className="w-full h-4" />
+            <Skeleton className="w-full h-4" />
           </div>
         ))}
       </div>
@@ -30,33 +31,9 @@ export function Info() {
   return (
     <div className="flex flex-col gap-6  max-w-[105ch]">
       <Typography variant="content-text" element="p">
-        👋 Hey there! I&apos;m {fullName}, a full-stack software engineer from
-        Azerbaijan with over four (4) years of professional experience. My
-        pronouns are he/they.
+        👋 Hey there! I&apos;m {fullName}. {data.bio.bio}
       </Typography>
-      <Typography variant="content-text" element="p">
-        I focus on details and I&apos;m passionate about crafting software products
-        that look great and are both accessible and easy to maintain.
-      </Typography>
-      <Typography variant="content-text" element="p">
-        I&apos;m a huge advocate for open source and collaborating with the
-        community. You can find my stash of websites, libraries, and apps on
-        <Typography
-          element="a"
-          variant="link"
-          href={data.bio.social.github}
-          className="mx-1"
-        >
-          GitHub
-        </Typography>
-        which have earned over 2K stars.
-      </Typography>
-
-      <Typography variant="content-text" element="p">
-        I&apos;m all about diving into challenges improving and expanding my skillset
-        and I thrive in globally-remote teams that value people and embrace
-        trust, kindness, and inclusion.
-      </Typography>
+      <AboutForm />
     </div>
   );
 }

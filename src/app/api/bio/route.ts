@@ -1,3 +1,4 @@
+import { NextRequest } from "next/server";
 import { BioService } from "../services/bio.service";
 
 export async function GET() {
@@ -5,7 +6,7 @@ export async function GET() {
   return await bioService.getBio();
 }
 
-export async function PUT(req: Request) {
+export async function PUT(req: NextRequest) {
   const bioService = new BioService();
   return await bioService.updateBio(req);
 }

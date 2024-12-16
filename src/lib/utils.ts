@@ -2,33 +2,10 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { z } from "zod";
 import { format } from "date-fns";
+import { ChainedCommands, Editor } from "@tiptap/react";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
-}
-
-export function toFormData<T extends Record<string, unknown>>(
-  obj: T
-): FormData {
-  const formData = new FormData();
-
-  const appendFormData = (data: T, parentKey: string | null = null) => {
-    if (data && typeof data === "object" && !(data instanceof File)) {
-      if (data instanceof Date) {
-        formData.append(parentKey || "", data.toISOString());
-      } else {
-        Object.keys(data).forEach(key => {
-          const fullKey = parentKey ? `${parentKey}[${key}]` : key;
-          appendFormData(data[key] as T, fullKey);
-        });
-      }
-    } else {
-      formData.append(parentKey || "", data);
-    }
-  };
-
-  appendFormData(obj);
-  return formData;
 }
 
 export async function parseFormData<T>(formData: FormData): Promise<T> {
@@ -39,7 +16,6 @@ export async function parseFormData<T>(formData: FormData): Promise<T> {
     path: string[],
     value: unknown
   ) => {
-    if (value === undefined) return;
     const lastKey = path.pop();
     if (!lastKey) return;
     const nested = path.reduce((acc, key) => {
@@ -82,3 +58,12 @@ export function convertToSlug(title: string): string {
     .replace(/[^a-z0-9\s-]/g, "")
     .replace(/\s+/g, "-");
 }
+
+export const chainMethods = (
+  editor: Editor | null,
+  command: (chain: ChainedCommands) => ChainedCommands
+) => {
+  if (!editor) return;
+
+  command(editor.chain().focus()).run();
+};

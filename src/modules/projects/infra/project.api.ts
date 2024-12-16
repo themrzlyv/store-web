@@ -2,6 +2,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { customFetchBaseQuery } from "@/lib/custom-fetch-base-query";
 import { ProjectEntity } from "../domain/entities/project.entity";
 import { DeleteProjectsInput } from "./types/delete-projects.input";
+import { ProjectFormInputType } from "./types/project-form.input";
 
 export const projectApi = createApi({
   reducerPath: "projectApi",
@@ -11,7 +12,7 @@ export const projectApi = createApi({
   }),
   tagTypes: ["GetProjects"],
   endpoints: builder => ({
-    createProject: builder.mutation<{ message: string }, FormData>({
+    createProject: builder.mutation<{ message: string }, ProjectFormInputType>({
       query: input => ({
         url: "/project",
         method: "POST",
@@ -29,7 +30,7 @@ export const projectApi = createApi({
       invalidatesTags: ["GetProjects"],
     }),
 
-    updateProject: builder.mutation<{ message: string }, FormData>({
+    updateProject: builder.mutation<{ message: string }, ProjectFormInputType>({
       query: input => ({
         url: `/project`,
         method: "PUT",

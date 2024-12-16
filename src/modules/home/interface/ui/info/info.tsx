@@ -59,6 +59,7 @@ export function Info() {
             <>
               <Skeleton className="w-3/4 h-4" />
               <Skeleton className="w-3/4 h-4" />
+              <Skeleton className="w-3/4 h-4" />
             </>
           ) : (
             <Typography
@@ -81,7 +82,7 @@ export function Info() {
               className={cn("rounded-full")}
             />
           ) : (
-            <Skeleton className="w-48 h-48 rounded-full" />
+            <Skeleton className="w-40 h-40 rounded-full" />
           )}
         </div>
       </div>
@@ -97,7 +98,7 @@ export function Info() {
             More about me
           </Button>
         ) : (
-          <Skeleton className="w-[200px] h-14" />
+          <Skeleton className="w-[200px] h-10" />
         )}
         <div className="flex gap-2 items-center">
           <Socials />

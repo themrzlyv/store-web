@@ -9,10 +9,10 @@ export const menuRoutes = [
     path: "/projects",
     name: "Projects",
   },
-  {
-    path: "/course",
-    name: "Course",
-  },
+  // {
+  //   path: "/course",
+  //   name: "Course",
+  // },
   {
     path: "/about",
     name: "About",

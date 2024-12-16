@@ -14,11 +14,11 @@ export function AdminMenu() {
           <div
             key={item.id}
             className={cn(
-              "p-4 rounded-lg transition-colors duration-200 hover:bg-light-darker hover:dark:bg-dark-lighter",
+              "p-3 rounded-lg transition-colors duration-200 hover:bg-light-darker hover:dark:bg-dark-lighter",
               isActive && "bg-light-darker dark:bg-dark-lighter"
             )}
           >
-            <Link href={item.path}>{<item.icon width={24} height={24} />}</Link>
+            <Link href={item.path}>{<item.icon width={20} height={20} />}</Link>
           </div>
         );
       })}

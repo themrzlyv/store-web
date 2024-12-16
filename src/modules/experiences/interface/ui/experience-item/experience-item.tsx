@@ -10,7 +10,13 @@ type Props = {
 
 export function ExperienceItem({ item, line }: Props) {
   return (
-    <Card key={item.id} element="a" href={item.companyUrl} target="_blank">
+    <Card
+      key={item.id}
+      element="a"
+      href={item.companyUrl}
+      target="_blank"
+      className="h-24"
+    >
       <Card.Image
         src={item.image}
         width={50}

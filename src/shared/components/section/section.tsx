@@ -38,7 +38,7 @@ function SectionHeader({
             className="font-bold flex items-center gap-1"
             onClick={() => action?.onClick && action.onClick()}
           >
-            {action?.icon && <action.icon width={18} height={18} />}
+            {action?.icon && <action.icon width={16} height={16} />}
             {action?.title && (
               <Typography element="p" variant="menu-text">
                 {action.title}

@@ -1,7 +1,5 @@
 import prisma from "@/lib/prisma";
-import { upload } from "@/lib/upload";
-import { parseFormData } from "@/lib/utils";
-import { ProjectFormInputType } from "@/modules/projects/infra/types/project-form.input";
+import { projectFormSchema } from "@/modules/projects/interface/data/form-schemas";
 import { NextRequest, NextResponse } from "next/server";
 import { Octokit } from "octokit";
 
@@ -27,13 +25,12 @@ export class ProjectService {
     }
   }
 
-  async createProject(req: Request) {
+  async createProject(req: NextRequest) {
     try {
       const octokit = new Octokit();
-      const formData = await req.formData();
+      const body = await req.json();
       const { image, title, content, sourceUrl } =
-        await parseFormData<ProjectFormInputType>(formData);
-      const imageUrl = image && (await upload(image));
+        projectFormSchema.parse(body);
 
       const urlParts = sourceUrl && sourceUrl.split("/");
       const owner = urlParts && urlParts[3];
@@ -53,7 +50,7 @@ export class ProjectService {
         data: {
           title,
           content,
-          image: imageUrl,
+          image,
           sourceUrl,
           stars: stargazers_count,
         },
@@ -73,25 +70,11 @@ export class ProjectService {
     }
   }
 
-  async updateProject(req: Request) {
+  async updateProject(req: NextRequest) {
     try {
-      const formData = await req.formData();
-      const {
-        image,
-        id,
-        published,
-        stars,
-        title,
-        content,
-        imageUrl,
-        sourceUrl,
-      } = await parseFormData<ProjectFormInputType>(formData);
-
-      const imageFile = !!image
-        ? typeof image === "string"
-          ? image
-          : await upload(image)
-        : imageUrl;
+      const body = await req.json();
+      const { image, id, published, stars, title, content, sourceUrl } =
+        projectFormSchema.parse(body);
 
       const project = await prisma.project.update({
         where: { id },
@@ -100,7 +83,7 @@ export class ProjectService {
           content,
           published,
           stars,
-          image: imageFile,
+          image,
           sourceUrl,
         },
       });

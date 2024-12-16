@@ -1,7 +1,5 @@
 import prisma from "@/lib/prisma";
-import { upload } from "@/lib/upload";
-import { parseFormData } from "@/lib/utils";
-import { ExperienceFormInputType } from "@/modules/experiences/infra/types/experience-form.input";
+import { experienceFormSchema } from "@/modules/experiences/interface/data/form-schemas";
 import { NextRequest, NextResponse } from "next/server";
 
 export class ExperienceService {
@@ -18,21 +16,22 @@ export class ExperienceService {
     }
   }
 
-  async createExperience(req: Request) {
+  async createExperience(req: NextRequest) {
     try {
-      const formData = await req.formData();
+      const body = await req.json();
+      body.startDate = body?.startDate ? new Date(body.startDate) : undefined;
+      body.endDate = body?.endDate ? new Date(body.endDate) : undefined;
       const { image, company, position, companyUrl, startDate, endDate } =
-        await parseFormData<ExperienceFormInputType>(formData);
-      const imageUrl = image && (await upload(image));
+        experienceFormSchema.parse(body);
 
       await prisma.experience.create({
         data: {
           company,
           position,
-          image: imageUrl,
+          image: image || "",
           companyUrl: companyUrl,
-          startDate,
-          endDate,
+          startDate: startDate || "",
+          endDate: endDate,
         },
       });
 
@@ -50,25 +49,13 @@ export class ExperienceService {
     }
   }
 
-  async updateExperience(req: Request) {
+  async updateExperience(req: NextRequest) {
     try {
-      const formData = await req.formData();
-      const {
-        image,
-        id,
-        company,
-        position,
-        companyUrl,
-        startDate,
-        imageUrl,
-        endDate,
-      } = await parseFormData<ExperienceFormInputType>(formData);
-
-      const imageFile = !!image
-        ? typeof image === "string"
-          ? image
-          : await upload(image)
-        : imageUrl;
+      const body = await req.json();
+      body.startDate = body?.startDate ? new Date(body.startDate) : undefined;
+      body.endDate = body?.endDate ? new Date(body.endDate) : undefined;
+      const { image, id, company, position, companyUrl, startDate, endDate } =
+        experienceFormSchema.parse(body);
 
       const experience = await prisma.experience.update({
         where: { id },
@@ -78,7 +65,7 @@ export class ExperienceService {
           companyUrl,
           startDate,
           endDate,
-          image: imageFile,
+          image,
         },
       });
 

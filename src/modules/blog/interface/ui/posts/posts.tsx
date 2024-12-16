@@ -25,9 +25,17 @@ export function Posts({ groupped = false }: Props) {
   }, [data?.posts, groupped]);
 
   if (!data || isLoading) {
-    return Array.from({ length: 3 }).map((_, index) => (
-      <PostItemSkeleton key={index} />
-    ));
+    return (
+      <div className="flex flex-col gap-4">
+        <div className="flex items-end gap-2 w-full">
+          <Skeleton className="w-16 h-6" />
+          <Skeleton className="flex-1 h-1" />
+        </div>
+        {Array.from({ length: 3 }).map((_, index) => (
+          <PostItemSkeleton key={index} />
+        ))}
+      </div>
+    );
   }
 
   if (!groupped) {

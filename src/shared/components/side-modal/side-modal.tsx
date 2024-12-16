@@ -38,7 +38,7 @@ export function Modal() {
 
   return (
     <Sheet open={isOpen} onOpenChange={() => dispatch(closeSideModal())}>
-      <SheetContent>
+      <SheetContent className="min-h-screen overflow-scroll sm:max-w-2xl">
         <SheetHeader>
           <SheetTitle>
             <Typography element="p" variant="section-title">

@@ -1,8 +1,8 @@
 "use client";
-import { CreatePostForm } from "./create-post-form/create-post-form";
 import { AdminTabs } from "@/shared/components/admin-tabs/admin-tabs";
 import { CreateProjectForm } from "./create-project-form/create-project-form";
 import { CreateExperienceForm } from "./create-experience-form/create-experience-form";
+import { CreatePostForm } from "./create-post-form/create-post-form";
 
 const tabs = [
   { label: "Post", value: "post", content: <CreatePostForm /> },
@@ -20,7 +20,7 @@ const tabs = [
 
 export function AdminCreatePage() {
   return (
-    <div className="p-10">
+    <div className="p-10 h-full">
       <AdminTabs tabs={tabs} />
     </div>
   );

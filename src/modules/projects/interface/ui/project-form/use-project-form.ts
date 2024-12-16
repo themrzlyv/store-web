@@ -1,6 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { toFormData } from "@/lib/utils";
 import { useAppDispatch } from "@/lib/store";
 import { closeSideModal } from "@/shared/components/side-modal/side-modal.slice";
 import { projectFormSchema } from "../../data/form-schemas";
@@ -10,6 +9,7 @@ import {
   useCreateProjectMutation,
   useUpdateProjectMutation,
 } from "@/modules/projects/infra/project.api";
+import { useState } from "react";
 
 type Props = {
   project?: ProjectEntity;
@@ -23,14 +23,18 @@ export function useProjectForm({ project, isEdit }: Props) {
   const [updateProjectMutation, { isLoading: isUpdatePostLoading }] =
     useUpdateProjectMutation();
 
+  const [isUploadLoading, setIsUploadLoading] = useState(false);
+
+  const isLoading =
+    isCreatePostLoading || isUpdatePostLoading || isUploadLoading;
+
   const form = useForm<ProjectFormInputType>({
     resolver: zodResolver(projectFormSchema),
     defaultValues: {
       id: project?.id,
       title: project?.title || "",
       content: project?.content || "",
-      image: undefined,
-      imageUrl: project?.image || "",
+      image: project?.image || "",
       sourceUrl: project?.sourceUrl || "",
       published: project?.published,
       stars: project?.stars,
@@ -38,24 +42,27 @@ export function useProjectForm({ project, isEdit }: Props) {
   });
 
   const onSubmit = (values: ProjectFormInputType) => {
-    const formData = toFormData<ProjectFormInputType>(values);
-
     if (isEdit) {
-      updateProjectMutation(formData).then(() => {
+      updateProjectMutation(values).then(() => {
         form.reset();
         dispatch(closeSideModal());
       });
       return;
     }
 
-    createProjectMutation(formData).then(() => {
+    createProjectMutation(values).then(() => {
       form.reset();
     });
+  };
+
+  const handleChangeUploadLoading = (loading: boolean) => {
+    setIsUploadLoading(loading);
   };
 
   return {
     form,
     onSubmit,
-    isLoading: isCreatePostLoading || isUpdatePostLoading,
+    isLoading,
+    handleChangeUploadLoading,
   };
 }

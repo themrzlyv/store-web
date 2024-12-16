@@ -5,6 +5,7 @@ import { UpdateBioForm } from "@/modules/bio/interface/ui/update-bio-form/update
 import { AdminSkills } from "./admin-skills/admin-skills";
 import { AdminSocials } from "./admin-socials/admin-socials";
 import { QueryTypes } from "@/shared/query-types/query-types";
+import { AboutForm } from "@/modules/bio/interface/ui/about-form/about-form";
 
 export function AdminSettingsPage() {
   const { data, isLoading } = useGetBioInformationQuery(QueryTypes.BIO_INFO);
@@ -23,8 +24,10 @@ export function AdminSettingsPage() {
           <UpdateBioForm />
         </div>
       </div>
+      <AboutForm showEditMode />
       <AdminSkills />
       <AdminSocials />
+     
     </div>
   );
 }

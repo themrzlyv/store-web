@@ -2,6 +2,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { PostEntity } from "../domain/entities/post.entity";
 import { DeletePostsInput } from "./types/delete-posts.input";
 import { customFetchBaseQuery } from "@/lib/custom-fetch-base-query";
+import { PostFormInputType } from "./types/post-form.input";
 
 export const postApi = createApi({
   reducerPath: "postApi",
@@ -11,7 +12,7 @@ export const postApi = createApi({
   }),
   tagTypes: ["GetPosts", "GetPostDetails"],
   endpoints: builder => ({
-    createPost: builder.mutation<{ message: string }, FormData>({
+    createPost: builder.mutation<{ message: string }, PostFormInputType>({
       query: input => ({
         url: "/post",
         method: "POST",
@@ -29,7 +30,7 @@ export const postApi = createApi({
       invalidatesTags: ["GetPosts"],
     }),
 
-    updatePost: builder.mutation<{ message: string }, FormData>({
+    updatePost: builder.mutation<{ message: string }, PostFormInputType>({
       query: input => ({
         url: `/post`,
         method: "PUT",

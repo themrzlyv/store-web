@@ -10,7 +10,7 @@ export const Input = forwardRef(function Input(
     <input
       ref={ref}
       className={cn(
-        "ring-1 ring-primary-600/10 dark:ring-primary-200/15 outline-none px-3 py-3 placeholder:text-gray-400 file:border-0 file:bg-transparent rounded-lg max-w-md w-full mx-auto",
+        "ring-1 ring-primary-600/10 dark:bg-dark-light dark:ring-primary-200/15 outline-none px-3 py-3 placeholder:text-gray-400 file:border-0 file:bg-transparent rounded-lg w-full mx-auto",
         className
       )}
       {...rest}

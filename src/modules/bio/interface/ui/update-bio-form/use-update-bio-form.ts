@@ -1,16 +1,18 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { toFormData } from "@/lib/utils";
 import {
   useGetBioInformationQuery,
   useUpdateBioMutation,
 } from "@/modules/bio/infra/bio.api";
 import { BioInformationFormInputType } from "@/modules/bio/infra/types/update-bio.input";
 import { bioInformationFormSchema } from "../../data/form-schemas";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { QueryTypes } from "@/shared/query-types/query-types";
+import { useAppDispatch } from "@/lib/store";
+import { setLoading } from "@/shared/components/loader/loader.slice";
 
 export function useUpdateBioForm() {
+  const dispatch = useAppDispatch();
   const { data } = useGetBioInformationQuery(QueryTypes.BIO_INFO);
   const [updateBioInformation, { isLoading: isUpdateBioLoading }] =
     useUpdateBioMutation();
@@ -22,9 +24,13 @@ export function useUpdateBioForm() {
     form.reset();
   };
 
+  useEffect(() => {
+    dispatch(setLoading({ isLoading: isUpdateBioLoading }));
+  }, [dispatch, isUpdateBioLoading]);
+
   const form = useForm<BioInformationFormInputType>({
     resolver: zodResolver(bioInformationFormSchema),
-    defaultValues: {
+    values: {
       firstName: data?.bio.firstName || "",
       lastName: data?.bio.lastName || "",
       profession: data?.bio.profession || "",
@@ -33,9 +39,7 @@ export function useUpdateBioForm() {
   });
 
   const onSubmit = (values: BioInformationFormInputType) => {
-    const formData = toFormData<BioInformationFormInputType>(values);
-
-    updateBioInformation(formData).then(() => toggleEditMode());
+    updateBioInformation(values).then(() => setIsEditMode(!isEditMode));
   };
 
   return {

@@ -10,7 +10,6 @@ import { Switch } from "@/ui/switch";
 import { Typography } from "@/shared/components/typography/typography";
 import Button from "@/ui/button";
 import { MoreHorizontal } from "lucide-react";
-import { toFormData } from "@/lib/utils";
 import { useAppDispatch } from "@/lib/store";
 import { openSideModal } from "@/shared/components/side-modal/side-modal.slice";
 import { SideModalComponentType } from "@/lib/types";
@@ -19,6 +18,7 @@ import {
   useUpdateProjectMutation,
 } from "@/modules/projects/infra/project.api";
 import { ProjectEntity } from "@/modules/projects/domain/entities/project.entity";
+import { ProjectFormInputType } from "@/modules/projects/infra/types/project-form.input";
 
 export function useProjectColumns() {
   const dispatch = useAppDispatch();
@@ -26,8 +26,7 @@ export function useProjectColumns() {
   const [removeProjectsMutation] = useDeleteProjectsMutation();
 
   const handleUpdatePost = (post: ProjectEntity) => {
-    const formData = toFormData(post);
-    updateProjectMutation(formData);
+    updateProjectMutation(post as ProjectFormInputType);
   };
 
   const handleOpenUpdateProjectModal = (project: ProjectEntity) => {

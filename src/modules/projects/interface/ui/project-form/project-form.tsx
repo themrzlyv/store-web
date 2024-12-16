@@ -4,6 +4,7 @@ import { Form, FormControl, FormField, FormItem } from "@/ui/form";
 import { useProjectForm } from "./use-project-form";
 import Button from "@/ui/button";
 import { ProjectEntity } from "@/modules/projects/domain/entities/project.entity";
+import { UploadImage } from "@/modules/upload/interface/upload-image/upload-image";
 
 type Props = {
   project?: ProjectEntity;
@@ -11,11 +12,12 @@ type Props = {
 };
 
 export function ProjectForm({ project, isEdit }: Props) {
-  const { form, onSubmit, isLoading } = useProjectForm({ project, isEdit });
+  const { form, onSubmit, handleChangeUploadLoading, isLoading } =
+    useProjectForm({ project, isEdit });
   return (
     <form
       onSubmit={form.handleSubmit(onSubmit)}
-      className="max-w-md w-full space-y-6"
+      className=" w-full h-full space-y-6"
     >
       <Form {...form}>
         <FormField
@@ -63,29 +65,16 @@ export function ProjectForm({ project, isEdit }: Props) {
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="image"
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          render={({ field: { value, onChange, ...fieldProps } }) => (
-            <FormItem>
-              <Typography element="p" variant="label">
-                Image
-              </Typography>
-              <FormControl>
-                <Input
-                  {...fieldProps}
-                  type="file"
-                  onChange={event =>
-                    onChange(event.target.files && event.target.files[0])
-                  }
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
+        <UploadImage form={form} onLoadingChange={handleChangeUploadLoading} />
 
-        <Button variant="primary" type="submit" size="lg" isLoading={isLoading}>
+        <Button
+          variant="primary"
+          type="submit"
+          size="md"
+          className="w-full"
+          disabled={isLoading}
+          isLoading={isLoading}
+        >
           Save
         </Button>
       </Form>

@@ -7,9 +7,13 @@ export function Projects() {
   const { data, isLoading } = useGetProjectsQuery({ isPublished: true });
 
   if (isLoading || !data) {
-    return Array.from({ length: 2 }).map((_,index) => (
-      <ProjectItemSkeleton key={index} />
-    ))
+    return (
+      <div className="flex flex-col gap-8">
+        {Array.from({ length: 2 }).map((_, index) => (
+          <ProjectItemSkeleton key={index} />
+        ))}
+      </div>
+    );
   }
 
 

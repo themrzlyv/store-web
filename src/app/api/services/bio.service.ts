@@ -1,9 +1,7 @@
 import prisma from "@/lib/prisma";
-import { upload } from "@/lib/upload";
-import { parseFormData } from "@/lib/utils";
-import { BioInformationFormInputType } from "@/modules/bio/infra/types/update-bio.input";
+import { bioInformationFormSchema } from "@/modules/bio/interface/data/form-schemas";
 import { DEFAULT_BIO_KEY } from "@/shared/data/constants";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export class BioService {
   async getBio() {
@@ -31,12 +29,11 @@ export class BioService {
     }
   }
 
-  async updateBio (req: Request) {
+  async updateBio(req: NextRequest) {
     try {
-      const formData = await req.formData();
+      const body = await req.json();
       const {
         image,
-        imageUrl,
         bio,
         profession,
         firstName,
@@ -44,13 +41,8 @@ export class BioService {
         social,
         skill,
         skillId,
-      } = await parseFormData<BioInformationFormInputType>(formData);
-
-      const imageFile = !!image
-        ? typeof image === "string"
-          ? image
-          : await upload(image)
-        : imageUrl;
+        about,
+      } = bioInformationFormSchema.parse(body);
 
       const bioInformation = await prisma.bio.update({
         where: { identifier: DEFAULT_BIO_KEY },
@@ -59,7 +51,8 @@ export class BioService {
           profession,
           firstName,
           lastName,
-          image: imageFile,
+          image,
+          about,
           skills: {
             ...(skill ? { create: { name: skill } } : {}),
             ...(skillId ? { delete: { id: Number(skillId) } } : {}),

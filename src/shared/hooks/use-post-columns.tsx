@@ -15,10 +15,11 @@ import {
   useDeletePostsMutation,
   useUpdatePostMutation,
 } from "@/modules/blog/infra/post.api";
-import { toFormData } from "@/lib/utils";
 import { useAppDispatch } from "@/lib/store";
 import { openSideModal } from "@/shared/components/side-modal/side-modal.slice";
 import { SideModalComponentType } from "@/lib/types";
+import { JSONContent } from "@tiptap/react";
+import { PostFormInputType } from "@/modules/blog/infra/types/post-form.input";
 
 export function usePostColumns() {
   const dispatch = useAppDispatch();
@@ -26,8 +27,7 @@ export function usePostColumns() {
   const [removePostsMutation] = useDeletePostsMutation();
 
   const handleUpdatePost = (post: PostEntity) => {
-    const formData = toFormData(post);
-    updatePostMutation(formData);
+    updatePostMutation(post as PostFormInputType);
   };
 
   const handleOpenUpdatePostModal = (post: PostEntity) => {
@@ -42,6 +42,18 @@ export function usePostColumns() {
 
   const handleRemovePost = async (id: number) => {
     removePostsMutation({ ids: [id] });
+  };
+
+  const renderContentCell = (row: JSONContent) => {
+    if (!row.content || row?.content?.length === 0) {
+      return "No content";
+    }
+
+    const firstText = row.content
+      .flatMap(item => item.content || [])
+      .find(innerItem => innerItem.text)?.text;
+
+    return firstText?.slice(0, 100) + "...";
   };
 
   const postColumns: ColumnDef<PostEntity>[] = [
@@ -76,7 +88,7 @@ export function usePostColumns() {
       ),
       cell: ({ row }) => (
         <Typography variant="content-text" element="h6" className="text-left">
-          {row.getValue("title")}
+          {(row.getValue("title") as string).slice(0, 50).trim() + "..."}
         </Typography>
       ),
     },
@@ -89,7 +101,7 @@ export function usePostColumns() {
       ),
       cell: ({ row }) => (
         <Typography variant="content-text" element="h6" className="text-left">
-          {row.getValue("content")}
+          {renderContentCell(row.getValue("content"))}
         </Typography>
       ),
     },

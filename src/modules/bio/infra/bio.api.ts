@@ -1,8 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { customFetchBaseQuery } from "@/lib/custom-fetch-base-query";
 import { BioEntity } from "../domain/entities/bio.entity";
-
-console.log(process.env.NEXT_PUBLIC_API_URL, "process.env.API_URL");
+import { BioInformationFormInputType } from "./types/update-bio.input";
 
 export const bioApi = createApi({
   reducerPath: "bioApi",
@@ -12,7 +11,10 @@ export const bioApi = createApi({
   }),
   tagTypes: ["GetBioInformation"],
   endpoints: builder => ({
-    updateBio: builder.mutation<{ message: string }, FormData>({
+    updateBio: builder.mutation<
+      { message: string },
+      BioInformationFormInputType
+    >({
       query: input => ({
         url: `/bio`,
         method: "PUT",

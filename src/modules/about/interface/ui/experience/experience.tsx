@@ -4,7 +4,6 @@ import { ExperienceItem } from "@/modules/experiences/interface/ui/experience-it
 import { PostItemSkeleton } from "@/shared/components/post-item-skeleton/post-item-skeleton";
 import { Section } from "@/shared/components/section/section";
 import { QueryTypes } from "@/shared/query-types/query-types";
-import Button from "@/ui/button";
 import { useMemo } from "react";
 
 export function Experience() {
@@ -12,9 +11,13 @@ export function Experience() {
 
   const renderList = useMemo(() => {
     if (!data || isLoading) {
-      return Array.from({ length: 2 }).map((_, index) => {
-        return <PostItemSkeleton key={index} />;
-      });
+      return (
+        <div className="flex flex-col gap-4">
+          {Array.from({ length: 2 }).map((_, index) => {
+            return <PostItemSkeleton key={index} />;
+          })}
+        </div>
+      );
     }
     return data.experiences.map((item, index) => (
       <ExperienceItem

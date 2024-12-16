@@ -4,11 +4,11 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from "@/ui/form";
 import { useExperienceForm } from "./use-experience-form";
 import Button from "@/ui/button";
 import { ExperienceEntity } from "@/modules/experiences/domain/entities/experience.entity";
-import { Calendar } from "@/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
-import { cn, formatDate } from "@/lib/utils";
-import { CalendarIcon } from "lucide-react";
 import { Checkbox } from "@/ui/checkbox";
+import { UploadImage } from "@/modules/upload/interface/upload-image/upload-image";
+import DatePicker from "react-datepicker";
+import { CalendarIcon } from "lucide-react";
+import { parseISO } from "date-fns";
 
 type Props = {
   experience?: ExperienceEntity;
@@ -16,15 +16,21 @@ type Props = {
 };
 
 export function ExperienceForm({ experience, isEdit }: Props) {
-  const { form, onSubmit, isLoading, isDisabledEndDate } = useExperienceForm({
+  const {
+    form,
+    onSubmit,
+    isLoading,
+    isDisabledEndDate,
+    handleChangeUploadLoading,
+  } = useExperienceForm({
     experience,
     isEdit,
   });
 
   return (
     <form
-      onSubmit={form.handleSubmit(onSubmit, err => console.log(err))}
-      className="max-w-md w-full space-y-6"
+      onSubmit={form.handleSubmit(onSubmit)}
+      className="h-full w-full space-y-6"
     >
       <Form {...form}>
         <FormField
@@ -76,81 +82,34 @@ export function ExperienceForm({ experience, isEdit }: Props) {
           <Typography element="p" variant="label">
             Time period
           </Typography>
-          <div className="flex items-center py-1 border rounded-lg ">
-            <FormField
-              control={form.control}
-              name="startDate"
-              render={({ field }) => (
-                <FormItem>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          id="start-date"
-                          variant="ghost"
-                          className={cn(
-                            "justify-start text-left font-normal",
-                            !field.value && "text-muted-foreground"
-                          )}
-                        >
-                          <CalendarIcon width={16} height={16} />
-                          {field.value
-                            ? formatDate(field.value, true)
-                            : "Pick a start date"}
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        initialFocus
-                        mode="single"
-                        selected={field.value}
-                        onSelect={field.onChange}
-                        toDate={new Date()}
-                      />
-                    </PopoverContent>
-                  </Popover>
-                </FormItem>
-              )}
+          <div className="flex items-center gap-4">
+            <DatePicker
+              showIcon
+              maxDate={new Date()}
+              selected={form.watch("startDate")}
+              wrapperClassName="flex-1 ring-1 py-1 bg-white dark:bg-dark-light ring-primary-600/10 dark:ring-primary-200/15 rounded-md"
+              className="outline-none w-5/6 bg-transparent focus:ring-0 ml-1"
+              onChange={date => {
+                if (date) form.setValue("startDate", date);
+                form.setValue("endDate", null);
+              }}
+              dateFormat={"MMMM d, yyyy"}
+              placeholderText="Pick a date"
+              icon={<CalendarIcon className="top-0.5 text-gray-600" />}
             />
-            {"-"}
-            <FormField
-              control={form.control}
-              name="endDate"
-              render={({ field }) => (
-                <FormItem>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          id="end-date"
-                          variant="ghost"
-                          className={cn(
-                            "justify-start text-left font-normal",
-                            !field.value && "text-muted-foreground"
-                          )}
-                          disabled={isDisabledEndDate}
-                        >
-                          {field.value
-                            ? formatDate(field.value, true)
-                            : "Pick an end date"}
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        initialFocus
-                        mode="single"
-                        selected={field.value || undefined}
-                        onSelect={field.onChange}
-                        fromDate={
-                          new Date(form.getValues("startDate") || new Date())
-                        }
-                      />
-                    </PopoverContent>
-                  </Popover>
-                </FormItem>
-              )}
+
+            <DatePicker
+              showIcon
+              wrapperClassName="flex-1 py-1 ring-1 bg-white dark:bg-dark-light ring-primary-600/10 dark:ring-primary-200/15 rounded-md"
+              className="outline-none bg-transparent focus:ring-0 ml-1"
+              selected={form.watch("endDate")}
+              onChange={date => form.setValue("endDate", date)}
+              isClearable
+              minDate={form.watch("startDate") || undefined}
+              disabled={isDisabledEndDate}
+              dateFormat={"MMMM d, yyyy"}
+              placeholderText="Pick a date"
+              icon={<CalendarIcon className="top-0.5 text-gray-600" />}
             />
           </div>
           <FormField
@@ -161,38 +120,28 @@ export function ExperienceForm({ experience, isEdit }: Props) {
                 <FormControl>
                   <Checkbox
                     checked={field.value}
-                    onCheckedChange={field.onChange}
+                    onCheckedChange={checked => {
+                      field.onChange(checked);
+                      form.setValue("endDate", null);
+                    }}
                   />
                 </FormControl>
-                <FormLabel>Present</FormLabel>
+                <FormLabel className="text-gray-400">Present</FormLabel>
               </FormItem>
             )}
           />
         </div>
 
-        <FormField
-          control={form.control}
-          name="image"
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          render={({ field: { value, onChange, ...fieldProps } }) => (
-            <FormItem>
-              <Typography element="p" variant="label">
-                Image
-              </Typography>
-              <FormControl>
-                <Input
-                  {...fieldProps}
-                  type="file"
-                  onChange={event =>
-                    onChange(event.target.files && event.target.files[0])
-                  }
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
+        <UploadImage form={form} onLoadingChange={handleChangeUploadLoading} />
 
-        <Button variant="primary" type="submit" size="lg" isLoading={isLoading}>
+        <Button
+          variant="primary"
+          type="submit"
+          size="md"
+          className="w-full"
+          disabled={isLoading}
+          isLoading={isLoading}
+        >
           Save
         </Button>
       </Form>

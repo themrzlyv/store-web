@@ -7,7 +7,6 @@ type Props = {
 };
 
 export function ProjectItem({ project }: Props) {
-  console.log(project, "proejct");
   return (
     <Card
       key={project.id}

@@ -13,7 +13,6 @@ export function AdminSocials() {
     onSubmit,
     isEditMode,
     toggleEditMode,
-    isLoading: isUpdateFormLoading,
   } = useAdminSocials();
 
   return (
@@ -22,7 +21,11 @@ export function AdminSocials() {
         <Section>
           <Section.Header
             title="Social Links"
-            action={{ icon: UserRoundPen, onClick: toggleEditMode }}
+            action={{
+              icon: UserRoundPen,
+              onClick: toggleEditMode,
+              title: "Edit",
+            }}
             subActions={[
               isEditMode && (
                 <Button
@@ -30,9 +33,9 @@ export function AdminSocials() {
                   variant="primary"
                   size="sm"
                   className="max-w-md w-full"
-                  isLoading={isUpdateFormLoading}
                 >
-                  <Save width={18} height={18} />
+                  <Save width={16} height={16} />
+                  Save
                 </Button>
               ),
             ]}
@@ -48,13 +51,13 @@ export function AdminSocials() {
                     <FormItem className="w-2/4 mb-6">
                       <FormControl>
                         <div className="flex items-center gap-2">
-                          <div className="p-3 rounded-lg bg-light-dark dark:bg-dark-lighter">
+                          <div className="p-2 rounded-lg bg-light-dark dark:bg-dark-lighter">
                             {social.icon}
                           </div>
                           <Input
                             {...field}
                             placeholder="Github URL"
-                            className="m-0"
+                            className="m-0 py-1.5 w-[80%] disabled:bg-transparent disabled:ring-0"
                             disabled={!isEditMode}
                           />
                         </div>

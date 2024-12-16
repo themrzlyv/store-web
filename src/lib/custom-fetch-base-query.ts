@@ -14,9 +14,15 @@ export const customFetchBaseQuery = (
     const result = await baseQuery(args, api, extraOptions);
 
     if (result.error) {
-      const errorMessage =
+      const errorCode = result.error.status;
+      let errorMessage =
         (result.error.data as { message?: string })?.message ||
         "An error occurred";
+
+      if (errorCode === 500) {
+        errorMessage = "Internal Server Error";
+      }
+
       toast.error(errorMessage);
     } else if ((result.data as { message?: string })?.message) {
       const successMessage = (result.data as { message?: string })?.message;

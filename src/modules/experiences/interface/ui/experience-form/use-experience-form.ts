@@ -1,6 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { toFormData } from "@/lib/utils";
 import { useAppDispatch } from "@/lib/store";
 import { closeSideModal } from "@/shared/components/side-modal/side-modal.slice";
 import { ExperienceFormInputType } from "@/modules/experiences/infra/types/experience-form.input";
@@ -10,6 +9,8 @@ import {
   useCreateExperienceMutation,
   useUpdateExperienceMutation,
 } from "@/modules/experiences/infra/experience.api";
+import { useState } from "react";
+import { parseISO } from "date-fns";
 
 type Props = {
   experience?: ExperienceEntity;
@@ -17,53 +18,71 @@ type Props = {
 };
 
 export function useExperienceForm({ experience, isEdit }: Props) {
+  const modifiedExperience = experience
+    ? {
+        ...experience,
+        startDate: parseISO(String(experience.startDate)),
+        endDate: experience.endDate
+          ? parseISO(String(experience.endDate))
+          : null,
+      }
+    : null;
+
   const dispatch = useAppDispatch();
-  const [createExperienceMutation, { isLoading: isCreatePostLoading }] =
+
+  const [createExperienceMutation, { isLoading: isCreateExperienceLoading }] =
     useCreateExperienceMutation();
-  const [updateExperienceMutation, { isLoading: isUpdatePostLoading }] =
+
+  const [updateExperienceMutation, { isLoading: isUpdateExperienceLoading }] =
     useUpdateExperienceMutation();
+
+  const [isUploadLoading, setIsUploadLoading] = useState(false);
 
   const form = useForm<ExperienceFormInputType>({
     resolver: zodResolver(experienceFormSchema),
-    defaultValues: {
-      id: experience?.id,
-      company: experience?.company || "",
-      position: experience?.position || "",
-      image: undefined,
-      imageUrl: experience?.image || "",
-      companyUrl: experience?.companyUrl || "",
-      startDate: experience ? new Date(experience?.startDate) : undefined,
-      endDate: experience?.endDate ? new Date(experience?.endDate) : null,
-      present: experience && experience.endDate === null
+    values: {
+      id: modifiedExperience?.id,
+      company: modifiedExperience?.company || "",
+      position: modifiedExperience?.position || "",
+      image: modifiedExperience?.image || "",
+      companyUrl: modifiedExperience?.companyUrl || "",
+      startDate: modifiedExperience?.startDate
+        ? modifiedExperience?.startDate
+        : undefined,
+      endDate: modifiedExperience ? modifiedExperience?.endDate : null,
+      present: modifiedExperience ? modifiedExperience.endDate === null : false,
     },
   });
 
-  const onSubmit = (values: ExperienceFormInputType) => {
-    const data = {
-      ...values,
-      endDate: values.present ? null : values.endDate,
-    };
-    const formData = toFormData<ExperienceFormInputType>(data);
+  const presentValue = form.watch("present");
+  const startDateValue = form.watch("startDate");
 
+  const onSubmit = (values: ExperienceFormInputType) => {
     if (isEdit) {
-      updateExperienceMutation(formData).then(() => {
+      updateExperienceMutation(values).then(() => {
         form.reset();
         dispatch(closeSideModal());
       });
       return;
     }
 
-    createExperienceMutation(formData).then(() => {
+    createExperienceMutation(values).then(() => {
       form.reset();
     });
   };
 
-  const isDisabledEndDate = !!form.watch("present") || !form.watch("startDate");
+  const isDisabledEndDate = !!presentValue || !startDateValue;
+
+  const handleChangeUploadLoading = (loading: boolean) => {
+    setIsUploadLoading(loading);
+  };
 
   return {
     form,
     onSubmit,
-    isLoading: isCreatePostLoading || isUpdatePostLoading,
+    isLoading:
+      isCreateExperienceLoading || isUpdateExperienceLoading || isUploadLoading,
     isDisabledEndDate,
+    handleChangeUploadLoading,
   };
 }

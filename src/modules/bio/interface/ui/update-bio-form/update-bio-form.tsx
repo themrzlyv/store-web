@@ -14,7 +14,7 @@ export function UpdateBioForm() {
       <Section>
         <Section.Header
           title="Bio Information"
-          action={{ icon: UserRoundPen, onClick: toggleEditMode }}
+          action={{ icon: UserRoundPen, onClick: toggleEditMode, title: "Edit" }}
           subActions={[
             isEditMode && (
               <Button
@@ -22,9 +22,9 @@ export function UpdateBioForm() {
                 variant="primary"
                 size="sm"
                 className="max-w-md w-full"
-                isLoading={isLoading}
               >
-                <Save width={18} height={18} />
+                <Save width={16} height={16} />
+                Save
               </Button>
             ),
           ]}
@@ -86,7 +86,7 @@ export function UpdateBioForm() {
                 <FormItem>
                   <FormControl>
                     <Textarea
-                      className="resize-none min-h-[80px] max-w-md w-full"
+                      className="resize-none min-h-[80px]  w-full"
                       disabled={!isEditMode}
                       placeholder="Bio"
                       {...field}

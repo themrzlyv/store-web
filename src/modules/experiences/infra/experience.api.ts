@@ -3,6 +3,7 @@ import { customFetchBaseQuery } from "@/lib/custom-fetch-base-query";
 import { ExperienceEntity } from "../domain/entities/experience.entity";
 import { DeleteExperiencesInput } from "./types/delete-experiences.input";
 import { compareDesc, parseISO } from "date-fns";
+import { ExperienceFormInputType } from "./types/experience-form.input";
 
 export const experienceApi = createApi({
   reducerPath: "experienceApi",
@@ -12,7 +13,10 @@ export const experienceApi = createApi({
   }),
   tagTypes: ["GetExperiences"],
   endpoints: builder => ({
-    createExperience: builder.mutation<{ message: string }, FormData>({
+    createExperience: builder.mutation<
+      { message: string },
+      ExperienceFormInputType
+    >({
       query: input => ({
         url: "/experience",
         method: "POST",
@@ -33,7 +37,10 @@ export const experienceApi = createApi({
       invalidatesTags: ["GetExperiences"],
     }),
 
-    updateExperience: builder.mutation<{ message: string }, FormData>({
+    updateExperience: builder.mutation<
+      { message: string },
+      ExperienceFormInputType
+    >({
       query: input => ({
         url: `/experience`,
         method: "PUT",

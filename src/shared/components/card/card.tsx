@@ -46,8 +46,13 @@ const CardImage = ({
   alt: string;
   line?: boolean;
 }) => (
-  <div className="h-full overflow-hidden flex flex-col items-center">
-    <Img src={src} width={width} height={height} alt={alt} />
+  <div className="h-full w-full max-w-[110px] flex flex-col items-center">
+    <Img
+      src={src}
+      width={width}
+      height={height}
+      alt={alt}
+    />
     {line && <div className="w-[1px] h-full z-[-1] absolute bg-gray-400" />}
   </div>
 );

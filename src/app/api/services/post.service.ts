@@ -1,7 +1,6 @@
 import prisma from "@/lib/prisma";
-import { upload } from "@/lib/upload";
-import { convertToSlug, parseFormData } from "@/lib/utils";
-import { PostFormInputType } from "@/modules/blog/infra/types/post-form.input";
+import { convertToSlug } from "@/lib/utils";
+import { postFormSchema } from "@/modules/blog/interface/data/form-schemas";
 import { NextRequest, NextResponse } from "next/server";
 
 export class PostService {
@@ -26,20 +25,18 @@ export class PostService {
     }
   }
 
-  async createPost(req: Request) {
+  async createPost(req: NextRequest) {
     try {
-      const formData = await req.formData();
-      const { image, title, content } = await parseFormData<PostFormInputType>(
-        formData
-      );
-      const imageUrl = image && (await upload(image));
+      const body = await req.json();
+
+      const { title, content, image } = postFormSchema.parse(body);
 
       await prisma.post.create({
         data: {
           title,
           content,
           slug: convertToSlug(title),
-          image: imageUrl,
+          image,
         },
       });
 
@@ -57,17 +54,11 @@ export class PostService {
     }
   }
 
-  async updatePost(req: Request) {
+  async updatePost(req: NextRequest) {
     try {
-      const formData = await req.formData();
-      const { image, id, published, views, title, content, imageUrl } =
-        await parseFormData<PostFormInputType>(formData);
-
-      const imageFile = !!image
-        ? typeof image === "string"
-          ? image
-          : await upload(image)
-        : imageUrl;
+      const body = await req.json();
+      const { image, id, published, title, content } =
+        postFormSchema.parse(body);
 
       const post = await prisma.post.update({
         where: { id },
@@ -75,9 +66,8 @@ export class PostService {
           title,
           content,
           published,
-          views,
           slug: convertToSlug(title),
-          image: imageFile,
+          image,
         },
       });
 
