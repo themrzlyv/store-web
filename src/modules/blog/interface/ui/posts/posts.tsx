@@ -8,6 +8,7 @@ import { PostEntity } from "@/modules/blog/domain/entities/post.entity";
 import { GroupedPostValueObject } from "@/modules/blog/domain/value-objects/groupped-post.value-object";
 import { Skeleton } from "@/ui/skeleton";
 import { PostItemSkeleton } from "@/shared/components/post-item-skeleton/post-item-skeleton";
+import { EmptyContent } from "@/shared/components/empty-content/empty-content";
 
 type Props = {
   groupped?: boolean;
@@ -36,6 +37,12 @@ export function Posts({ groupped = false }: Props) {
         ))}
       </div>
     );
+  }
+
+  if(posts.length === 0){
+    return (
+      <EmptyContent title="Sorry, there are no posts yet." />
+    )
   }
 
   if (!groupped) {

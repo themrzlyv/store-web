@@ -2,6 +2,7 @@
 import { useGetProjectsQuery } from "@/modules/projects/infra/project.api";
 import { ProjectItem } from "../project-item/project-item";
 import { ProjectItemSkeleton } from "@/shared/components/project-item-skeleton/project-item-skeleton";
+import { EmptyContent } from "@/shared/components/empty-content/empty-content";
 
 export function Projects() {
   const { data, isLoading } = useGetProjectsQuery({ isPublished: true });
@@ -14,6 +15,10 @@ export function Projects() {
         ))}
       </div>
     );
+  }
+
+  if (data.projects.length === 0) {
+    return <EmptyContent title="Sorry, there are no projects yet." />;
   }
 
 

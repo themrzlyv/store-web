@@ -32,19 +32,23 @@ export class ProjectService {
       const { image, title, content, sourceUrl } =
         projectFormSchema.parse(body);
 
-      const urlParts = sourceUrl && sourceUrl.split("/");
-      const owner = urlParts && urlParts[3];
-      const repo = urlParts && urlParts[4];
+      const isGithubUrl = sourceUrl?.startsWith("https://github.com");
 
-      const {
-        data: { stargazers_count },
-      } =
-        owner && repo
-          ? await octokit.request("GET /repos/{owner}/{repo}", {
-              owner: owner,
-              repo: repo,
-            })
-          : { data: { stargazers_count: 0 } };
+      let stars = 0;
+
+      if (isGithubUrl && sourceUrl) {
+        const [, , , owner, repo] = sourceUrl.split("/") || [];
+
+        if (owner && repo) {
+          const {
+            data: { stargazers_count = 0 },
+          } = await octokit.request("GET /repos/{owner}/{repo}", {
+            owner,
+            repo,
+          });
+          stars = stargazers_count;
+        }
+      }
 
       await prisma.project.create({
         data: {
@@ -52,7 +56,7 @@ export class ProjectService {
           content,
           image,
           sourceUrl,
-          stars: stargazers_count,
+          stars,
         },
       });
 
