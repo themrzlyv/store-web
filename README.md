@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# [themirzaliyev.store](https://themirzaliyev.store)
 
-## Getting Started
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./preview-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="./preview.png">
+  <img alt="Website preview" src="./preview.png">
+</picture>
 
-First, run the development server:
+## Stack
+
+- **Framework**: [Next.js](https://nextjs.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Database**: [MySQL] and [Prisma ORM](https://prisma.io/)
+- **Analytics**: [Umami](https://jahir.dev/analytics)
+- **Deployment**: [Contabo](https://contabo.com)
+
+## Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+.
+|____.github
+| |____workflows
+| | |____deploy.yml
+|____prisma
+| |____schema.prisma
+|____src
+| |____app
+| |____assets
+| | |____images
+| | |____fonts
+| |____lib
+| |____middlewares
+| |____modules
+| |____shared
+| |____styles
+| |____ui
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **`content/*`** - MDX blog posts and the content for the `donate` pages
+- **`public/*`** - Static assets including images, fonts, audios, files, etc.
+- **`scripts/*`** - Utilities to setup the project
+- **`src/app/*`** - Every page and API route in the website. Uses the new [App Router](https://beta.nextjs.org/docs/getting-started#introducing-the-app-router) from [Next.js](https://nextjs.org/) `13.+`
+- **`src/assets/*`** - Fonts and static images used in different components
+- **`src/components/core/*`** - The simplest components. Most of them are stateless
+- **`src/components/molecules/*`** - The main blocks for the website: `toolbar`, `footer`, `main` layout, `back-to-top` button and `social links`
+- **`src/components/og/*`** - The code that powers dynamic open-graph images generation
+- **`src/components/views/*`** - More complex components to build the different pages of my website. _(They're here to keep `src/app/` as clean as possible)_
+- **`src/components/icons.ts`** - SVG icon paths. Icons come from [Lucide](https://lucide.dev/)
+- **`src/hooks/*`** - A couple hooks used throughout the app
+- **`src/lib/*`** - Short for "library", a collection of helpful utilities or code for external services
+- **`src/providers/*`** - React Contexts for storing the current theme and blog post reactions
+- **`src/styles/*`** - Global styles with `scss`. Mostly use tailwind classes
+- **`src/types/*`** - Some types definitions
+- **`src/utils/*`** - More utilities functions but less complex than the ones in `lib`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<details>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+<summary><strong>Note</strong></summary>
 
-## Learn More
+Some things might be broken or not found because the `bun run setup` script will remove many files.
+Please double check the code and implementations.
 
-To learn more about Next.js, take a look at the following resources:
+</details>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Cloning / Forking
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Please review the [license](https://github.com/themrzlyv/store-web/blob/main/LICENSE), do not copy it directly, remove all of my personal content and files (resume, blog posts, images, etc.) by running `bun run setup` and please change the styling and colors to match your personal brand. You are free to use this code as inspiration or learning reference but this is not really intended to be a template.
