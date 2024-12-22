@@ -46,7 +46,7 @@ export function Statistics() {
         >
           <div
             className={cn(
-              "absolute top-[-25] right-[-25] w-14 h-14 rounded-full bg-opacity-70 backdrop-blur-sm blur-sm",
+              "absolute top-[-25px] right-[-25px] w-14 h-14 rounded-full bg-opacity-70 backdrop-blur-sm blur-sm",
               item["bg-color"]
             )}
           />
