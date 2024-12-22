@@ -2,19 +2,32 @@ import prisma from "@/lib/prisma";
 import { convertToSlug } from "@/lib/utils";
 import { postFormSchema } from "@/modules/blog/interface/data/form-schemas";
 import { NextRequest, NextResponse } from "next/server";
+import { AnalyticsService } from "./analytics.service";
 
 export class PostService {
   async getPosts(req: NextRequest) {
     try {
+      const analyticsService = new AnalyticsService();
       const params = req.nextUrl.searchParams;
 
       const isPublished = params.get("isPublished");
 
-      const posts = await prisma.post.findMany({
+      const postsFromDb = await prisma.post.findMany({
         where: {
           ...(isPublished ? { published: isPublished === "true" } : {}),
         },
       });
+
+      const posts = await Promise.all(
+        postsFromDb.map(async post => {
+          const { pageviews } = await analyticsService.getStatistics(post.slug);
+
+          return {
+            ...post,
+            views: pageviews,
+          };
+        })
+      );
 
       return NextResponse.json({ posts }, { status: 200 });
     } catch (error) {

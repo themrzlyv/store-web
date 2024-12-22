@@ -21,23 +21,49 @@ export const menuRoutes = [
 
 export const adminMenuItems = [
   {
-    id: 1,
     icon: icons.LayoutDashboard,
     path: "/admin",
+    label: "Dashboard",
   },
   {
-    id: 2,
     icon: icons.PencilLine,
-    path: "/admin/create",
+    label: "Create",
+    subMenu: [
+      {
+        path: "/admin/create/post",
+        label: "Post",
+      },
+      {
+        path: "/admin/create/project",
+        label: "Project",
+      },
+      {
+        path: "/admin/create/experience",
+        label: "Experience",
+      },
+    ],
   },
   {
-    id: 3,
     icon: icons.ScrollText,
-    path: "/admin/update",
+    label: "Update",
+    subMenu: [
+      {
+        path: "/admin/update/post",
+        label: "Post",
+      },
+      {
+        path: "/admin/update/project",
+        label: "Project",
+      },
+      {
+        path: "/admin/update/experience",
+        label: "Experience",
+      },
+    ],
   },
   {
-    id: 4,
     icon: icons.Settings,
     path: "/admin/settings",
+    label: "Bio",
   },
 ];

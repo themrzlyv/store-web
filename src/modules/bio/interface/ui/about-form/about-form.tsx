@@ -14,7 +14,7 @@ export function AboutForm({ showEditMode = false }: Props) {
   const { editor, form, onSubmit, toggleEditMode, isEditMode } = useAboutForm();
 
   return (
-    <div className={cn(showEditMode ? "border-t py-3" : "")}>
+    <div className={cn(showEditMode ? "" : "")}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <Section>
           {showEditMode && (

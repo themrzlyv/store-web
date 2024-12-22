@@ -3,6 +3,7 @@ import { Manrope } from "@/styles/fonts";
 import { MainProviders } from "@/shared/providers/main-providers";
 import "react-toastify/dist/ReactToastify.css";
 import "@/styles/globals.css";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Samir Mirzaliyev",
@@ -15,14 +16,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${Manrope.variable}`} suppressHydrationWarning>
-      {/* <head>
-        <script
+    <html lang="en" className={`${Manrope.className}`} suppressHydrationWarning>
+      <head>
+        <Script
           defer
           src="https://cloud.umami.is/script.js"
           data-website-id="8fdd1ded-7977-4c72-980e-8374b3223878"
-        ></script>
-      </head> */}
+        />
+      </head>
       <body className={`antialiased`} suppressHydrationWarning>
         <MainProviders>{children}</MainProviders>
       </body>

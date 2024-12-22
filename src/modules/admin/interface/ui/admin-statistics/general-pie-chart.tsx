@@ -1,7 +1,6 @@
 "use client";
-import { useGetPostsQuery } from "@/modules/blog/infra/post.api";
-import { useGetExperiencesQuery } from "@/modules/experiences/infra/experience.api";
-import { useGetProjectsQuery } from "@/modules/projects/infra/project.api";
+import { useGetPageViewsQuery } from "@/modules/admin/infra/reports.api";
+import { menuRoutes } from "@/shared/data/routes";
 import { QueryTypes } from "@/shared/query-types/query-types";
 import { useMemo } from "react";
 import {
@@ -19,7 +18,7 @@ type RenderLabelParams = {
   midAngle: number;
   innerRadius: number;
   outerRadius: number;
-  value: string;
+  percent: number;
 };
 
 const RADIAN = Math.PI / 180;
@@ -30,7 +29,7 @@ const renderCustomizedLabel = ({
   midAngle,
   innerRadius,
   outerRadius,
-  value,
+  percent,
 }: RenderLabelParams) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -43,36 +42,31 @@ const renderCustomizedLabel = ({
       fill="white"
       textAnchor={x > cx ? "start" : "end"}
       dominantBaseline="central"
-      fontSize={16}
+      fontSize={14}
     >
-      {value}
+      {`${(percent * 100).toFixed(0)}%`}
     </text>
   );
 };
 
-const COLORS = ["#0A5EB0", "#D91656", "#EB5B00"];
+const COLORS = ["#0A5EB0", "#D91656", "#EB5B00", "#FCC737"];
 
 export function GeneralPieChart() {
-  const { data: posts } = useGetPostsQuery({});
-  const { data: projects } = useGetProjectsQuery({});
-  const { data: experiences } = useGetExperiencesQuery(QueryTypes.EXPERIENCES);
+  const { data: pageViews } = useGetPageViewsQuery({});
+
 
   const pieData = useMemo(() => {
-    return [
-      {
-        name: "Posts",
-        value: posts?.posts.length || 0,
-      },
-      {
-        name: "Projects",
-        value: projects?.projects.length || 0,
-      },
-      {
-        name: "Experiences",
-        value: experiences?.experiences.length || 0,
-      },
-    ];
-  }, [posts, projects, experiences]);
+    if (!pageViews || pageViews.data.length === 0) return [];
+
+    return [...pageViews.data]
+      .filter(item =>
+        ["/", ...menuRoutes.map(route => route.path)].includes(item.x)
+      )
+      .map(item => ({
+        name: item.x === "/" ? "home" : item.x.slice(1),
+        value: item.y,
+      }));
+  }, [pageViews]);
 
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -100,7 +94,7 @@ export function GeneralPieChart() {
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Tooltip />
+        <Tooltip wrapperClassName="capitalize" />
         <Legend />
       </PieChart>
     </ResponsiveContainer>

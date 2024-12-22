@@ -13,6 +13,7 @@ export function ProjectItem({ project }: Props) {
       className="h-24"
       element="a"
       href={project.sourceUrl}
+      target="_blank"
     >
       <Card.Image
         src={project.image!}

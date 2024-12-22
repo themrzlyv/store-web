@@ -56,7 +56,7 @@ function SectionHeader({
 }
 
 function SectionBody({ children }: React.PropsWithChildren) {
-  return <div className="flex flex-col gap-4">{children}</div>;
+  return <div className="flex flex-col gap-2">{children}</div>;
 }
 
 export const Section = Object.assign(SectionContainer, {

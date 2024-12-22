@@ -1,39 +1,18 @@
-import { useEffect, useRef } from "react";
-import {
-  useGetPostDetailsQuery,
-  useTrackingViewMutation,
-} from "@/modules/blog/infra/post.api";
+import { useGetPostDetailsQuery } from "@/modules/blog/infra/post.api";
 
 type Props = {
   slug: string;
 };
 
 export function usePostDetails({ slug }: Props) {
-  const hasTrackedView = useRef(false);
-  const [
-    trackingViewMutation,
-    { data: trackingData, isLoading: trackingLoading },
-  ] = useTrackingViewMutation();
   const {
     data,
     isLoading: postDetailsLoading,
     isError,
-  } = useGetPostDetailsQuery(
-    { slug },
-    {
-      skip: !trackingData,
-    }
-  );
-
-  useEffect(() => {
-    if (!hasTrackedView.current) {
-      trackingViewMutation({ slug });
-      hasTrackedView.current = true;
-    }
-  }, [slug, trackingViewMutation]);
+  } = useGetPostDetailsQuery({ slug });
 
   return {
-    isLoading: postDetailsLoading || trackingLoading,
+    isLoading: postDetailsLoading,
     error: isError || !data,
     post: data?.post,
   };

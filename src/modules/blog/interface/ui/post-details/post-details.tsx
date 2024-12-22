@@ -90,7 +90,7 @@ export function PostDetails({ slug }: Props) {
             variant="small-text"
             className="text-gray-500"
           >
-            {post?.views || 0} views
+            {post?.views.value || 0} views
           </Typography>
         </div>
         {post?.content && <PostContent content={post.content} />}

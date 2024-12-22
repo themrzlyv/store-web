@@ -15,8 +15,8 @@ export function AdminSettingsPage() {
   }
 
   return (
-    <div className="flex flex-col gap-8 py-8">
-      <div className="flex items-center">
+    <div className="flex flex-col gap-8 pb-5">
+      <div className="flex items-center dark:bg-dark-light rounded-lg p-4">
         <div className="flex-1">
           <AdminUpdatePhoto />
         </div>
@@ -24,10 +24,15 @@ export function AdminSettingsPage() {
           <UpdateBioForm />
         </div>
       </div>
-      <AboutForm showEditMode />
-      <AdminSkills />
-      <AdminSocials />
-     
+      <div className="dark:bg-dark-light rounded-lg p-4">
+        <AboutForm showEditMode />
+      </div>
+      <div className="dark:bg-dark-light rounded-lg p-4">
+        <AdminSkills />
+      </div>
+      <div className="dark:bg-dark-light rounded-lg p-4">
+        <AdminSocials />
+      </div>
     </div>
   );
 }

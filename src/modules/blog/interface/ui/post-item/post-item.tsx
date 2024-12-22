@@ -2,6 +2,7 @@ import { formatDate } from "@/lib/utils";
 import { PostEntity } from "@/modules/blog/domain/entities/post.entity";
 import { Card } from "@/shared/components/card/card";
 import { Typography } from "@/shared/components/typography/typography";
+import { ArrowDown, ArrowUp } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useMemo } from "react";
 
@@ -40,7 +41,7 @@ export function PostItem({ post }: Props) {
             </Typography>
             <span>·</span>
             <Typography element="p" variant="small-text">
-              {post.views} views
+              {post.views.value} views
             </Typography>
           </>
         }

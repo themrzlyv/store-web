@@ -9,6 +9,7 @@ import sideModalReducer from "@/shared/components/side-modal/side-modal.slice";
 import loaderReducer from "@/shared/components/loader/loader.slice";
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
+import { reportsApi } from "@/modules/admin/infra/reports.api";
 
 export const store = configureStore({
   devTools: process.env.NODE_ENV !== "production",
@@ -23,6 +24,7 @@ export const store = configureStore({
     [experienceApi.reducerPath]: experienceApi.reducer,
     [bioApi.reducerPath]: bioApi.reducer,
     [uploadApi.reducerPath]: uploadApi.reducer,
+    [reportsApi.reducerPath]: reportsApi.reducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat([
@@ -33,6 +35,7 @@ export const store = configureStore({
       experienceApi.middleware,
       bioApi.middleware,
       uploadApi.middleware,
+      reportsApi.middleware,
     ]),
 });
 

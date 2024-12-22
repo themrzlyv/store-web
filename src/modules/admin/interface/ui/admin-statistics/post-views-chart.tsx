@@ -1,9 +1,9 @@
 "use client";
-import { useGetPostsQuery } from "@/modules/blog/infra/post.api";
+import { useGetPageViewsQuery } from "@/modules/admin/infra/reports.api";
 import { useMemo } from "react";
 import {
-  Area,
-  AreaChart,
+  Bar,
+  BarChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -11,20 +11,20 @@ import {
 } from "recharts";
 
 export function PostViewsChart() {
-  const { data: posts } = useGetPostsQuery({});
+  const { data: posts } = useGetPageViewsQuery({ page: "/blog/" });
 
   const chartData = useMemo(() => {
-    if (!posts) return [];
+    if (!posts || posts.data.length === 0) return [];
 
-    return [...posts.posts].map(post => ({
-      name: post.title,
-      views: post.views,
+    return [...posts.data].map(post => ({
+      name: post.x,
+      views: post.y,
     }));
   }, [posts]);
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <AreaChart data={chartData}>
+      <BarChart data={chartData}>
         <defs>
           <linearGradient id="gradient1" x1="0%" y1="100%" x2="0%" y2="0%">
             <stop offset="0%" stopColor="#F6D466" stopOpacity={0.4} />
@@ -34,13 +34,13 @@ export function PostViewsChart() {
         <XAxis dataKey="name" tick={{ fontSize: 12, fill: "#999" }} />
         <YAxis width={30} axisLine={false} />
         <Tooltip />
-        <Area
+        <Bar
           type="monotone"
           dataKey="views"
           fill="url(#gradient1)"
           stroke="#F6D466"
         />
-      </AreaChart>
+      </BarChart>
     </ResponsiveContainer>
   );
 }

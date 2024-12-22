@@ -61,12 +61,6 @@ export function Footer() {
       <div className={linksContainer()}>
         <p className={linksHeader()}>MISC</p>
         <Link href={"#"}>
-          <p className={links()}>Donate</p>
-        </Link>
-        <Link href={"#"}>
-          <p className={links()}>Contact</p>
-        </Link>
-        <Link href={"#"}>
           <p className={links()}>Back to Top</p>
         </Link>
       </div>

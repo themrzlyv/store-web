@@ -138,7 +138,6 @@ export function ExperienceForm({ experience, isEdit }: Props) {
           variant="primary"
           type="submit"
           size="md"
-          className="w-full"
           disabled={isLoading}
           isLoading={isLoading}
         >

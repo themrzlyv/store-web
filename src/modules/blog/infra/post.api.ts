@@ -56,13 +56,6 @@ export const postApi = createApi({
       }),
       providesTags: ["GetPostDetails"],
     }),
-
-    trackingView: builder.mutation<{ post: PostEntity }, { slug: string }>({
-      query: arg => ({
-        url: `/post/${arg.slug}/tracking-view`,
-        method: "POST",
-      }),
-    }),
   }),
 });
 
@@ -72,5 +65,4 @@ export const {
   useDeletePostsMutation,
   useUpdatePostMutation,
   useGetPostDetailsQuery,
-  useTrackingViewMutation,
 } = postApi;

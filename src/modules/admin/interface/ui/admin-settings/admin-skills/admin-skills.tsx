@@ -31,7 +31,7 @@ export function AdminSkills() {
   };
 
   return (
-    <div className="px-3 py-5 gap-3 border-t">
+    <div className="gap-3">
       <Section>
         <Section.Header title="Skills" />
         <div className="flex gap-4">

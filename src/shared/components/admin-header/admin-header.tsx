@@ -18,14 +18,16 @@ export function AdminHeader() {
   };
 
   return (
-    <div className="w-full  h-full flex justify-end items-center gap-4 px-4">
-      <SwitchTheme />
-      <Typography variant="content-text" element="h4">
-        {currentUser?.user.email}
-      </Typography>
-      <Button variant="ghost" size="lg" onClick={handleLogout}>
-        Logout
-      </Button>
+    <div className="w-full h-16 shadow-sm bg-white dark:bg-dark-light flex justify-end items-center px-4">
+      <div className="flex items-center gap-4">
+        <SwitchTheme />
+        <Typography variant="menu-text" element="p">
+          {currentUser?.user.email}
+        </Typography>
+        <Button variant="ghost" size="md" onClick={handleLogout}>
+          Logout
+        </Button>
+      </div>
     </div>
   );
 }

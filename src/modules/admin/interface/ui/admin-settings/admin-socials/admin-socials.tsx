@@ -16,7 +16,7 @@ export function AdminSocials() {
   } = useAdminSocials();
 
   return (
-    <div className="border-t py-3">
+    <div >
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <Section>
           <Section.Header
@@ -56,7 +56,7 @@ export function AdminSocials() {
                           </div>
                           <Input
                             {...field}
-                            placeholder="Github URL"
+                            placeholder={social.placeholder}
                             className="m-0 py-1.5 w-[80%] disabled:bg-transparent disabled:ring-0"
                             disabled={!isEditMode}
                           />
