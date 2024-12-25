@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
       exclude: ["error"],
     },
   },
+  staticPageGenerationTimeout: 10000,
   images: {
     remotePatterns: [
       {
