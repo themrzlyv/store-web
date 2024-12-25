@@ -49,7 +49,7 @@ jobs:
             CLOUDINARY_API_SECRET=${{ vars.CLOUDINARY_API_SECRET }} \
             CLOUDINARY_CLOUD_NAME=${{ vars.CLOUDINARY_CLOUD_NAME }} \
             CLOUDINARY_UPLOAD_PRESET=${{ vars.CLOUDINARY_UPLOAD_PRESET }} \
-            docker-compose up -d --build --no-cache > /dev/null || { echo "Docker build failed! Exiting."; exit 1; }
+            docker-compose up -d --build > /dev/null || { echo "Docker build failed! Exiting."; exit 1; }
 
             echo "Deployment finished"
         env:
