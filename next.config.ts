@@ -5,9 +5,6 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
   crossOrigin: "anonymous",
-  experimental: {
-    ppr: true,
-  },
   compiler: {
     removeConsole: {
       exclude: ["error"],
