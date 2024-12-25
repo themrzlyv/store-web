@@ -26,6 +26,7 @@ ENV CLOUDINARY_UPLOAD_PRESET=$CLOUDINARY_UPLOAD_PRESET
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 RUN npx prisma generate
+RUN npx next telemetry disable
 RUN npm run build
 
 FROM node:20 AS runner
