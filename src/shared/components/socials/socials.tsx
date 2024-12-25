@@ -13,11 +13,13 @@ export function Socials() {
   const social: Omit<Social, "id" | "bioId"> | object = useMemo(() => {
     if (!data?.bio.social) return {};
 
-    return Object.fromEntries(
+    const filteredSocial = Object.fromEntries(
       Object.entries(data.bio.social).filter(
         ([key]) => key !== "id" && key !== "bioId"
       )
     );
+
+    return { ...filteredSocial, mail: `mailto:${filteredSocial.mail}` };
   }, [data]);
 
   return (

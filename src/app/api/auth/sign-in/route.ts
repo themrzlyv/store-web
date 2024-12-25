@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
 
     const accessToken = await signJWT(
       { userId: user.id, role: user.role },
-      "24h"
+      "1w"
     );
 
     const res = NextResponse.json({ message: "Login successful!" });
@@ -34,6 +34,7 @@ export async function POST(req: NextRequest) {
       path: "/",
       secure: process.env.NODE_ENV === "production",
       httpOnly: true,
+      maxAge: 7 * 24 * 60 * 60,
       sameSite: "lax",
     });
 

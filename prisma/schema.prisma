@@ -34,11 +34,12 @@ model Bio {
 }
 
 model Skill {
-  id      Int      @id @default(autoincrement())
+  id      Int       @id @default(autoincrement())
   name    String
   bioId   String
-  Bio     Bio      @relation(fields: [bioId], references: [identifier])
-  courses Course[] @relation("CourseToSkill")
+  Bio     Bio       @relation(fields: [bioId], references: [identifier])
+  courses Course[]  @relation("CourseToSkill")
+  Project Project[]
 
   @@index([bioId], map: "Skill_bioId_fkey")
 }
@@ -73,6 +74,7 @@ model Project {
   createdAt DateTime @default(now())
   sourceUrl String?
   stars     Int      @default(0)
+  techStack Skill[]
 }
 
 model Experience {
