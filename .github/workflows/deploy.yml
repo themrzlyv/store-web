@@ -23,17 +23,33 @@ jobs:
           script: |
             # SSH into VPS and perform deployment
             echo "Logged into VPS at $HOST"
+
             cd /var/www/store-web
-            # Stop and remove the old container
-            echo "Stopping and removing old container..."
-            docker-compose down || echo "Failed to stop/remove old container"
+
+            # Stop and remove old containers
+            echo "Stopping and removing old containers..."
+            docker-compose down || echo "Failed to stop/remove containers"
+
+            # Clean up Docker resources
+            echo "Cleaning up old images, containers, and volumes..."
+            docker system prune -a -f --volumes || echo "Failed to prune Docker resources"
 
             # Pull latest code from GitHub
+            echo "Pulling latest code from GitHub..."
             git pull origin main || echo "Failed to pull from GitHub"
 
-            # Build and start new container
+            # Build and start new container with no caching
             echo "Building and starting new container..."
-            DATABASE_URL=${{ vars.DATABASE_URL }} NEXT_PUBLIC_API_URL=${{ vars.NEXT_PUBLIC_API_URL }} JWT_SECRET=${{ vars.JWT_SECRET }} UMAMI_SITE_ID=${{ vars.UMAMI_SITE_ID }} UMAMI_API_KEY=${{ vars.UMAMI_API_KEY}} CLOUDINARY_API_KEY=${{ vars.CLOUDINARY_API_KEY }} CLOUDINARY_API_SECRET=${{ vars.CLOUDINARY_API_SECRET }} CLOUDINARY_CLOUD_NAME=${{ vars.CLOUDINARY_CLOUD_NAME }} CLOUDINARY_UPLOAD_PRESET=${{ vars.CLOUDINARY_UPLOAD_PRESET }} docker-compose up -d --build
+            DATABASE_URL=${{ vars.DATABASE_URL }} \
+            NEXT_PUBLIC_API_URL=${{ vars.NEXT_PUBLIC_API_URL }} \
+            JWT_SECRET=${{ vars.JWT_SECRET }} \
+            UMAMI_SITE_ID=${{ vars.UMAMI_SITE_ID }} \
+            UMAMI_API_KEY=${{ vars.UMAMI_API_KEY }} \
+            CLOUDINARY_API_KEY=${{ vars.CLOUDINARY_API_KEY }} \
+            CLOUDINARY_API_SECRET=${{ vars.CLOUDINARY_API_SECRET }} \
+            CLOUDINARY_CLOUD_NAME=${{ vars.CLOUDINARY_CLOUD_NAME }} \
+            CLOUDINARY_UPLOAD_PRESET=${{ vars.CLOUDINARY_UPLOAD_PRESET }} \
+            docker-compose up -d --build --no-cache --timeout 600
 
             echo "Deployment finished"
         env:
