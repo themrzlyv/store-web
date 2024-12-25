@@ -40,7 +40,7 @@ function SectionHeader({
           >
             {action?.icon && <action.icon width={16} height={16} />}
             {action?.title && (
-              <Typography element="p" variant="menu-text">
+              <Typography element="p" variant="small-bold">
                 {action.title}
               </Typography>
             )}

@@ -14,11 +14,23 @@ export const reportsApi = createApi({
     credentials: "include",
   }),
   endpoints: builder => ({
-    getStatistics: builder.query<StatisticEntity, string>({
-      query: () => ({
-        url: "/statistics",
-        method: "GET",
-      }),
+    getStatistics: builder.query<
+      StatisticEntity,
+      { pageUrl?: string; startAt?: string; endAt?: string }
+    >({
+      query: ({ pageUrl, startAt, endAt }) => {
+        
+        const queryParams = new URLSearchParams({
+          ...(pageUrl && { pageUrl }),
+          ...(startAt && { startAt }),
+           ...(endAt && { endAt }),
+        }).toString();
+
+        return {
+          url: `/statistics${queryParams ? `?${queryParams}` : ""}`,
+          method: "GET",
+        };
+      },
     }),
 
     getPageViews: builder.query<

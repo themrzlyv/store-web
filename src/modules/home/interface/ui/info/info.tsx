@@ -8,7 +8,6 @@ import { QueryTypes } from "@/shared/query-types/query-types";
 import { Img } from "@/ui";
 import Button from "@/ui/button";
 import { Skeleton } from "@/ui/skeleton";
-import { Bio } from "@prisma/client";
 import { User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
@@ -91,10 +90,10 @@ export function Info() {
           <Button
             variant="primary"
             size="md"
-            className="flex items-center gap-2 font-semibold"
+            className="flex items-center gap-2 font-semibold text-sm"
             onClick={() => router.push("/about")}
           >
-            <User width={20} height={20} />
+            <User width={18} height={18} />
             More about me
           </Button>
         ) : (

@@ -7,6 +7,7 @@ type Props = {
 };
 
 export function ProjectItem({ project }: Props) {
+  const isGithubUrl = project.sourceUrl?.includes("github.com");
   return (
     <Card
       key={project.id}
@@ -25,13 +26,15 @@ export function ProjectItem({ project }: Props) {
         title={
           <>
             {project.title}
-            <span
-              style={{ textDecorationLine: "none" }}
-              className="ml-4 text-xs flex items-center gap-1 rounded-md bg-primary-100 text-black py-0.5 px-2"
-            >
-              <Star width={10} height={10} fill="#000" />
-              {project.stars}
-            </span>
+            {isGithubUrl && (
+              <span
+                style={{ textDecorationLine: "none" }}
+                className="ml-4 text-xs flex items-center gap-1 rounded-md bg-primary-100 text-black py-0.5 px-2"
+              >
+                <Star width={10} height={10} fill="#000" />
+                {project.stars}
+              </span>
+            )}
           </>
         }
         content={project.content}

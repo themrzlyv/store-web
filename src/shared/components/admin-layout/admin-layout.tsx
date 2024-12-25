@@ -33,7 +33,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
 
         <div
           className={cn(
-            "h-full bg-light-dark dark:bg-dark-default w-full duration-300",
+            "h-full min-h-screen bg-light-dark dark:bg-dark-default w-full duration-300",
             isOpenMenu ? "pl-60" : "pl-20"
           )}
         >

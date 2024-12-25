@@ -7,11 +7,12 @@ type TypographyProps<T extends React.ElementType> = {
     | "content-text"
     | "link"
     | "section-title"
-    | "big-heading"
     | "card-title"
     | "label"
     | "logo-text"
-    | "small-text";
+    | "small-text"
+    | "small-medium"
+    | "small-bold";
   element?: T;
   className?: string;
   children: React.ReactNode;
@@ -21,15 +22,16 @@ const typographyVariants = tv({
   variants: {
     variant: {
       "content-text":
-        "text-base text-pretty font-normal dark:text-dark-light-gray",
-      link: "text-primary-500 underline text-base font-normal",
-      "section-title": "text-xl font-semibold dark:text-light-default",
-      "big-heading": "text-4xl font-bold dark:text-dark-light-gray",
-      "card-title": "text-base font-medium dark:text-light-default",
+        "text-base text-pretty font-medium dark:text-dark-light-gray",
+      link: "text-primary-500 underline text-base font-medium",
+      "section-title": "text-lg font-semibold dark:text-light-default",
+      "card-title": "text-base font-semibold dark:text-light-default",
       label: "text-sm font-normal  dark:text-dark-light-gray",
       "logo-text": "text-base font-semibold dark:text-dark-light-gray",
-      "menu-text": "text-base font-medium dark:text-dark-light-gray",
-      "small-text": "text-sm font-normal dark:text-dark-light-gray"
+      "menu-text": "text-base font-semibold dark:text-dark-light-gray",
+      "small-text": "text-sm font-normal dark:text-dark-light-gray",
+      "small-medium": "text-sm font-medium dark:text-dark-light-gray",
+      "small-bold": "text-sm font-semibold dark:text-dark-light-gray",
     },
   },
   defaultVariants: {

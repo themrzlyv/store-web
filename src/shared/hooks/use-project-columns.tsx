@@ -69,12 +69,12 @@ export function useProjectColumns() {
     {
       accessorKey: "title",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-left">
+        <Typography variant="small-bold" element="h6" className="text-left">
           Title
         </Typography>
       ),
       cell: ({ row }) => (
-        <Typography variant="content-text" element="h6" className="text-left">
+        <Typography variant="small-text" element="h6" className="text-left">
           {row.getValue("title")}
         </Typography>
       ),
@@ -82,12 +82,12 @@ export function useProjectColumns() {
     {
       accessorKey: "content",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-left">
+        <Typography variant="small-bold" element="h6" className="text-left">
           Content
         </Typography>
       ),
       cell: ({ row }) => (
-        <Typography variant="content-text" element="h6" className="text-left">
+        <Typography variant="small-text" element="h6" className="text-left">
           {row.getValue("content")}
         </Typography>
       ),
@@ -95,7 +95,7 @@ export function useProjectColumns() {
     {
       accessorKey: "published",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-center">
+        <Typography variant="small-bold" element="h6" className="text-center">
           Published
         </Typography>
       ),
@@ -116,14 +116,14 @@ export function useProjectColumns() {
     {
       accessorKey: "stars",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-center">
+        <Typography variant="small-bold" element="h6" className="text-center">
           Stars
         </Typography>
       ),
       cell: ({ row }) => {
         return (
           <Typography
-            variant="content-text"
+            variant="small-text"
             element="h6"
             className="w-full text-center"
           >
@@ -141,8 +141,8 @@ export function useProjectColumns() {
           <div className="flex justify-center items-center">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="md" className="">
-                  <MoreHorizontal />
+                <Button variant="ghost" size="sm" className="">
+                  <MoreHorizontal width={16} height={16} />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">

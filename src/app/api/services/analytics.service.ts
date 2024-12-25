@@ -4,6 +4,7 @@ import {
   TotalViewsEntity,
   VisitorSessionsEntity,
 } from "@/lib/types";
+import { addHours, getTime, startOfHour, subDays } from "date-fns";
 
 export class AnalyticsService {
   private readonly apiUrl: string;
@@ -65,14 +66,26 @@ export class AnalyticsService {
     return response.json();
   }
 
-  async getStatistics(pageUrl?: string | null): Promise<StatisticEntity> {
+  async getStatistics(
+    pageUrl?: string | null,
+    startAt?: string | null,
+    endAt?: string | null
+  ): Promise<StatisticEntity> {
     const params: Record<string, string> = {};
+    if (startAt) {
+      params.startAt = `${startAt}`;
+    }
+
+    if (endAt) {
+      params.endAt = `${endAt}`;
+    }
 
     if (pageUrl) {
       params.url = `~${pageUrl}`;
     }
 
     const url = this.createRequestUrl("stats", params);
+    console.log(url.toString(), "stseees");
     return this.fetchData<StatisticEntity>(url);
   }
 

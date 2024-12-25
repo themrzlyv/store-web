@@ -1,9 +1,9 @@
-import localFont from "next/font/local";
+import { Raleway } from "next/font/google"
 
-export const Manrope = localFont({
-  src: "../assets/fonts/ManropeVariable.woff2",
-  variable: "--font-manrope",
-  display: "swap",
-  weight: "1 999",
-  preload: false,
+export const JosefinSans = Raleway({
+  variable: "--font-poppins",
+  adjustFontFallback: true,
+  display: "optional",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });

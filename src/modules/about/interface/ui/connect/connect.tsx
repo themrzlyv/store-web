@@ -16,7 +16,12 @@ export function Connect() {
       {data ? (
         <Typography variant="content-text" element="p">
           Feel free to reach out to me at
-          <Typography variant="link" href="#" element="a" className="mx-1">
+          <Typography
+            variant="link"
+            href={`mailto:${data?.bio.social.mail}`}
+            element="a"
+            className="mx-1"
+          >
             {data?.bio.social.mail}
           </Typography>
           , or find me on social media:

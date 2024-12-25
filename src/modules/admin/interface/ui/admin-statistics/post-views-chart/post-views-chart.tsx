@@ -9,6 +9,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { ToolTip } from "./tool-tip";
 
 export function PostViewsChart() {
   const { data: posts } = useGetPageViewsQuery({ page: "/blog/" });
@@ -17,7 +18,7 @@ export function PostViewsChart() {
     if (!posts || posts.data.length === 0) return [];
 
     return [...posts.data].map(post => ({
-      name: post.x,
+      name: post.x.split("/")[2],
       views: post.y,
     }));
   }, [posts]);
@@ -31,9 +32,17 @@ export function PostViewsChart() {
             <stop offset="100%" stopColor="#F6D466" stopOpacity={1} />
           </linearGradient>
         </defs>
-        <XAxis dataKey="name" tick={{ fontSize: 12, fill: "#999" }} />
-        <YAxis width={30} axisLine={false} />
-        <Tooltip />
+        <XAxis
+          dataKey="name"
+          tick={{ fontSize: 12, fill: "#999" }}
+          tickLine={false}
+        />
+        <YAxis
+          width={30}
+          tickLine={false}
+          tick={{ fontSize: 12, fill: "#999" }}
+        />
+        <Tooltip cursor={{ fill: "transparent" }} content={<ToolTip />} />
         <Bar
           type="monotone"
           dataKey="views"

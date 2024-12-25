@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope } from "@/styles/fonts";
+import { JosefinSans } from "@/styles/fonts";
 import { MainProviders } from "@/shared/providers/main-providers";
 import "react-toastify/dist/ReactToastify.css";
 import "@/styles/globals.css";
@@ -16,7 +16,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${Manrope.className}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${JosefinSans.className}`}
+      suppressHydrationWarning
+    >
       <head>
         <Script
           defer

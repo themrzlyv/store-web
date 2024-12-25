@@ -5,7 +5,7 @@ import { NameType, ValueType } from "recharts/types/component/DefaultTooltipCont
 
 export function ToolTip({ active, payload }: TooltipProps<ValueType, NameType>) {
   if (active && payload && payload.length) {
-    const { rawDate, pageviews } = payload[0].payload;
+    const { rawDate, sessions, pageviews } = payload[0].payload;
 
     const formattedTime = rawDate.toLocaleTimeString([], {
       hour: "numeric",
@@ -27,8 +27,9 @@ export function ToolTip({ active, payload }: TooltipProps<ValueType, NameType>) 
           variant="small-text"
           className="p-0 flex items-center gap-1"
         >
-          <Dot width={16} height={16} className="text-green-500" />
           {`${pageviews} views`}
+          <Dot width={16} height={16} className="text-green-500" />
+          {`${sessions} visitors`}
         </Typography>
       </div>
     );

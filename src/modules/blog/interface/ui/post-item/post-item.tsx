@@ -2,9 +2,10 @@ import { formatDate } from "@/lib/utils";
 import { PostEntity } from "@/modules/blog/domain/entities/post.entity";
 import { Card } from "@/shared/components/card/card";
 import { Typography } from "@/shared/components/typography/typography";
-import { ArrowDown, ArrowUp } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useMemo } from "react";
+import { BsCalendarDate } from "react-icons/bs";
+import { GoDotFill } from "react-icons/go";
 
 type Props = {
   post: PostEntity;
@@ -36,10 +37,16 @@ export function PostItem({ post }: Props) {
         content={content}
         subContent={
           <>
-            <Typography element="p" variant="small-text">
+            <Typography
+              element="p"
+              variant="small-text"
+              className="flex items-center gap-1"
+            >
+              <BsCalendarDate />
               {formatDate(post.createdAt, dateFormat)}
             </Typography>
-            <span>·</span>
+            <GoDotFill size="5" />
+
             <Typography element="p" variant="small-text">
               {post.views.value} views
             </Typography>

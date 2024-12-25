@@ -6,12 +6,12 @@ export function useCountryColumn() {
     {
       accessorKey: "country",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-left">
+        <Typography variant="small-bold" element="h6" className="text-left">
           Top Countries
         </Typography>
       ),
       cell: ({ row }) => (
-        <Typography variant="content-text" element="h6" className="text-left">
+        <Typography variant="small-text" element="p" className="text-left">
           {new Intl.DisplayNames(["en"], { type: "region" }).of(
             row.getValue("country")
           )}
@@ -21,12 +21,12 @@ export function useCountryColumn() {
     {
       accessorKey: "visitors",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-center">
+        <Typography variant="small-bold" element="h6" className="text-center">
           Users
         </Typography>
       ),
       cell: ({ row }) => (
-        <Typography variant="content-text" element="h6" className="text-center">
+        <Typography variant="small-text" element="p" className="text-center">
           {row.getValue("visitors")}
         </Typography>
       ),

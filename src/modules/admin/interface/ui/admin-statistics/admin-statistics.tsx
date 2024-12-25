@@ -1,16 +1,16 @@
 "use client";
 import { GeneralPieChart } from "./general-pie-chart";
 import { TotalViewsChart } from "./total-views-chart/total-views-chart";
-// import { PostsByMonths } from "./posts-by-months";
 import { Typography } from "@/shared/components/typography/typography";
 import { Statistics } from "@/shared/components/statistics/statistics";
 import { SessionsTable } from "./sessions-table/sessions-table";
 import { CountriesTable } from "./countries-table/countries-table";
 import { PostsByMonthsChart } from "./posts-by-months-chart/posts-by-months-chart";
+import { PostViewsChart } from "./post-views-chart/post-views-chart";
 
 export function AdminStatistics() {
   return (
-    <div className="w-full h-full flex flex-wrap gap-4">
+    <div className="w-full h-full flex flex-wrap gap-4 pb-6">
       <div className="w-full flex gap-4">
         <div className="flex-1 bg-light-default dark:bg-dark-light rounded-md shadow-sm p-3">
           <div>
@@ -33,8 +33,11 @@ export function AdminStatistics() {
           </div>
         </div>
         <div className="w-4/12 flex flex-col gap-4">
-          <div className="w-full max-h-[246px] h-full bg-light-default dark:bg-dark-light rounded-md ">
-            <PostsByMonthsChart />
+          <div className="w-full max-h-[246px] h-full p-3 bg-light-default dark:bg-dark-light rounded-md ">
+            <Typography element="h4" variant="card-title" className="mb-2">
+              Posts Views
+            </Typography>
+            <PostViewsChart />
           </div>
           <div className="w-full flex-1 overflow-scroll p-3 gap-3 flex flex-col bg-light-default dark:bg-dark-light rounded-md ">
             <CountriesTable />
@@ -45,7 +48,10 @@ export function AdminStatistics() {
         <div className="flex-1 p-3 flex flex-col gap-3 bg-light-default dark:bg-dark-light rounded-md">
           <SessionsTable />
         </div>
-        <div className="w-4/12 h-[400px] bg-light-default dark:bg-dark-light rounded-md">
+        <div className="w-4/12 max-h-[400px] bg-light-default dark:bg-dark-light rounded-md">
+          <Typography element="h4" variant="card-title" className="pt-3 pl-3">
+            Visited Pages
+          </Typography>
           <GeneralPieChart />
         </div>
       </div>

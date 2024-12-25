@@ -7,6 +7,7 @@ import { useGetBioInformationQuery } from "@/modules/bio/infra/bio.api";
 import { QueryTypes } from "@/shared/query-types/query-types";
 import { useMemo } from "react";
 import { Skeleton } from "@/ui/skeleton";
+import { Typography } from "../typography/typography";
 
 export function Footer() {
   const {
@@ -35,7 +36,13 @@ export function Footer() {
         <LogoButton textClass={logoText()} wrapperClass="p-0" />
         <div>
           {data ? (
-            <p className={description()}>{data?.bio.bio}</p>
+            <Typography
+              element="p"
+              variant="small-medium"
+              className={description()}
+            >
+              {data?.bio.bio}
+            </Typography>
           ) : (
             <>
               <Skeleton className="h-4 w-3/4 mb-2" />
@@ -48,25 +55,40 @@ export function Footer() {
         </div>
       </div>
       <div className={linksContainer()}>
-        <p className={linksHeader()}>NAVIGATE</p>
+        <Typography element="p" variant="small-bold" className={linksHeader()}>
+          NAVIGATE
+        </Typography>
         <Link href={"/"}>
-          <p className={links()}>Home</p>
+          <Typography element="p" variant="small-medium" className={links()}>
+            Home
+          </Typography>
         </Link>
         {menuRoutes.map(route => (
           <Link key={route.path} href={route.path}>
-            <p className={links()}>{route.name}</p>
+            <Typography element="p" variant="small-medium" className={links()}>
+              {route.name}
+            </Typography>
           </Link>
         ))}
       </div>
       <div className={linksContainer()}>
-        <p className={linksHeader()}>MISC</p>
+        <Typography element="p" variant="small-bold" className={linksHeader()}>
+          MISC
+        </Typography>
         <Link href={"#"}>
-          <p className={links()}>Back to Top</p>
+          <Typography element="p" variant="small-medium" className={links()}>
+            Back to Top
+          </Typography>
         </Link>
       </div>
       <div className="col-span-2">
         {data ? (
-          <p className={endText()}>Developed by {fullName}</p>
+          <Typography element="p" variant="small-medium" className={endText()}>
+            Developed by
+            <Typography element="span" variant="small-bold">
+              {fullName}
+            </Typography>
+          </Typography>
         ) : (
           <Skeleton className="h-4 w-2/4" />
         )}

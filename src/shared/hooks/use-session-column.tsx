@@ -1,15 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/ui/dropdown-menu";
 import { Typography } from "@/shared/components/typography/typography";
-import Button from "@/ui/button";
-import { Link, MoreHorizontal } from "lucide-react";
 import { SessionEntity } from "@/lib/types";
-import { formatDate } from "@/lib/utils";
 import { format } from "date-fns";
 
 export function useSessionColumn() {
@@ -17,12 +8,12 @@ export function useSessionColumn() {
     {
       accessorKey: "visits",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-left">
+        <Typography variant="small-bold" element="h6" className="text-left">
           Visits
         </Typography>
       ),
       cell: ({ row }) => (
-        <Typography variant="content-text" element="h6" className="text-left">
+        <Typography variant="small-text" element="h6" className="text-left">
           {row.getValue("visits")}
         </Typography>
       ),
@@ -30,12 +21,12 @@ export function useSessionColumn() {
     {
       accessorKey: "views",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-left">
+        <Typography variant="small-bold" element="h6" className="text-left">
           Views
         </Typography>
       ),
       cell: ({ row }) => (
-        <Typography variant="content-text" element="h6" className="text-left">
+        <Typography variant="small-text" element="h6" className="text-left">
           {row.getValue("views")}
         </Typography>
       ),
@@ -43,12 +34,12 @@ export function useSessionColumn() {
     {
       accessorKey: "country",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-left">
+        <Typography variant="small-bold" element="h6" className="text-left">
           Country
         </Typography>
       ),
       cell: ({ row }) => (
-        <Typography variant="content-text" element="h6" className="text-left">
+        <Typography variant="small-text" element="h6" className="text-left">
           {new Intl.DisplayNames(["en"], { type: "region" }).of(
             row.getValue("country")
           )}
@@ -58,12 +49,12 @@ export function useSessionColumn() {
     {
       accessorKey: "city",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-left">
+        <Typography variant="small-bold" element="h6" className="text-left">
           City
         </Typography>
       ),
       cell: ({ row }) => (
-        <Typography variant="content-text" element="h6" className="text-left">
+        <Typography variant="small-text" element="h6" className="text-left">
           {row.getValue("city")}
         </Typography>
       ),
@@ -71,12 +62,12 @@ export function useSessionColumn() {
     {
       accessorKey: "browser",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-left">
+        <Typography variant="small-bold" element="h6" className="text-left">
           Browser
         </Typography>
       ),
       cell: ({ row }) => (
-        <Typography variant="content-text" element="h6" className="text-left">
+        <Typography variant="small-text" element="h6" className="text-left">
           {row.getValue("browser")}
         </Typography>
       ),
@@ -84,12 +75,12 @@ export function useSessionColumn() {
     {
       accessorKey: "os",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-left">
+        <Typography variant="small-bold" element="h6" className="text-left">
           Os
         </Typography>
       ),
       cell: ({ row }) => (
-        <Typography variant="content-text" element="h6" className="text-left">
+        <Typography variant="small-text" element="h6" className="text-left">
           {row.getValue("os")}
         </Typography>
       ),
@@ -97,12 +88,12 @@ export function useSessionColumn() {
     {
       accessorKey: "device",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-left">
+        <Typography variant="small-bold" element="h6" className="text-left">
           Device
         </Typography>
       ),
       cell: ({ row }) => (
-        <Typography variant="content-text" element="h6" className="text-left">
+        <Typography variant="small-text" element="h6" className="text-left">
           {row.getValue("device")}
         </Typography>
       ),
@@ -110,12 +101,12 @@ export function useSessionColumn() {
     {
       accessorKey: "lastAt",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-left">
+        <Typography variant="small-bold" element="h6" className="text-left">
           Last seen
         </Typography>
       ),
       cell: ({ row }) => (
-        <Typography variant="content-text" element="h6" className="text-left">
+        <Typography variant="small-text" element="h6" className="text-left">
           {format(row.getValue("lastAt"), "MMMM d 'at' h aaaa")}
         </Typography>
       ),

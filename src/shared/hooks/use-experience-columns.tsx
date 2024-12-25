@@ -60,12 +60,12 @@ export function useExperienceColumns() {
     {
       accessorKey: "company",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-left">
+        <Typography variant="small-bold" element="h6" className="text-left">
           Company
         </Typography>
       ),
       cell: ({ row }) => (
-        <Typography variant="content-text" element="h6" className="text-left">
+        <Typography variant="small-text" element="h6" className="text-left">
           {row.getValue("company")}
         </Typography>
       ),
@@ -73,12 +73,12 @@ export function useExperienceColumns() {
     {
       accessorKey: "position",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-left">
+        <Typography variant="small-bold" element="h6" className="text-left">
           Position
         </Typography>
       ),
       cell: ({ row }) => (
-        <Typography variant="content-text" element="h6" className="text-left">
+        <Typography variant="small-text" element="h6" className="text-left">
           {row.getValue("position")}
         </Typography>
       ),
@@ -86,14 +86,14 @@ export function useExperienceColumns() {
     {
       accessorKey: "startDate",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-center">
+        <Typography variant="small-bold" element="h6" className="text-center">
           Start Date
         </Typography>
       ),
       cell: ({ row }) => {
         return (
           <Typography
-            variant="content-text"
+            variant="small-text"
             element="h6"
             className="w-full text-center"
           >
@@ -105,14 +105,14 @@ export function useExperienceColumns() {
     {
       accessorKey: "endDate",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-center">
+        <Typography variant="small-bold" element="h6" className="text-center">
           End Date
         </Typography>
       ),
       cell: ({ row }) => {
         return (
           <Typography
-            variant="content-text"
+            variant="small-text"
             element="h6"
             className="w-full text-center"
           >
@@ -126,7 +126,7 @@ export function useExperienceColumns() {
     {
       accessorKey: "companyUrl",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-center">
+        <Typography variant="small-bold" element="h6" className="text-center">
           Web Site
         </Typography>
       ),
@@ -138,7 +138,7 @@ export function useExperienceColumns() {
             rel="noreferrer"
             className="flex items-center justify-center"
           >
-            <Link />
+            <Link width={16} height={16} />
           </a>
         );
       },
@@ -152,8 +152,8 @@ export function useExperienceColumns() {
           <div className="flex justify-center items-center">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="md" className="">
-                  <MoreHorizontal />
+                <Button variant="ghost" size="sm" className="">
+                  <MoreHorizontal width={16} height={16} />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">

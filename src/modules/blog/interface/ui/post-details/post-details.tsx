@@ -9,8 +9,6 @@ import { Editor } from "@/shared/components/editor/editor";
 import { useEditor } from "@/shared/hooks/use-editor";
 import { JSONContent } from "@tiptap/react";
 import { Skeleton } from "@/ui/skeleton";
-import { ArchiveX } from "lucide-react";
-import { EmptyIcon } from "@/shared/icons";
 import { EmptyContent } from "@/shared/components/empty-content/empty-content";
 
 type Props = {

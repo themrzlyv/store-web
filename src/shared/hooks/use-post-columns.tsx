@@ -17,7 +17,7 @@ import {
 } from "@/modules/blog/infra/post.api";
 import { useAppDispatch } from "@/lib/store";
 import { openSideModal } from "@/shared/components/side-modal/side-modal.slice";
-import { SideModalComponentType } from "@/lib/types";
+import { SideModalComponentType, StatisticItemType } from "@/lib/types";
 import { JSONContent } from "@tiptap/react";
 import { PostFormInputType } from "@/modules/blog/infra/types/post-form.input";
 
@@ -82,12 +82,12 @@ export function usePostColumns() {
     {
       accessorKey: "title",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-left">
+        <Typography variant="small-bold" element="h6" className="text-left">
           Title
         </Typography>
       ),
       cell: ({ row }) => (
-        <Typography variant="content-text" element="h6" className="text-left">
+        <Typography variant="small-text" element="h6" className="text-left">
           {(row.getValue("title") as string).slice(0, 50).trim() + "..."}
         </Typography>
       ),
@@ -95,12 +95,12 @@ export function usePostColumns() {
     {
       accessorKey: "content",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-left">
+        <Typography variant="small-bold" element="h6" className="text-left">
           Content
         </Typography>
       ),
       cell: ({ row }) => (
-        <Typography variant="content-text" element="h6" className="text-left">
+        <Typography variant="small-text" element="h6" className="text-left">
           {renderContentCell(row.getValue("content"))}
         </Typography>
       ),
@@ -108,7 +108,7 @@ export function usePostColumns() {
     {
       accessorKey: "published",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-center">
+        <Typography variant="small-bold" element="h6" className="text-center">
           Published
         </Typography>
       ),
@@ -129,18 +129,18 @@ export function usePostColumns() {
     {
       accessorKey: "views",
       header: () => (
-        <Typography variant="menu-text" element="h6" className="text-center">
+        <Typography variant="small-bold" element="h6" className="text-center">
           Views
         </Typography>
       ),
       cell: ({ row }) => {
         return (
           <Typography
-            variant="content-text"
+            variant="small-text"
             element="h6"
             className="w-full text-center"
           >
-            {row.getValue("views")}
+            {(row.getValue("views") as StatisticItemType).value}
           </Typography>
         );
       },
@@ -154,8 +154,8 @@ export function usePostColumns() {
           <div className="flex justify-center items-center">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="md" className="">
-                  <MoreHorizontal />
+                <Button variant="ghost" size="sm" className="">
+                  <MoreHorizontal width={16} height={16} />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">

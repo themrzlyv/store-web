@@ -53,9 +53,9 @@ export function TotalViewsChart() {
           }
         }}
       >
-        <CartesianGrid vertical={false} strokeDasharray="3 3" />
+        <CartesianGrid vertical={false} strokeWidth={0.2} />
         <XAxis
-          dataKey="time"
+          dataKey="date"
           tick={{ fontSize: 12, fill: "#999" }}
           tickLine={false}
         />

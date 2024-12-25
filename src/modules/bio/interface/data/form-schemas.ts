@@ -19,7 +19,7 @@ export const bioInformationFormSchema = z.object({
     .object({
       github: z.string().optional(),
       linkedin: z.string().optional(),
-      instagram: z.string().optional(),
+      medium: z.string().optional(),
       mail: z.string().optional(),
     })
     .optional(),

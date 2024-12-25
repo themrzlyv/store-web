@@ -26,24 +26,24 @@ export function UpdateExperiencesPage() {
   };
 
   return (
-    <div className="dark:bg-dark-light p-5 rounded-lg">
+    <div className="dark:bg-dark-light bg-light-default p-5 rounded-lg">
       <div className="flex items-center justify-between mt-2 mb-5">
         <Typography
           variant="section-title"
           element="h2"
-          className="text-center"
+          className="text-center py-2"
         >
           All Experiences
         </Typography>
         {selectedRows.length > 0 && (
           <Button
             variant="ghost"
-            size="md"
+            size="sm"
             className="text-red-500"
             onClick={handleRemoveProjects}
             isLoading={isDeleteProjectsLoading}
           >
-            <Trash2 width={20} height={20} />
+            <Trash2 width={16} height={16} />
           </Button>
         )}
       </div>

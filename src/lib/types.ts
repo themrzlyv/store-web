@@ -9,27 +9,17 @@ export enum SideModalComponentType {
   "EXPERIENCE_FORM",
 }
 
+export type StatisticItemType = {
+  value: number;
+  prev: number;
+}
+
 export type StatisticEntity = {
-  pageviews: {
-    value: number;
-    prev: number;
-  };
-  visitors: {
-    value: number;
-    prev: number;
-  };
-  visits: {
-    value: number;
-    prev: number;
-  };
-  bounces: {
-    value: number;
-    prev: number;
-  };
-  totaltime: {
-    value: number;
-    prev: number;
-  };
+  pageviews: StatisticItemType;
+  visitors: StatisticItemType;
+  visits: StatisticItemType;
+  bounces: StatisticItemType;
+  totaltime: StatisticItemType;
 };
 
 export type PageViewsEntity = Array<{ x: string; y: number }>;

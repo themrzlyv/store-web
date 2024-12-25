@@ -30,7 +30,7 @@ export function useAdminSocials() {
       social: {
         github: data?.bio?.social?.github || "",
         linkedin: data?.bio?.social?.linkedin || "",
-        instagram: data?.bio?.social?.instagram || "",
+        medium: data?.bio?.social?.medium || "",
         mail: data?.bio?.social?.mail || "",
       },
     },
