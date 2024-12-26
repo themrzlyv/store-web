@@ -13,9 +13,12 @@ import {
   YAxis,
 } from "recharts";
 import { ToolTip } from "./tool-tip";
+import { Skeleton } from "@/ui/skeleton";
 
 export function TotalViewsChart() {
-  const { data: totalViews } = useGetTotalViewsQuery(QueryTypes.TOTAL_VIEWS);
+  const { data: totalViews, isLoading } = useGetTotalViewsQuery(
+    QueryTypes.TOTAL_VIEWS
+  );
 
   const [focusBar, setFocusBar] = useState<number | undefined>(undefined);
 
@@ -43,45 +46,62 @@ export function TotalViewsChart() {
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <BarChart
-        data={chartData}
-        onMouseMove={state => {
-          if (state.isTooltipActive) {
-            setFocusBar(state.activeTooltipIndex);
-          } else {
-            setFocusBar(undefined);
-          }
-        }}
-      >
-        <CartesianGrid vertical={false} strokeWidth={0.2} />
-        <XAxis
-          dataKey="date"
-          tick={{ fontSize: 12, fill: "#999" }}
-          tickLine={false}
-        />
-        <YAxis
-          tick={{ fontSize: 12, fill: "#999" }}
-          tickLine={false}
-          width={20}
-        />
-        <Tooltip cursor={{ fill: "transparent" }} content={<ToolTip />} />
+      {isLoading ? (
+        <div className="w-[95%] mx-auto h-[300px] flex border-b border-l px-4 pb-1 justify-between items-end">
+          {Array.from({ length: 10 }).map((_, index) => {
+            const randomHeight = Math.floor(Math.random() * 60) + 40;
+            return (
+              <Skeleton
+                key={index}
+                className="w-10"
+                style={{
+                  height: `${randomHeight}%`,
+                }}
+              />
+            );
+          })}
+        </div>
+      ) : (
+        <BarChart
+          data={chartData}
+          onMouseMove={state => {
+            if (state.isTooltipActive) {
+              setFocusBar(state.activeTooltipIndex);
+            } else {
+              setFocusBar(undefined);
+            }
+          }}
+        >
+          <CartesianGrid vertical={false} strokeWidth={0.2} />
+          <XAxis
+            dataKey="date"
+            tick={{ fontSize: 12, fill: "#999" }}
+            tickLine={false}
+          />
+          <YAxis
+            tick={{ fontSize: 12, fill: "#999" }}
+            tickLine={false}
+            width={20}
+          />
+          <Tooltip cursor={{ fill: "transparent" }} content={<ToolTip />} />
 
-        <Bar
-          dataKey="sessions"
-          stroke="#F26B0F"
-          fill="#F26B0F"
-          stackId="a"
-          fillOpacity={1}
-        />
-        <Bar dataKey="pageviews" stroke="#F26B0F" fill="#F26B0F" stackId="a">
-          {chartData.map((_, index) => (
-            <Cell
-              key={`cell-${index}`}
-              fillOpacity={focusBar === index ? 0.5 : 0.1}
-            />
-          ))}
-        </Bar>
-      </BarChart>
+          <Bar
+            dataKey="sessions"
+            stroke="#F26B0F"
+            fill="#F26B0F"
+            stackId="a"
+            fillOpacity={1}
+          />
+          <Bar dataKey="pageviews" stroke="#F26B0F" fill="#F26B0F" stackId="a">
+            {chartData.map((_, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fillOpacity={focusBar === index ? 0.5 : 0.1}
+              />
+            ))}
+          </Bar>
+        </BarChart>
+      )}
     </ResponsiveContainer>
   );
 }

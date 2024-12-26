@@ -2,6 +2,7 @@
 import { useGetPageViewsQuery } from "@/modules/admin/infra/reports.api";
 import { Typography } from "@/shared/components/typography/typography";
 import { menuRoutes } from "@/shared/data/routes";
+import { Skeleton } from "@/ui/skeleton";
 import { Dot } from "lucide-react";
 import { useMemo } from "react";
 import {
@@ -58,24 +59,25 @@ const CustomLegend = (props: LegendProps) => {
   const { payload } = props;
   return (
     <ul className="flex items-center justify-center gap-2 mt-3">
-      {payload && payload.map((entry: Payload, index: number) => (
-        <li
-          key={`item-${index}`}
-          style={{ color: entry.color }}
-          className="flex items-center justify-center"
-        >
-          <Dot style={{ color: entry.color }} />
-          <Typography element="p" variant="small-bold" className="capitalize">
-            {entry.value}
-          </Typography>
-        </li>
-      ))}
+      {payload &&
+        payload.map((entry: Payload, index: number) => (
+          <li
+            key={`item-${index}`}
+            style={{ color: entry.color }}
+            className="flex items-center justify-center"
+          >
+            <Dot style={{ color: entry.color }} />
+            <Typography element="p" variant="small-bold" className="capitalize">
+              {entry.value}
+            </Typography>
+          </li>
+        ))}
     </ul>
   );
 };
 
 export function GeneralPieChart() {
-  const { data: pageViews } = useGetPageViewsQuery({});
+  const { data: pageViews, isLoading } = useGetPageViewsQuery({});
 
   const pieData = useMemo(() => {
     if (!pageViews || pageViews.data.length === 0) return [];
@@ -92,33 +94,45 @@ export function GeneralPieChart() {
 
   return (
     <ResponsiveContainer width="100%" height="80%">
-      <PieChart width={400} height={400}>
-        <Pie
-          data={pieData}
-          cx="50%"
-          cy="50%"
-          labelLine={false}
-          label={entry =>
-            renderCustomizedLabel({
-              ...entry,
-              name: entry.name,
-              value: entry.value,
-            })
-          }
-          outerRadius={100}
-          innerRadius={60}
-          fill="#8884d8"
-          dataKey="value"
-          paddingAngle={3}
-          stroke="none"
-        >
-          {pieData.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-        <Tooltip wrapperClassName="capitalize text-sm" />
-        <Legend content={<CustomLegend />} />
-      </PieChart>
+      {isLoading ? (
+        <div className="p-5 flex items-center justify-center">
+          <div className="relative w-[300px] h-[300px] rounded-full  border-gray-200">
+            <div className="absolute w-full h-full rounded-full border-[36px] border-transparent border-t-gray-300 animate-spin"></div>
+            <div className="absolute w-full h-full rounded-full border-[36px] border-transparent border-r-gray-300 animate-spin-slower"></div>
+          </div>
+        </div>
+      ) : (
+        <PieChart width={400} height={400}>
+          <Pie
+            data={pieData}
+            cx="50%"
+            cy="50%"
+            labelLine={false}
+            label={entry =>
+              renderCustomizedLabel({
+                ...entry,
+                name: entry.name,
+                value: entry.value,
+              })
+            }
+            outerRadius={100}
+            innerRadius={60}
+            fill="#8884d8"
+            dataKey="value"
+            paddingAngle={3}
+            stroke="none"
+          >
+            {pieData.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
+          </Pie>
+          <Tooltip wrapperClassName="capitalize text-sm" />
+          <Legend content={<CustomLegend />} />
+        </PieChart>
+      )}
     </ResponsiveContainer>
   );
 }

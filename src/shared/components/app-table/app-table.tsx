@@ -24,6 +24,7 @@ import {
 } from "@tanstack/react-table";
 import { useEffect, useMemo, useState } from "react";
 import { Typography } from "../typography/typography";
+import { Skeleton } from "@/ui/skeleton";
 
 type Props<T> = {
   data: T[];
@@ -92,11 +93,16 @@ export function AppTable<T>({
         </TableHeader>
         <TableBody>
           {isTableLoading ? (
-            <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                Loading
-              </TableCell>
-            </TableRow>
+            Array.from({ length: 8 }).map((_, index) => (
+              <TableRow key={index}>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-10"
+                >
+                  <Skeleton className="w-full h-6" />
+                </TableCell>
+              </TableRow>
+            ))
           ) : table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map(row => (
               <TableRow
