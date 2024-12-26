@@ -1,5 +1,4 @@
 "use client";
-import { useGetPostsQuery } from "@/modules/blog/infra/post.api";
 import { Posts } from "@/modules/blog/interface/ui/posts/posts";
 import { Section } from "@/shared/components/section/section";
 import { ArrowRight } from "lucide-react";
@@ -7,10 +6,6 @@ import { useRouter } from "next/navigation";
 
 export function RecentPosts() {
   const router = useRouter();
-  const { data } = useGetPostsQuery({ isPublished: true });
-
-  if (!data?.posts || data.posts.length === 0) return null;
-
   return (
     <Section>
       <Section.Header
@@ -22,7 +17,7 @@ export function RecentPosts() {
         }}
       />
       <Section.Body>
-        <Posts />
+        <Posts showEmptyText={false} />
       </Section.Body>
     </Section>
   );

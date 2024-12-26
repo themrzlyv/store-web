@@ -1,3 +1,5 @@
-import { Project } from "@prisma/client";
+import { Project, Skill } from "@prisma/client";
 
-export type ProjectEntity = Project
+export type ProjectEntity = Project & {
+  techStack: Skill[];
+};

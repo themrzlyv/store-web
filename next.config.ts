@@ -6,9 +6,11 @@ const nextConfig: NextConfig = {
   compress: true,
   crossOrigin: "anonymous",
   compiler: {
-    removeConsole: {
-      exclude: ["error"],
-    },
+    ...(process.env.NODE_ENV === "production" && {
+      removeConsole: {
+        exclude: ["error"],
+      },
+    }),
   },
   output: "standalone",
   staticPageGenerationTimeout: 10000,

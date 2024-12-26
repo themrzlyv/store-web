@@ -4,7 +4,11 @@ import { ProjectItem } from "../project-item/project-item";
 import { ProjectItemSkeleton } from "@/shared/components/project-item-skeleton/project-item-skeleton";
 import { EmptyContent } from "@/shared/components/empty-content/empty-content";
 
-export function Projects() {
+type Props = {
+  showEmptyText?: boolean;
+};
+
+export function Projects({ showEmptyText }: Props) {
   const { data, isLoading } = useGetProjectsQuery({ isPublished: true });
 
   if (isLoading || !data) {
@@ -17,10 +21,9 @@ export function Projects() {
     );
   }
 
-  if (data.projects.length === 0) {
+  if (data.projects.length === 0 && showEmptyText) {
     return <EmptyContent title="Sorry, there are no projects yet." />;
   }
-
 
   return (
     <>

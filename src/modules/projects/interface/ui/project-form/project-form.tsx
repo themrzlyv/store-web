@@ -5,6 +5,7 @@ import { useProjectForm } from "./use-project-form";
 import Button from "@/ui/button";
 import { ProjectEntity } from "@/modules/projects/domain/entities/project.entity";
 import { UploadImage } from "@/modules/upload/interface/upload-image/upload-image";
+import Select from "react-select";
 
 type Props = {
   project?: ProjectEntity;
@@ -12,11 +13,17 @@ type Props = {
 };
 
 export function ProjectForm({ project, isEdit }: Props) {
-  const { form, onSubmit, handleChangeUploadLoading, isLoading } =
-    useProjectForm({ project, isEdit });
+  const {
+    form,
+    onSubmit,
+    handleChangeUploadLoading,
+    isLoading,
+    skills,
+    isBioLoading,
+  } = useProjectForm({ project, isEdit });
   return (
     <form
-      onSubmit={form.handleSubmit(onSubmit)}
+      onSubmit={form.handleSubmit(onSubmit, err => console.log(err, "errrrr"))}
       className=" w-full h-full space-y-6"
     >
       <Form {...form}>
@@ -60,6 +67,41 @@ export function ProjectForm({ project, isEdit }: Props) {
               </Typography>
               <FormControl>
                 <Input placeholder="Source URL" {...field} />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="techStack"
+          render={({ field }) => (
+            <FormItem>
+              <Typography element="p" variant="label">
+                Tech Stack
+              </Typography>
+              <FormControl>
+                <Select<(typeof skills)[0], true>
+                  isMulti
+                  isSearchable
+                  isClearable
+                  isLoading={isBioLoading}
+                  name="techStack"
+                  options={skills}
+                  value={field.value?.map(skill => ({
+                    value: skill.id,
+                    label: skill.name,
+                  }))}
+                  onChange={value => {
+                    const techStack = value.map(item => ({
+                      id: item.value,
+                      name: item.label,
+                    }));
+                    field.onChange(techStack);
+                  }}
+                  className="basic-multi-select"
+                  classNamePrefix="select"
+                />
               </FormControl>
             </FormItem>
           )}

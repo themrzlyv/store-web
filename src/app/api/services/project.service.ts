@@ -14,6 +14,14 @@ export class ProjectService {
         where: {
           ...(isPublished ? { published: isPublished === "true" } : {}),
         },
+        include: {
+          techStack: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+        },
       });
 
       return NextResponse.json({ projects }, { status: 200 });
@@ -29,7 +37,7 @@ export class ProjectService {
     try {
       const octokit = new Octokit();
       const body = await req.json();
-      const { image, title, content, sourceUrl } =
+      const { image, title, content, sourceUrl, techStack } =
         projectFormSchema.parse(body);
 
       const isGithubUrl = sourceUrl?.startsWith("https://github.com");
@@ -57,6 +65,11 @@ export class ProjectService {
           image,
           sourceUrl,
           stars,
+          ...(techStack && {
+            techStack: {
+              connect: techStack.map(item => ({ id: item.id })),
+            },
+          }),
         },
       });
 
@@ -77,8 +90,16 @@ export class ProjectService {
   async updateProject(req: NextRequest) {
     try {
       const body = await req.json();
-      const { image, id, published, stars, title, content, sourceUrl } =
-        projectFormSchema.parse(body);
+      const {
+        image,
+        id,
+        published,
+        stars,
+        title,
+        content,
+        sourceUrl,
+        techStack,
+      } = projectFormSchema.parse(body);
 
       const project = await prisma.project.update({
         where: { id },
@@ -89,6 +110,19 @@ export class ProjectService {
           stars,
           image,
           sourceUrl,
+          ...(techStack && {
+            techStack: {
+              set: techStack.map(item => ({ id: item.id })),
+            },
+          }),
+        },
+        include: {
+          techStack: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
         },
       });
 

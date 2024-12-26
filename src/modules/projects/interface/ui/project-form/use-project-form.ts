@@ -9,7 +9,9 @@ import {
   useCreateProjectMutation,
   useUpdateProjectMutation,
 } from "@/modules/projects/infra/project.api";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { useGetBioInformationQuery } from "@/modules/bio/infra/bio.api";
+import { QueryTypes } from "@/shared/query-types/query-types";
 
 type Props = {
   project?: ProjectEntity;
@@ -22,6 +24,18 @@ export function useProjectForm({ project, isEdit }: Props) {
     useCreateProjectMutation();
   const [updateProjectMutation, { isLoading: isUpdatePostLoading }] =
     useUpdateProjectMutation();
+
+  const { data, isFetching: isBioLoading } = useGetBioInformationQuery(
+    QueryTypes.BIO_INFO
+  );
+
+  const skills = useMemo(() => {
+    if (!data) return [];
+    return [...data.bio.skills].map(skill => ({
+      label: skill.name,
+      value: skill.id,
+    }));
+  }, [data]);
 
   const [isUploadLoading, setIsUploadLoading] = useState(false);
 
@@ -38,6 +52,7 @@ export function useProjectForm({ project, isEdit }: Props) {
       sourceUrl: project?.sourceUrl || "",
       published: project?.published,
       stars: project?.stars,
+      techStack: project?.techStack || [],
     },
   });
 
@@ -64,5 +79,7 @@ export function useProjectForm({ project, isEdit }: Props) {
     onSubmit,
     isLoading,
     handleChangeUploadLoading,
+    isBioLoading,
+    skills,
   };
 }

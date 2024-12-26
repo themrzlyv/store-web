@@ -1,5 +1,6 @@
 import { ProjectEntity } from "@/modules/projects/domain/entities/project.entity";
 import { Card } from "@/shared/components/card/card";
+import { Typography } from "@/shared/components/typography/typography";
 import { Star } from "lucide-react";
 
 type Props = {
@@ -38,6 +39,20 @@ export function ProjectItem({ project }: Props) {
           </>
         }
         content={project.content}
+        subContent={
+          <div className="flex flex-wrap items-center gap-2">
+            {project.techStack.map((item) => (
+              <Typography
+                key={item.id}
+                element="span"
+                variant="small-text"
+                className="dark:bg-dark-lighter text-xs bg-light-darker px-2 py-0.5 dark:text-light-default/90 rounded-md"
+              >
+                {item.name}
+              </Typography>
+            ))}
+          </div>
+        }
       />
     </Card>
   );

@@ -12,9 +12,10 @@ import { EmptyContent } from "@/shared/components/empty-content/empty-content";
 
 type Props = {
   groupped?: boolean;
+  showEmptyText?: boolean;
 };
 
-export function Posts({ groupped = false }: Props) {
+export function Posts({ groupped = false, showEmptyText = true }: Props) {
   const { data, isLoading } = useGetPostsQuery({ isPublished: true });
 
   const posts = useMemo(() => {
@@ -28,10 +29,12 @@ export function Posts({ groupped = false }: Props) {
   if (!data || isLoading) {
     return (
       <div className="flex flex-col gap-4">
-        <div className="flex items-end gap-2 w-full">
-          <Skeleton className="w-16 h-6" />
-          <Skeleton className="flex-1 h-1" />
-        </div>
+        {groupped && (
+          <div className="flex items-end gap-2 w-full">
+            <Skeleton className="w-16 h-6" />
+            <Skeleton className="flex-1 h-1" />
+          </div>
+        )}
         {Array.from({ length: 3 }).map((_, index) => (
           <PostItemSkeleton key={index} />
         ))}
@@ -39,10 +42,8 @@ export function Posts({ groupped = false }: Props) {
     );
   }
 
-  if(posts.length === 0){
-    return (
-      <EmptyContent title="Sorry, there are no posts yet." />
-    )
+  if (posts.length === 0 && showEmptyText) {
+    return <EmptyContent title="Sorry, there are no posts yet." />;
   }
 
   if (!groupped) {
