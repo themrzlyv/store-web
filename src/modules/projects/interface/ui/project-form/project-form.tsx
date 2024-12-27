@@ -23,7 +23,7 @@ export function ProjectForm({ project, isEdit }: Props) {
   } = useProjectForm({ project, isEdit });
   return (
     <form
-      onSubmit={form.handleSubmit(onSubmit, err => console.log(err, "errrrr"))}
+      onSubmit={form.handleSubmit(onSubmit)}
       className=" w-full h-full space-y-6"
     >
       <Form {...form}>

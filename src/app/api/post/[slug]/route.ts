@@ -8,20 +8,30 @@ export async function GET(
 ) {
   try {
     const { slug } = await params;
+    const visitorId = req.nextUrl.searchParams.get("visitorId");
 
     const post = await prisma.post.findUnique({
       where: { slug },
+      include: { likes: true },
     });
 
     const analyticsService = new AnalyticsService();
-    const { pageviews } = await analyticsService.getStatistics(slug)
+    const { pageviews } = await analyticsService.getStatistics(slug);
 
     if (!post) {
       return NextResponse.json({ message: "Post not found!" }, { status: 400 });
     }
 
+    const { likes, ...data } = post;
+
     return NextResponse.json(
-      { post: { ...post, views: pageviews } },
+      {
+        post: {
+          ...data,
+          views: pageviews,
+          isLiked: likes.some(item => item.visitorId === visitorId),
+        },
+      },
       { status: 200 }
     );
   } catch (error) {

@@ -12,13 +12,16 @@ import { Skeleton } from "@/ui/skeleton";
 import { EmptyContent } from "@/shared/components/empty-content/empty-content";
 import { GoDot } from "react-icons/go";
 import { ShareLink } from "@/shared/components/share-link/share-link";
+import { AiOutlineLike } from "react-icons/ai";
+import { AiFillLike } from "react-icons/ai";
+import Button from "@/ui/button";
 
 type Props = {
   slug: string;
 };
 
 export function PostDetails({ slug }: Props) {
-  const { isLoading, error, post } = usePostDetails({
+  const { isLoading, error, post, handleLikePost, isLiked } = usePostDetails({
     slug,
   });
 
@@ -95,7 +98,25 @@ export function PostDetails({ slug }: Props) {
               {post?.views.value || 0} views
             </Typography>
           </div>
-          <ShareLink />
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              type="button"
+              className={`${
+                isLiked
+                  ? "text-red-500 bg-gray-100 dark:bg-dark-lighter"
+                  : "text-gray-500"
+              }`}
+              onClick={handleLikePost}
+            >
+              {isLiked ? <AiFillLike size="16" /> : <AiOutlineLike size="16" />}
+              <Typography element="span" variant="small-text">
+                Like
+              </Typography>
+            </Button>
+            <ShareLink />
+          </div>
         </div>
         {post?.content && <PostContent content={post.content} />}
       </div>

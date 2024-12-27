@@ -30,10 +30,10 @@ export function ShareLink() {
     <DropdownMenu open={isOpenMenu} onOpenChange={open => setIsOpenMenu(open)}>
       <DropdownMenuTrigger asChild>
         <button className="px-2 flex items-center gap-2 focus:outline-none">
-          <RiShare2Line size={18} className="text-gray-500" />
+          <RiShare2Line size={16} className="text-gray-500" />
           <Typography
             element="span"
-            variant="small-bold"
+            variant="small-text"
             className="text-gray-500"
           >
             Share

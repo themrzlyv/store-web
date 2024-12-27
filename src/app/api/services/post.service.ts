@@ -16,6 +16,9 @@ export class PostService {
         where: {
           ...(isPublished ? { published: isPublished === "true" } : {}),
         },
+        include: {
+          likes: true,
+        },
       });
 
       const posts = await Promise.all(
@@ -25,6 +28,7 @@ export class PostService {
           return {
             ...post,
             views: pageviews,
+            likes: post.likes.length,
           };
         })
       );
@@ -107,6 +111,8 @@ export class PostService {
           },
         },
       });
+
+      await prisma.like.deleteMany({ where: { postId: { in: ids } } });
 
       return NextResponse.json({ message: "Post(s) deleted successfully" });
     } catch (error) {

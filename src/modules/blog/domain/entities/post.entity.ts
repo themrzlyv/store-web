@@ -5,4 +5,6 @@ import { StatisticItemType } from "@/lib/types";
 export type PostEntity = Omit<Post, "content" | "views"> & {
   content: JSONContent;
   views: StatisticItemType;
+  isLiked: boolean;
+  likes: number;
 };

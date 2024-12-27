@@ -4,7 +4,6 @@ import {
   TotalViewsEntity,
   VisitorSessionsEntity,
 } from "@/lib/types";
-import { addHours, getTime, startOfHour, subDays } from "date-fns";
 
 export class AnalyticsService {
   private readonly apiUrl: string;
@@ -85,7 +84,6 @@ export class AnalyticsService {
     }
 
     const url = this.createRequestUrl("stats", params);
-    console.log(url.toString(), "stseees");
     return this.fetchData<StatisticEntity>(url);
   }
 

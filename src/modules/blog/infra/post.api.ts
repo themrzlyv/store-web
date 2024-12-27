@@ -3,6 +3,8 @@ import { PostEntity } from "../domain/entities/post.entity";
 import { DeletePostsInput } from "./types/delete-posts.input";
 import { customFetchBaseQuery } from "@/lib/custom-fetch-base-query";
 import { PostFormInputType } from "./types/post-form.input";
+import { getVisitorId } from "@/lib/get-visitor-id";
+import { VISITOR_ID_KEY } from "@/shared/data/constants";
 
 export const postApi = createApi({
   reducerPath: "postApi",
@@ -39,6 +41,18 @@ export const postApi = createApi({
       invalidatesTags: ["GetPosts"],
     }),
 
+    likePost: builder.mutation<
+      { message: string },
+      { postId: number; isLiked: boolean; visitorId: string }
+    >({
+      query: input => ({
+        url: `/post/like`,
+        method: "PUT",
+        body: input,
+      }),
+      invalidatesTags: ["GetPostDetails"],
+    }),
+
     getPosts: builder.query<{ posts: PostEntity[] }, { isPublished?: boolean }>(
       {
         query: arg => ({
@@ -49,11 +63,16 @@ export const postApi = createApi({
       }
     ),
 
-    getPostDetails: builder.query<{ post: PostEntity }, { slug: string }>({
-      query: arg => ({
-        url: `/post/${arg.slug}`,
-        method: "GET",
-      }),
+    getPostDetails: builder.query<{ post: PostEntity }, { slug: string; visitorId?: string | null }>({
+      query: arg => {
+        const queryParam = new URLSearchParams({
+          ...(arg.visitorId && { visitorId: arg.visitorId }),
+        }).toString();
+        return {
+          url: `/post/${arg.slug}${queryParam ? `?${queryParam}` : ""}`,
+          method: "GET",
+        };
+      },
       providesTags: ["GetPostDetails"],
     }),
   }),
@@ -65,4 +84,5 @@ export const {
   useDeletePostsMutation,
   useUpdatePostMutation,
   useGetPostDetailsQuery,
+  useLikePostMutation,
 } = postApi;

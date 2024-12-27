@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { BsCalendarDate } from "react-icons/bs";
 import { GoDotFill } from "react-icons/go";
+import { AiFillLike } from "react-icons/ai";
 
 type Props = {
   post: PostEntity;
@@ -49,6 +50,12 @@ export function PostItem({ post }: Props) {
 
             <Typography element="p" variant="small-text">
               {post.views.value} views
+            </Typography>
+
+            <GoDotFill size="5" />
+
+            <Typography element="p" variant="small-text">
+              {post.likes} likes
             </Typography>
           </>
         }
