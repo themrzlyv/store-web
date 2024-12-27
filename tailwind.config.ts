@@ -6,6 +6,9 @@ export default withTV({
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
+      fontFamily: {
+        inter: "[var(--font-inter)]",
+      },
       colors: {
         primary: {
           "50": "#EBF0FB",

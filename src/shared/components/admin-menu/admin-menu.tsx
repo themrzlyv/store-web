@@ -7,7 +7,6 @@ import { LogoIcon } from "@/shared/icons";
 import { AdminMenuItem } from "./admin-menu-item";
 import Link from "next/link";
 import Button from "@/ui/button";
-import { useState } from "react";
 
 type Props = {
   isOpenMenu: boolean;
@@ -15,8 +14,6 @@ type Props = {
 };
 
 export function AdminMenu({ isOpenMenu, handleToggleMenu }: Props) {
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-
   return (
     <nav
       className={cn(
@@ -49,13 +46,7 @@ export function AdminMenu({ isOpenMenu, handleToggleMenu }: Props) {
           </Link>
         </li>
         {adminMenuItems.map((item, index) => (
-          <AdminMenuItem
-            key={index}
-            item={item}
-            isOpenMenu={isOpenMenu}
-            openDropdown={openDropdown}
-            setOpenDropdown={setOpenDropdown}
-          />
+          <AdminMenuItem key={index} item={item} isOpenMenu={isOpenMenu} />
         ))}
         <li
           onClick={handleToggleMenu}

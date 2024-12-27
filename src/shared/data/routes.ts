@@ -1,4 +1,8 @@
-import { icons } from "lucide-react";
+import { BsViewList } from "react-icons/bs";
+import { RxDashboard } from "react-icons/rx";
+import { LiaProjectDiagramSolid } from "react-icons/lia";
+import { MdOutlineHomeWork } from "react-icons/md";
+import { IoSettingsOutline } from "react-icons/io5";
 
 export const menuRoutes = [
   {
@@ -9,10 +13,6 @@ export const menuRoutes = [
     path: "/projects",
     name: "Projects",
   },
-  // {
-  //   path: "/course",
-  //   name: "Course",
-  // },
   {
     path: "/about",
     name: "About",
@@ -21,48 +21,27 @@ export const menuRoutes = [
 
 export const adminMenuItems = [
   {
-    icon: icons.LayoutDashboard,
+    icon: RxDashboard,
     path: "/admin",
     label: "Dashboard",
   },
   {
-    icon: icons.PencilLine,
-    label: "Create",
-    subMenu: [
-      {
-        path: "/admin/create/post",
-        label: "Post",
-      },
-      {
-        path: "/admin/create/project",
-        label: "Project",
-      },
-      {
-        path: "/admin/create/experience",
-        label: "Experience",
-      },
-    ],
+    icon: BsViewList,
+    path: "/admin/posts",
+    label: "Posts",
   },
   {
-    icon: icons.ScrollText,
-    label: "Update",
-    subMenu: [
-      {
-        path: "/admin/update/post",
-        label: "Post",
-      },
-      {
-        path: "/admin/update/project",
-        label: "Project",
-      },
-      {
-        path: "/admin/update/experience",
-        label: "Experience",
-      },
-    ],
+    icon: LiaProjectDiagramSolid,
+    path: "/admin/projects",
+    label: "Projects",
   },
   {
-    icon: icons.Settings,
+    icon: MdOutlineHomeWork,
+    path: "/admin/experiences",
+    label: "Experiences",
+  },
+  {
+    icon: IoSettingsOutline,
     path: "/admin/settings",
     label: "Bio",
   },

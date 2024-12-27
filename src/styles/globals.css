@@ -8,3 +8,21 @@
   box-sizing: border-box;
   @apply lining-nums;
 }
+
+.prose code {
+  background-color: rgba(135, 131, 120, 0.15);
+  color: #e3116c; 
+  border-radius: 4px;
+  font-family: "Fira Code", monospace; 
+  font-size: 0.9em;
+  padding: 0.2em 0.4em;
+  white-space: nowrap;
+}
+
+.prose pre code {
+  background-color: transparent; 
+  color: inherit; 
+  font-size: 1em; 
+  padding: 0; 
+  white-space: pre-wrap; 
+}

@@ -8,7 +8,6 @@ import { Checkbox } from "@/ui/checkbox";
 import { UploadImage } from "@/modules/upload/interface/upload-image/upload-image";
 import DatePicker from "react-datepicker";
 import { CalendarIcon } from "lucide-react";
-import { parseISO } from "date-fns";
 
 type Props = {
   experience?: ExperienceEntity;

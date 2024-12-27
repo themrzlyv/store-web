@@ -10,6 +10,8 @@ import { useEditor } from "@/shared/hooks/use-editor";
 import { JSONContent } from "@tiptap/react";
 import { Skeleton } from "@/ui/skeleton";
 import { EmptyContent } from "@/shared/components/empty-content/empty-content";
+import { GoDot } from "react-icons/go";
+import { ShareLink } from "@/shared/components/share-link/share-link";
 
 type Props = {
   slug: string;
@@ -74,22 +76,26 @@ export function PostDetails({ slug }: Props) {
           {post?.title}
         </Typography>
         <div className="flex items-center justify-between">
-          {post?.createdAt && (
+          <div className="flex items-center gap-2">
+            {post?.createdAt && (
+              <Typography
+                element="p"
+                variant="small-text"
+                className="italic text-gray-500"
+              >
+                {formatDate(post.createdAt, true)}
+              </Typography>
+            )}
+            <GoDot size={14} className="text-gray-500" />
             <Typography
               element="p"
               variant="small-text"
-              className="italic text-gray-500"
+              className="text-gray-500"
             >
-              {formatDate(post.createdAt, true)}
+              {post?.views.value || 0} views
             </Typography>
-          )}
-          <Typography
-            element="p"
-            variant="small-text"
-            className="text-gray-500"
-          >
-            {post?.views.value || 0} views
-          </Typography>
+          </div>
+          <ShareLink />
         </div>
         {post?.content && <PostContent content={post.content} />}
       </div>

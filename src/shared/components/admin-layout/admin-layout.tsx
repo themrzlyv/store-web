@@ -20,7 +20,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
       return paths[0];
     }
 
-    return [paths[paths.length - 2], paths[paths.length - 1]].join(" | ");
+    return [paths[paths.length - 2], paths[paths.length - 1]].join(" > ");
   }, [pathname]);
 
   return (
@@ -42,7 +42,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
             <Typography
               element="h4"
               variant="section-title"
-              className="capitalize"
+              className="capitalize text-gray-600"
             >
               {pageName}
             </Typography>

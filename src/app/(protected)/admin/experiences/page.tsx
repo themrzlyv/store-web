@@ -1,5 +1,5 @@
 "use client";
-import { UpdatePostsPage } from "@/modules/admin/interface/ui/admin-update/update-posts/update-posts.page";
+import { AdminExperiencesPage } from "@/modules/admin/interface/ui/admin-experiences/admin-experiences.page";
 import { useEffect, useState } from "react";
 
 export default function AdminCreate() {
@@ -13,5 +13,5 @@ export default function AdminCreate() {
     return null;
   }
 
-  return <UpdatePostsPage />;
+  return <AdminExperiencesPage />;
 }

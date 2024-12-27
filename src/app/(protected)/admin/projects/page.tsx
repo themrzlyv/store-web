@@ -1,5 +1,5 @@
 "use client";
-import { CreateProjectPage } from "@/modules/admin/interface/ui/admin-create/create-project-page/create-project.page";
+import { AdminProjectsPage } from "@/modules/admin/interface/ui/admin-projects/admin-projects.page";
 import { useEffect, useState } from "react";
 
 export default function AdminCreate() {
@@ -13,5 +13,5 @@ export default function AdminCreate() {
     return null;
   }
 
-  return <CreateProjectPage />;
+  return <AdminProjectsPage />;
 }

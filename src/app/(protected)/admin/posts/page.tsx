@@ -1,5 +1,5 @@
 "use client";
-import { CreateExperiencePage } from "@/modules/admin/interface/ui/admin-create/create-experience-page/create-experience.page";
+import { AdminPostsPage } from "@/modules/admin/interface/ui/admin-posts/admin-posts.page";
 import { useEffect, useState } from "react";
 
 export default function AdminCreate() {
@@ -13,5 +13,5 @@ export default function AdminCreate() {
     return null;
   }
 
-  return <CreateExperiencePage />;
+  return <AdminPostsPage />;
 }

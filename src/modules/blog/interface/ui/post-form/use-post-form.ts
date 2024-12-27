@@ -59,6 +59,7 @@ export function usePostForm({ post, isEdit }: Props) {
     createPostMutation(values).then(() => {
       form.reset();
       editor?.commands.setContent("");
+      dispatch(closeSideModal());
     });
   };
 

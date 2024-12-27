@@ -68,6 +68,7 @@ export function useExperienceForm({ experience, isEdit }: Props) {
 
     createExperienceMutation(values).then(() => {
       form.reset();
+      dispatch(closeSideModal());
     });
   };
 

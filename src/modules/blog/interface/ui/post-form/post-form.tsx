@@ -32,6 +32,11 @@ export function PostForm({ post, isEdit }: Props) {
         className="w-full h-full space-y-6"
       >
         <Form {...form}>
+          <UploadImage
+            form={form}
+            onLoadingChange={handleChangeUploadLoading}
+          />
+
           <FormField
             control={form.control}
             name="title"
@@ -45,11 +50,6 @@ export function PostForm({ post, isEdit }: Props) {
                 </FormControl>
               </FormItem>
             )}
-          />
-
-          <UploadImage
-            form={form}
-            onLoadingChange={handleChangeUploadLoading}
           />
 
           <Editor editor={editor} />
