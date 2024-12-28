@@ -62,15 +62,18 @@ const CardContent = ({
   title,
   content,
   subContent,
+  className,
 }: {
   title: string | React.ReactNode;
   content: string;
   subContent?: React.ReactNode | JSX.Element | JSX.Element[];
+  className?: string;
 }) => (
   <div
     className={cn(
       "flex flex-col h-full overflow-hidden",
-      subContent ? "justify-between" : ""
+      subContent ? "justify-between" : "",
+      className,
     )}
   >
     {title && (

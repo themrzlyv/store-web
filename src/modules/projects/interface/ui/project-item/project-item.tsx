@@ -12,7 +12,7 @@ export function ProjectItem({ project }: Props) {
   return (
     <Card
       key={project.id}
-      className="md:h-24 h-24"
+      className="md:h-24 h-36"
       element="a"
       href={project.sourceUrl}
       target="_blank"
@@ -22,8 +22,10 @@ export function ProjectItem({ project }: Props) {
         width={70}
         height={35}
         alt={project.title}
+
       />
       <Card.Content
+        className="justify-start gap-2 md:justify-between md:gap-0"
         title={
           <>
             {project.title}

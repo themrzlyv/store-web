@@ -34,7 +34,7 @@ export function AdminSkills() {
     <div className="gap-3">
       <Section>
         <Section.Header title="Skills" />
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-4">
           <Skills handleRemoveSkill={removeSkill} />
           <Input
             ref={addInputRef}

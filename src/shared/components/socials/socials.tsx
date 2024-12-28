@@ -32,7 +32,7 @@ export function Socials() {
               href={social[name]}
               key={social[name]}
               target="_blank"
-              className="p-3 rounded-lg hover:bg-light-dark dark:hover:bg-dark-lighter"
+              className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-light-dark dark:hover:bg-dark-lighter"
             >
               {field.icon}
             </Link>

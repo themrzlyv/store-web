@@ -37,7 +37,7 @@ export function PostItem({ post }: Props) {
         title={post.title.slice(0, 50).trim() + "..."}
         content={content}
         subContent={
-          <>
+          <div className="flex flex-wrap items-center gap-1">
             <Typography
               element="p"
               variant="small-text"
@@ -57,7 +57,7 @@ export function PostItem({ post }: Props) {
             <Typography element="p" variant="small-text">
               {post.likes} likes
             </Typography>
-          </>
+          </div>
         }
       />
     </Card>

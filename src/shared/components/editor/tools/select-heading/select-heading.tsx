@@ -9,7 +9,7 @@ type Props = {
 };
 
 export function SelectHeading({ editor }: Props) {
-  const selectedHeading = useMemo((): HeadingType => {
+  const selectedHeading = (): HeadingType => {
     let result: HeadingType = "p";
 
     if (editor?.isActive("heading", { level: 1 })) result = "h1";
@@ -17,7 +17,7 @@ export function SelectHeading({ editor }: Props) {
     if (editor?.isActive("heading", { level: 3 })) result = "h3";
 
     return result;
-  }, [editor]);
+  }
 
   const handleHeadingSelection: ChangeEventHandler<HTMLSelectElement> = ({
     target,
@@ -38,7 +38,7 @@ export function SelectHeading({ editor }: Props) {
 
   return (
     <select
-      value={selectedHeading}
+      value={selectedHeading()}
       className="p-2 bg-transparent outline-none"
       onChange={handleHeadingSelection}
     >

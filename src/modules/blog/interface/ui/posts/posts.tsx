@@ -49,7 +49,7 @@ export function Posts({ groupped = false, showEmptyText = true }: Props) {
   if (!groupped) {
     return (
       <>
-        {(posts as PostEntity[]).map((post, index) => (
+        {(posts as PostEntity[]).slice(0,3).map((post, index) => (
           <PostItem key={index} post={post} />
         ))}
       </>

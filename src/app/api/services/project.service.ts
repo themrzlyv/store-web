@@ -14,6 +14,9 @@ export class ProjectService {
         where: {
           ...(isPublished ? { published: isPublished === "true" } : {}),
         },
+        orderBy: {
+          createdAt: "desc",
+        },
         include: {
           techStack: {
             select: {

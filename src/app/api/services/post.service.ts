@@ -19,6 +19,9 @@ export class PostService {
         include: {
           likes: true,
         },
+        orderBy: {
+          createdAt: "desc",
+        },
       });
 
       const posts = await Promise.all(

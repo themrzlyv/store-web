@@ -14,7 +14,7 @@ export function Connect() {
         Let&apos;s connect!
       </Typography>
       {data ? (
-        <Typography variant="content-text" element="p" className="font-light font-inter">
+        <Typography variant="content-text" element="p" className="font-inter">
           Feel free to reach out to me at
           <Typography
             variant="link"

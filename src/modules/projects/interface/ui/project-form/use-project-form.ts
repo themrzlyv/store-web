@@ -67,6 +67,7 @@ export function useProjectForm({ project, isEdit }: Props) {
 
     createProjectMutation(values).then(() => {
       form.reset();
+      dispatch(closeSideModal());
     });
   };
 

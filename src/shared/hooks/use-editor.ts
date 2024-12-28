@@ -31,7 +31,9 @@ export function useEditor({ editable, handleChange, content }: Props) {
 
   const editor = useEditorBase({
     extensions: [
-      StarterKit,
+      StarterKit.configure({
+        codeBlock: false,
+      }),
       Underline,
       TextAlign.configure({
         types: ["heading", "paragraph"],

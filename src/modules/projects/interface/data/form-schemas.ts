@@ -9,6 +9,6 @@ export const projectFormSchema = z.object({
   stars: z.number().optional(),
   published: z.boolean().optional(),
   techStack: z
-    .array(z.object({ id: z.number(), name: z.string() })).max(5)
+    .array(z.object({ id: z.number(), name: z.string() })).max(7)
     .optional(),
 });
