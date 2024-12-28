@@ -78,7 +78,7 @@ export function PostDetails({ slug }: Props) {
         <Typography element="h4" variant="card-title" className="text-pretty">
           {post?.title}
         </Typography>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-2 md:gap-0 md:flex-row md:items-center justify-between">
           <div className="flex items-center gap-2">
             {post?.createdAt && (
               <Typography
@@ -89,7 +89,7 @@ export function PostDetails({ slug }: Props) {
                 {formatDate(post.createdAt, true)}
               </Typography>
             )}
-            <GoDot size={14} className="text-gray-500" />
+            <GoDot size={10} className="text-gray-500" />
             <Typography
               element="p"
               variant="small-text"

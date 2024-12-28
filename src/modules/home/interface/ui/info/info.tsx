@@ -26,7 +26,7 @@ export function Info() {
   return (
     <section className="flex flex-col gap-6">
       <div className="flex justify-between flex-col-reverse md:flex-row py-3">
-        <div className="flex-1 flex flex-col gap-4">
+        <div className="flex-1 flex flex-col items-center md:items-start gap-4">
           <h2 className="text-2xl flex items-center gap-1 dark:text-dark-light-gray">
             <span
               role="img"
@@ -64,13 +64,13 @@ export function Info() {
             <Typography
               variant="content-text"
               element="p"
-              className="max-w-[25rem]"
+              className="max-w-[25rem] text-center md:text-left"
             >
               {data?.bio?.bio}
             </Typography>
           )}
         </div>
-        <div className="flex w-40 h-40 mb-5 md:mb-0">
+        <div className="flex md:justify-start justify-center md:w-40 w-full h-full md:h-40 mb-5 md:mb-0">
           {data?.bio.image ? (
             <Img
               src={data?.bio.image}
@@ -85,12 +85,12 @@ export function Info() {
           )}
         </div>
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex flex-col md:flex-row items-center gap-4">
         {data ? (
           <Button
             variant="primary"
             size="md"
-            className="flex items-center gap-2 font-semibold text-sm"
+            className="flex items-center w-full md:w-auto gap-2 font-semibold text-sm"
             onClick={() => router.push("/about")}
           >
             <User width={18} height={18} />

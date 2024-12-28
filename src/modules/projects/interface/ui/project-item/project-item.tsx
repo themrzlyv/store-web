@@ -12,7 +12,7 @@ export function ProjectItem({ project }: Props) {
   return (
     <Card
       key={project.id}
-      className="h-24"
+      className="md:h-24 h-24"
       element="a"
       href={project.sourceUrl}
       target="_blank"

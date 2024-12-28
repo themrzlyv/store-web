@@ -38,7 +38,7 @@ export function usePostDetails({ slug }: Props) {
 
   return {
     isLoading: postDetailsLoading,
-    error: isError || !data,
+    error: isError && !data,
     post: data?.post,
     handleLikePost,
     isLiked: data?.post?.isLiked,

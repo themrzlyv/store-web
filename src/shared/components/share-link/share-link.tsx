@@ -40,7 +40,7 @@ export function ShareLink() {
           </Typography>
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent className="w-max">
         <DropdownMenuGroup>
           <DropdownMenuItem
             onClick={e => {
@@ -50,7 +50,11 @@ export function ShareLink() {
             className="flex items-center justify-between"
           >
             Copy link
-            {isCopied ? <LuCheck /> : <LuClipboardCopy />}
+            {isCopied ? (
+              <LuCheck size="12" className="text-green-500" />
+            ) : (
+              <LuClipboardCopy size="12" className="text-gray-600" />
+            )}
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />

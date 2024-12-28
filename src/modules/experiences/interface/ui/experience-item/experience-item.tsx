@@ -15,7 +15,7 @@ export function ExperienceItem({ item, line }: Props) {
       element="a"
       href={item.companyUrl}
       target="_blank"
-      className="h-24"
+      className="md:h-24 h-24"
     >
       <Card.Image
         src={item.image}
@@ -28,9 +28,9 @@ export function ExperienceItem({ item, line }: Props) {
         title={item.company}
         content={item.position}
         subContent={
-          <Typography element="p" variant="small-text" className="font-light">
-            {formatDate(item.startDate, false)} -{" "}
-            {item.endDate ? formatDate(item.endDate, false) : "Present"}
+          <Typography element="p" variant="small-text" className="text-xs">
+            {formatDate(item.startDate, true)} -{" "}
+            {item.endDate ? formatDate(item.endDate, true) : "Present"}
           </Typography>
         }
       />

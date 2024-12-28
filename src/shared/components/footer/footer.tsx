@@ -38,7 +38,7 @@ export function Footer() {
           {data ? (
             <Typography
               element="p"
-              variant="small-medium"
+              variant="small-text"
               className={description()}
             >
               {data?.bio.bio}
@@ -83,9 +83,9 @@ export function Footer() {
       </div>
       <div className="col-span-2">
         {data ? (
-          <Typography element="p" variant="small-medium" className={endText()}>
+          <Typography element="p" variant="small-text" className={endText()}>
             Developed by
-            <Typography element="span" variant="small-bold">
+            <Typography element="span" variant="small-medium">
               {fullName}
             </Typography>
           </Typography>

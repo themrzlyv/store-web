@@ -23,7 +23,7 @@ function CardContainer<T extends React.ElementType = "div">({
     <Element
       onClick={onClick}
       className={cn(
-        "flex gap-4 relative group cursor-pointer p-3 h-32 rounded-xl hover:bg-light-dark/50 dark:hover:bg-dark-lighter/50",
+        "flex gap-4 relative group cursor-pointer p-3 md:h-32 rounded-xl hover:bg-light-dark/50 dark:hover:bg-dark-lighter/50",
         className
       )}
       {...rest}
@@ -46,12 +46,13 @@ const CardImage = ({
   alt: string;
   line?: boolean;
 }) => (
-  <div className="h-full w-full max-w-[110px] flex flex-col items-center overflow-hidden">
+  <div className="h-full w-full max-w-[110px]  flex flex-col items-center overflow-hidden">
     <Img
       src={src}
       width={width}
       height={height}
       alt={alt}
+      className="rounded-md"
     />
     {line && <div className="w-[1px] h-full z-[-1] absolute bg-gray-400" />}
   </div>

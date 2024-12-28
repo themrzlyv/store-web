@@ -42,6 +42,7 @@ export function useUploadImage<T extends FieldValues>({
     accept: {
       "image/png": [".png"],
       "image/jpeg": [".jpg", ".jpeg"],
+      "image/svg+xml": [".svg"],
     },
     multiple: false,
     maxFiles: 1,
