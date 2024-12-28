@@ -27,7 +27,7 @@ export function Info() {
     <section className="flex flex-col gap-6">
       <div className="flex justify-between flex-col-reverse md:flex-row py-3">
         <div className="flex-1 flex flex-col items-center md:items-start gap-4">
-          <h2 className="text-2xl flex items-center gap-1 dark:text-dark-light-gray">
+          <h2 className="text-2xl font-medium flex items-center gap-1 dark:text-dark-light-gray">
             <span
               role="img"
               aria-label={"waving hand"}
@@ -41,7 +41,7 @@ export function Info() {
             </span>
           </h2>
 
-          <h2 className="flex items-center gap-2 text-xl shadow-primary-300 dark:text-dark-light-gray">
+          <h2 className="flex items-center gap-2 text-xl font-medium shadow-primary-300 dark:text-dark-light-gray">
             {!data ? (
               <Skeleton className="w-[250px] h-5" />
             ) : (
@@ -64,7 +64,7 @@ export function Info() {
             <Typography
               variant="content-text"
               element="p"
-              className="max-w-[25rem] text-center md:text-left"
+              className="max-w-[25rem] text-center md:text-left font-normal"
             >
               {data?.bio?.bio}
             </Typography>

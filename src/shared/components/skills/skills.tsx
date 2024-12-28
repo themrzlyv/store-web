@@ -33,7 +33,7 @@ export function Skills({ handleRemoveSkill }: Props) {
           </div>
         )}
 
-        <Typography variant="small-text" element="p" className="font-medium">
+        <Typography variant="small-text" element="p" className="font-normal font-inter">
           {skill.name}
         </Typography>
       </div>

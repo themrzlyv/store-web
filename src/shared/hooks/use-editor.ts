@@ -54,7 +54,7 @@ export function useEditor({ editable, handleChange, content }: Props) {
     editorProps: {
       attributes: {
         class:
-          "prose prose-p:font-inter prose-p:text-pretty w-full  prose-code:font-inter outline-none prose-pre:shadow-lg  prose-a:font-inter  prose-a:text-primary-500 dark:prose-p:text-light-default dark:prose-headings:text-light-default dark:prose-strong:text-light-default",
+          "prose max-w-full prose-p:font-inter prose-p:text-black prose-p:font-light prose-p:text-pretty w-full  prose-code:font-inter outline-none prose-pre:shadow-lg  prose-a:font-inter  prose-a:text-primary-500 dark:prose-p:text-dark-light-gray dark:prose-headings:text-light-default dark:prose-strong:text-light-default",
       },
     },
     content,

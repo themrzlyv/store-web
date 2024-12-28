@@ -12,7 +12,7 @@ export function ProjectItem({ project }: Props) {
   return (
     <Card
       key={project.id}
-      className="md:h-24 h-36"
+      className="md:h-24 md:min-h-full min-h-36"
       element="a"
       href={project.sourceUrl}
       target="_blank"
@@ -48,7 +48,7 @@ export function ProjectItem({ project }: Props) {
                 key={item.id}
                 element="span"
                 variant="small-text"
-                className="dark:bg-dark-lighter text-xs bg-light-darker px-2 py-0.5 dark:text-light-default/90 rounded-md"
+                className="dark:bg-dark-lighter font-inter text-xs bg-light-darker px-2 py-0.5 dark:text-light-default/90 rounded-md"
               >
                 {item.name}
               </Typography>

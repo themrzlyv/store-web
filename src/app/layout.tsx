@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JosefinSans } from "@/styles/fonts";
+import { Inter, JosefinSans } from "@/styles/fonts";
 import { MainProviders } from "@/shared/providers/main-providers";
 import "react-toastify/dist/ReactToastify.css";
 import "@/styles/globals.css";
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${JosefinSans.className}`}
+      className={`${JosefinSans.className} ${Inter.variable}`}
       suppressHydrationWarning
     >
       <head>

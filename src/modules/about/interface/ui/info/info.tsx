@@ -30,8 +30,8 @@ export function Info() {
 
   return (
     <div className="flex flex-col gap-6  max-w-[105ch]">
-      <Typography variant="content-text" element="p" className="font-normal">
-        👋 Hey there! I&apos;m {fullName}. {data.bio.bio}
+      <Typography variant="content-text" element="p" className="font-light font-inter">
+        👋 Hey there! I&apos;m {fullName}. {data.bio.bio}.
       </Typography>
       <AboutForm />
     </div>

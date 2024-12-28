@@ -25,7 +25,7 @@ const typographyVariants = tv({
         "text-base text-pretty font-medium dark:text-dark-light-gray",
       link: "text-primary-500 underline text-base font-medium",
       "section-title": "text-lg font-semibold dark:text-light-default",
-      "card-title": "text-base font-semibold dark:text-light-default",
+      "card-title": "text-base font-medium dark:text-light-default",
       label: "text-sm font-normal  dark:text-dark-light-gray",
       "logo-text": "text-base font-semibold dark:text-dark-light-gray",
       "menu-text": "text-base font-semibold dark:text-dark-light-gray",

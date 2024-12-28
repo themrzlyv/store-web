@@ -7,7 +7,7 @@ export default withTV({
   theme: {
     extend: {
       fontFamily: {
-        inter: "[var(--font-inter)]",
+        inter: ["var(--font-inter)"],
       },
       colors: {
         primary: {
