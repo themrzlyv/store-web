@@ -4,10 +4,29 @@ import { MainProviders } from "@/shared/providers/main-providers";
 import "react-toastify/dist/ReactToastify.css";
 import "@/styles/globals.css";
 import Script from "next/script";
+import { generateMetadata } from "@/lib/generate-metadata";
+import { Meta } from "@/shared/components/meta/meta";
 
 export const metadata: Metadata = {
-  title: "Samir Mirzaliyev",
-  description: "Developed by Samir Mirzaliyev",
+  ...generateMetadata({
+    description:
+      "A passionate and innovative full-stack software developer from Azerbaijan",
+    keywords: [
+      "samir mirzaliyev",
+      "samir",
+      "mirzaliyev",
+      "samirmirzaliyev",
+      "front-end",
+      "full-stack",
+      "software engineer",
+      "bio",
+      "developer",
+      "portfolio",
+      "development",
+      "mobile",
+      "web",
+    ],
+  }),
 };
 
 export default function RootLayout({
@@ -22,6 +41,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <Meta />
         <Script
           defer
           src="https://cloud.umami.is/script.js"
