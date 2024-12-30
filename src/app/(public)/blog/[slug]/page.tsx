@@ -25,6 +25,19 @@ export async function generateMetadata({
 
   return {
     ...metadata,
+    openGraph: {
+      ...metadata.openGraph,
+      type: "article",
+      publishedTime: post?.createdAt.toISOString(),
+      images: [
+        {
+          url: post?.image || "https://themirzaliyev.store/opengraph-image.png",
+          width: 1200,
+          height: 630,
+          alt: "Samir Mirzaliyev's personal blog",
+        },
+      ],
+    },
   };
 }
 

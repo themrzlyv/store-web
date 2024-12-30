@@ -9,7 +9,9 @@ export const generateMetadata = (data: {
 }): Metadata => {
   const { title, description, keywords, exactUrl, image: imageURL } = data;
   const metadata: Metadata = {
-    title: title ? `${title} | Samir Mirzaliyev` : "Samir Mirzaliyev's blog",
+    title: title
+      ? `${title} | Samir Mirzaliyev`
+      : "Samir Mirzaliyev's personal blog",
     description,
     keywords,
     authors: [{ name: "Samir Mirzaliyev", url: "https://themirzaliyev.store" }],
@@ -20,6 +22,14 @@ export const generateMetadata = (data: {
       siteName: title,
       locale: "en_US",
       type: "website",
+      images: [
+        {
+          url: "/opengraph-image.png",
+          width: 1200,
+          height: 630,
+          alt: "Samir Mirzaliyev's personal blog",
+        },
+      ],
     },
     twitter: {
       title,
