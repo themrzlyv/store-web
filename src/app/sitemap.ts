@@ -1,4 +1,4 @@
-import { PostEntity } from "@/modules/blog/domain/entities/post.entity";
+import prisma from "@/lib/prisma";
 import type { MetadataRoute } from "next";
 
 const today = ((): Date => {
@@ -8,11 +8,7 @@ const today = ((): Date => {
 })();
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/post?isPublished=true`,
-    { method: "GET" }
-  );
-  const { posts } = (await response.json()) as { posts: PostEntity[] };
+  const posts = await prisma.post.findMany();
 
   const blogs = posts.map(post => ({
     url: `https://themirzaliyev.store/blog/${post.slug}`,
