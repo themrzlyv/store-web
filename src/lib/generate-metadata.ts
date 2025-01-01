@@ -37,10 +37,15 @@ export const generateMetadata = (data: {
       card: "summary_large_image",
       creator: "@themrzlyv",
       site: "@themrzlyv",
+      images: [
+        {
+          url: "/opengraph-image.png",
+          width: 1200,
+          height: 630,
+          alt: "Samir Mirzaliyev's personal blog",
+        },
+      ],
     },
-    // verification: {
-    //   google: "",
-    // },
     metadataBase: new URL("https://themirzaliyev.store"),
   };
 

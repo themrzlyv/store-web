@@ -21,6 +21,7 @@ export async function generateMetadata({
     title: `${post?.title}`,
     description: post?.title || "Blog post by Samir Mirzaliyev",
     exactUrl: `https://themirzaliyev.store/blog/${slug}`,
+    image: post?.image || "https://themirzaliyev.store/opengraph-image.png",
   });
 
   return {
@@ -29,14 +30,6 @@ export async function generateMetadata({
       ...metadata.openGraph,
       type: "article",
       publishedTime: post?.createdAt.toISOString(),
-      images: [
-        {
-          url: post?.image || "https://themirzaliyev.store/opengraph-image.png",
-          width: 1200,
-          height: 630,
-          alt: "Samir Mirzaliyev's personal blog",
-        },
-      ],
     },
   };
 }
