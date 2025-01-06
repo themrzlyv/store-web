@@ -15,8 +15,8 @@
 - **Database**: [MySQL] and [Prisma ORM](https://prisma.io/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **Charting**: [Recharts](https://recharts.org/)
-- **Analytics**: [Umami]
-- **Deployment**: [Docker], [Nginx] and [Contabo](https://contabo.com)
+- **Analytics**: [Umami](https://umami.is/)
+- **Deployment**: [Docker](https://www.docker.com/), [Nginx](https://www.nginx.com/) and [Contabo](https://contabo.com)
 
 ## Project Structure
 
