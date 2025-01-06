@@ -2,7 +2,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./public/opengraph-image.png">
-  <source media="(prefers-color-scheme: light)" srcset="./preview.png">
+  <source media="(prefers-color-scheme: light)" srcset="./public/opengraph-image.png">
   <img alt="Website preview" src="./public/opengraph-image.png">
 </picture>
 
@@ -12,7 +12,7 @@
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **State Management**: [Redux](https://redux.js.org/)
 - **API**: [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer)
-- **Database**: [MySQL] and [Prisma ORM](https://prisma.io/)
+- **Database**: [MySQL](https://www.mysql.com/) and [Prisma ORM](https://prisma.io/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **Charting**: [Recharts](https://recharts.org/)
 - **Analytics**: [Umami](https://umami.is/)
