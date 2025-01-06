@@ -19,7 +19,7 @@ export function Navigation() {
       })}
       <SwitchTheme className="hidden md:flex" />
       {/* TODO: Add rating logic */}
-      <Button variant="ghost" size="sm">
+      <Button variant="ghost" size="md">
         <MdStarBorder size={20} />
       </Button>
     </nav>
