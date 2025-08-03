@@ -15,7 +15,7 @@ export function Navigation() {
           <NavigationItem key={route.path} route={route} isActive={isActive} />
         );
       })}
-      <SwitchTheme className="hidden md:flex test" />
+      <SwitchTheme className="hidden md:flex" />
     </nav>
   );
 }
